@@ -1,0 +1,34 @@
+Branch indexing
+[Mon Sep 10 11:55:22 EDT 2018] Starting branch indexing...
+[8mha:////4Ebb7BneMhLCn0uUByt3g7E6g0EX2XYazrHov4hJ+TcJAAAAhB+LCAAAAAAAAP9b85aBtbiIwSa/KF0vKzUvOzOvODlTryCnNB3I0kvPLMkoTYpPKkrMS86IL84vLUpO1XPPLPEoTXLOzyvOz0n1yy9JZYAARiYGRi8GzpLM3NTiksTcgooiBqmM0pTi/Dy9ZIhiPayaGCoKgHTqEcMzRQAWpTt1jgAAAA==[0mConnecting to https://api.github.com using dpduganwood/******
+Examining [8mha:////4FETqxhHf/IF2YBAZ0TzD2juS6oxioVTjmVT5poYKxqiAAAAqR+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMgQK2HQzCgpKSi20tdPzyzJKE0C6srVTylIKU1PzCvPz0/Rd0osKclJLc7ILAAAfuQL5K4AAAA=[0mdpduganwood/Battleship
+
+  Checking branches...
+
+  Getting remote branches...
+
+    Checking branch [8mha:////4CXkPD94X14KjdrYzrk5/MM7kB1iQ0egCVgNW8dnVXyEAAAAuB+LCAAAAAAAAP9djEEOATEUhp8R1mIpzjDdWZCJhBCSiQ0XKH1ph85r075hXMM12DiE47iDETvf5v82//d4QycGGJpKRUfpwVF0FtPV1WOwBZ02jnGU3Z/Zzb8SSNbQtUiaTQ7tKliGfn6UZymsJC22HArSkzrA4C83/+03Bj9aCUDtG+kxTA2zj2MhdMGm2jevUiivKi3p4pwSM8lsMZrCCw6IYhkc8YLUDktvJeMH5WWIH8QAAAA=[0mFrontEndTemplate
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4KNbBxVkxQaIa5UHKFtiLq7+9qi72AGSLJDkj0M1Ak6PAAAAtR+LCAAAAAAAAP9djD0SQTEURq9n6DRKYwukU/hpaDBG81YQcieJFzeZ5MbPNmyDxiIsxx48o3Oa7zTfebyhlSL0TVbJ03DvKXmHw+U1YHSWqq1nHM3uz9ktvAooVtB2SJrNBpo5Oobu5iBPUjhJWpQcLenJJULvL7f47TcGPxoFwCXU0mGYGuaQxkJoyybv6tdRqKCylnT2Xom5ZHaYjA2CI6JYI1WW0qBEzuEDlxSKNcEAAAA=[0mJenkins-Setup
+      ‘Jenkinsfile’ found
+    Met criteria
+No changes detected: Jenkins-Setup (still at efcb708e7b9c73b1ff24d4cc90a93a8e239ea77d)
+
+    Checking branch [8mha:////4CDjOl13ZU+GeirbwXYRpLzSoSArRoHCpOAQWqUtCM8nAAAAsB+LCAAAAAAAAP9djLENwjAQRY8gMgAlYoZcBQUoDTQgRTRMYPDJDji2ZZ8hrMEa0DAE47ADQel4zX/Nf88PjGKAqU4yOlscnY3OULG5eQqmtuedY5qXj1d59+8Msi3khqxiXcEwBcMwrk7iItAIq3DPobZq2QaY/OXW/f5i0DPIAFrfSc4w08w+LhBVzToduleD0sukhL06J3ElmA1FXXvkQISNiEzhC9AuZgO6AAAA[0mmaster
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+  3 branches were processed
+
+  Checking pull-requests...
+
+  Getting remote pull requests...
+
+  0 pull requests were processed
+
+Finished examining dpduganwood/Battleship
+
+[Mon Sep 10 11:55:23 EDT 2018] Finished branch indexing. Indexing took 1.3 sec
+Finished: SUCCESS
