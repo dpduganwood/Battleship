@@ -1,0 +1,15 @@
+[Wed Sep 12 10:02:30 EDT 2018] Received com.github.kostyasha.github.integration.multibranch.hooks.GitHubBranchSCMHeadEvent UPDATED event from dpduganwood/Battleship with timestamp Wed Sep 12 10:02:30 EDT 2018
+[Wed Sep 12 10:02:30 EDT 2018] Finished processing com.github.kostyasha.github.integration.multibranch.hooks.GitHubBranchSCMHeadEvent UPDATED event from dpduganwood/Battleship with timestamp Wed Sep 12 10:02:30 EDT 2018. Matched 0.
+[Wed Sep 12 10:02:35 EDT 2018] Received Push event to branch master in repository dpduganwood/Battleship UPDATED event from 192.30.252.39 ⇒ http://84ecbf94.ngrok.io:8079/github-webhook/ with timestamp Wed Sep 12 10:02:30 EDT 2018
+Found match against My Pipeline/Battleship
+[Wed Sep 12 10:02:37 EDT 2018] Finished processing Push event to branch master in repository dpduganwood/Battleship UPDATED event from 192.30.252.39 ⇒ http://84ecbf94.ngrok.io:8079/github-webhook/ with timestamp Wed Sep 12 10:02:30 EDT 2018. Matched 1.
+[Wed Sep 12 10:03:43 EDT 2018] Received com.github.kostyasha.github.integration.multibranch.hooks.GitHubBranchSCMHeadEvent UPDATED event from dpduganwood/Battleship with timestamp Wed Sep 12 10:03:43 EDT 2018
+[Wed Sep 12 10:03:43 EDT 2018] Finished processing com.github.kostyasha.github.integration.multibranch.hooks.GitHubBranchSCMHeadEvent UPDATED event from dpduganwood/Battleship with timestamp Wed Sep 12 10:03:43 EDT 2018. Matched 0.
+[Wed Sep 12 10:03:48 EDT 2018] Received Push event to branch master in repository dpduganwood/Battleship UPDATED event from 192.30.252.37 ⇒ http://84ecbf94.ngrok.io:8079/github-webhook/ with timestamp Wed Sep 12 10:03:43 EDT 2018
+Found match against My Pipeline/Battleship
+[Wed Sep 12 10:03:49 EDT 2018] Finished processing Push event to branch master in repository dpduganwood/Battleship UPDATED event from 192.30.252.37 ⇒ http://84ecbf94.ngrok.io:8079/github-webhook/ with timestamp Wed Sep 12 10:03:43 EDT 2018. Matched 1.
+[Wed Sep 12 10:53:04 EDT 2018] Received com.github.kostyasha.github.integration.multibranch.hooks.GitHubBranchSCMHeadEvent UPDATED event from dpduganwood/Battleship with timestamp Wed Sep 12 10:53:04 EDT 2018
+[Wed Sep 12 10:53:04 EDT 2018] Finished processing com.github.kostyasha.github.integration.multibranch.hooks.GitHubBranchSCMHeadEvent UPDATED event from dpduganwood/Battleship with timestamp Wed Sep 12 10:53:04 EDT 2018. Matched 0.
+[Wed Sep 12 10:53:10 EDT 2018] Received Push event to branch master in repository dpduganwood/Battleship UPDATED event from 192.30.252.34 ⇒ http://myjenkins.serveo.net:8079/github-webhook/ with timestamp Wed Sep 12 10:53:04 EDT 2018
+Found match against My Pipeline/Battleship
+[Wed Sep 12 10:53:11 EDT 2018] Finished processing Push event to branch master in repository dpduganwood/Battleship UPDATED event from 192.30.252.34 ⇒ http://myjenkins.serveo.net:8079/github-webhook/ with timestamp Wed Sep 12 10:53:04 EDT 2018. Matched 1.

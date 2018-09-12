@@ -1,0 +1,28 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@2.20">
+  <node class="cps.n.StepStartNode" plugin="workflow-cps@2.54">
+    <parentIds>
+      <string>2</string>
+    </parentIds>
+    <id>3</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.support.steps.ExecutorStep</descriptorId>
+  </node>
+  <actions>
+    <wf.a.TimingAction plugin="workflow-api@2.29">
+      <startTime>1536594007170</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogActionImpl/>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.54">
+      <arguments>
+        <entry>
+          <string>label</string>
+          <string>dpduganwood</string>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <org.jenkinsci.plugins.workflow.support.steps.ExecutorStepExecution_-QueueItemActionImpl plugin="workflow-durable-task-step@2.21">
+      <id>11</id>
+    </org.jenkinsci.plugins.workflow.support.steps.ExecutorStepExecution_-QueueItemActionImpl>
+  </actions>
+</Tag>

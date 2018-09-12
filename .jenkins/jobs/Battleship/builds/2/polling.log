@@ -1,0 +1,21 @@
+Started on Sep 12, 2018 10:02:30 AM
+Started by event from 192.30.252.39 ⇒ http://84ecbf94.ngrok.io:8079/github-webhook/ on Wed Sep 12 10:02:30 EDT 2018
+Polling SCM changes on master
+Using strategy: Default
+[poll] Last Built Revision: Revision b78734f11419fbf2b0d677dc52ad807ece4ea28e (refs/remotes/origin/master)
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repositories
+ > git config remote.origin.url https://github.com/dpduganwood/Battleship.git # timeout=10
+Fetching upstream changes from https://github.com/dpduganwood/Battleship.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/dpduganwood/Battleship.git +refs/heads/*:refs/remotes/origin/*
+Polling for changes in
+Seen branch in repository origin/FrontEndTemplate
+Seen branch in repository origin/Jenkins-Setup
+Seen branch in repository origin/ServerBranch
+Seen branch in repository origin/master
+Seen 4 remote branches
+ > git show-ref --tags -d # timeout=10
+ > git log --full-history --no-abbrev --format=raw -M -m b78734f11419fbf2b0d677dc52ad807ece4ea28e..d0563fb87ee1a7906b6110055ae261bdc86f54c7 # timeout=10
+Done. Took 3.8 sec
+Changes found

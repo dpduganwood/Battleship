@@ -1,0 +1,22 @@
+Started by GitHub push by dpduganwood
+Building in workspace /Users/DavidDuganWood/.jenkins/workspace/Battleship
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/dpduganwood/Battleship.git # timeout=10
+Fetching upstream changes from https://github.com/dpduganwood/Battleship.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/dpduganwood/Battleship.git +refs/heads/*:refs/remotes/origin/*
+Seen branch in repository origin/FrontEndTemplate
+Seen branch in repository origin/Jenkins-Setup
+Seen branch in repository origin/ServerBranch
+Seen branch in repository origin/master
+Seen 4 remote branches
+ > git show-ref --tags -d # timeout=10
+Multiple candidate revisions
+Scheduling another build to catch up with Battleship
+Checking out Revision d0563fb87ee1a7906b6110055ae261bdc86f54c7 (origin/FrontEndTemplate)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d0563fb87ee1a7906b6110055ae261bdc86f54c7
+Commit message: "Welcome Message & Potential Leaderboard"
+First time build. Skipping changelog.
+Finished: SUCCESS
