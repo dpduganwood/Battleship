@@ -3,11 +3,11 @@ var express = require('express');
 
 var app = express();
 var bodyParser = require('body-parser');
-//var mysql = require('mysql');
-//var cookieParser = require('cookie-parser');
+var mysql = require('mysql');
+var cookieParser = require('cookie-parser');
 var path = require('path');
 
-//app.use(cookieParser());
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '')));
