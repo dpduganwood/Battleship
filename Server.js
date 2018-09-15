@@ -8,14 +8,21 @@ var cookieParser = require('cookie-parser');
 var Connection = require(__dirname + "/Connection.js");
 var path = require('path');
 
-const passport=require('passport');
 var passportSetup=require('./config/passport-setup');
 var authRoutes = require('./routes/auth-routes');
+const passport=require('passport');
 
 
 // initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// set up routes
+app.use('/auth', authRoutes);
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '')));
+app.use( express.static( "Public" ) );
 
 
 app.use(cookieParser());
