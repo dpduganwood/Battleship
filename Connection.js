@@ -14,4 +14,8 @@ con.connect(function(err) {
     }
 });
 
+function procUser(profile, cb) {
+    //login or register user
+}
+
 module.exports = con;
