@@ -8,6 +8,16 @@ var cookieParser = require('cookie-parser');
 var Connection = require(__dirname + "/Connection.js");
 var path = require('path');
 
+const passport=require('passport');
+var passportSetup=require('./config/passport-setup');
+var authRoutes = require('./routes/auth-routes');
+
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
