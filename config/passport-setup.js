@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 var db = require('../Connection');
 var key=require('../config/key.js');
-var Connection = require(__dirname + "../Connection.js");
+var Connection = require(__dirname + "/../Connection.js");
 
 
 

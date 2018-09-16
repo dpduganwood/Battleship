@@ -17,6 +17,7 @@ con.connect(function(err) {
 exports.procUser = procUser;
 function procUser(profile, cb) {
     //login or register user
+    //console.log(profile);
 }
 
-module.exports = con;
+//module.exports = con;
