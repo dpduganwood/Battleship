@@ -15,9 +15,9 @@ CREATE SCHEMA IF NOT EXISTS `Battletracks_db` DEFAULT CHARACTER SET utf8 ;
 USE `Battletracks_db` ;
 
 -- -----------------------------------------------------
--- Table `Battletracks_db`.`Users`
+-- Table `Battletracks_db`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Battletracks_db`.`Users` (
+CREATE TABLE IF NOT EXISTS `Battletracks_db`.`users` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` TEXT NOT NULL,
   `firstName` TEXT NOT NULL,
