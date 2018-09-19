@@ -47,22 +47,45 @@ con.connect(function (err) {
 app.set('view engine', 'ejs');
 //user res.render to load up an ejs view file
 
+function register(profile) {
+    Connection.procUser(profile, function(status) {
+        res.cookie('playerName', status, {maxAge: 9000000});
+        res.render('pages/index', {playerName:status});
+    });
+}
+
 app.get('/', function (req, res) {
-    res.render('pages/index');
+    if(req.cookie.playerName == NULL){
+        res.cookie('playerName','', {maxAge: 9000000});
+    }
+    res.render('pages/index', {playerName:req.cookie.playerName});
 });
 
+app.get('/logout', function (req, res){
+    res.cookie('playerName', '', {maxAge: 9000000});
+    res.render('pages/index', {playerName:''});
+});
+
+var grids = new Array(100);
 
 class Grid {
     constructor(height, width){
         this.height = height;
         this.width = width;
-        var grid = new Array(height);
-        for(var i = 0; i < grid.length; i++){
-            grid[i] = new Array(width);
+        this.grid = new Array(height);
+        for(var i = 0; i < this.grid.length; i++){
+            this.grid[i] = new Array(this.width);
         }
-
     }
 }
+
+
+/*
+app.get('/setup', function (req, res) {
+    var grid = Grid(req.cookies.gridHeight,req.cookies.gridWidth);
+
+});
+*/
 
 app.listen(6009);
 console.log('6009 is the open port');
