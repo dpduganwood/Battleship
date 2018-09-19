@@ -47,19 +47,21 @@ con.connect(function (err) {
 app.set('view engine', 'ejs');
 //user res.render to load up an ejs view file
 
+app.get('/', function (req, res) {
+    try {
+        res.render('pages/index', {playerName:req.cookie.playerName});
+    } catch(e) {
+        res.cookie('playerName','', {maxAge: 9000000});
+        res.render('pages/index', {playerName:''});
+    }
+});
+
 function register(profile) {
     Connection.procUser(profile, function(status) {
         res.cookie('playerName', status, {maxAge: 9000000});
         res.render('pages/index', {playerName:status});
     });
 }
-
-app.get('/', function (req, res) {
-    if(req.cookie.playerName == NULL){
-        res.cookie('playerName','', {maxAge: 9000000});
-    }
-    res.render('pages/index', {playerName:req.cookie.playerName});
-});
 
 app.get('/logout', function (req, res){
     res.cookie('playerName', '', {maxAge: 9000000});
@@ -76,7 +78,17 @@ class Grid {
         for(var i = 0; i < this.grid.length; i++){
             this.grid[i] = new Array(this.width);
         }
+        for(var i = 0; i < this.grid.length; i++){
+            for(var j = 0; j < this.grid[i].length; j++){
+                this.grid[i][j] = 0;
+            }
+        }
     }
+    //grid settings: 0 = empty, 1 = ship (unhit), 2 = ship (hit), 3 = miss
+    /*
+    setShip(x,y, dir) {
+
+    }*/
 }
 
 
