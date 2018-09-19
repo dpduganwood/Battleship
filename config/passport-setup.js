@@ -4,6 +4,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var db = require('../Connection');
 var key=require('../config/key.js');
 var Connection = require(__dirname + "/../Connection.js");
+var Server = require(__dirname + "/../Server.js");
 
 
 
@@ -40,11 +41,11 @@ passport.use(
     }, (accessToken,refreshToken,profile, done) => {
         console.log("heloo");
         console.log(profile);
-        Connection.procUser(profile, function(status) {
+        /*Connection.procUser(profile, function(status) {
 
-        });
-        var sql_select='SELECT * from users where email=\''+profile.emails[0].value+'\'';
-        var sql_insert='INSERT into users(email,fname,lname,profile_pic_url) VALUES (\''+profile.emails[0].value+'\',\''
+        });*/
+//        var sql_select='SELECT * from users where email=\''+profile.emails[0].value+'\'';
+//        var sql_insert='INSERT into users(email,fname,lname,profile_pic_url) VALUES (\''+profile.emails[0].value+'\',\''
         +profile.name.familyName+'\',\''+profile.name.givenName+'\',\''+profile.photos[0].value+'\')';
 // db.query(sql_select,function(err,user){
 //       if(err || user.length<1){
