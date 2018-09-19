@@ -20,6 +20,7 @@ USE `Battletracks_db` ;
 CREATE TABLE IF NOT EXISTS `Battletracks_db`.`users` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` TEXT NOT NULL,
+  `displayName` TEXT NOT NULL,
   `firstName` TEXT NOT NULL,
   `lastName` TEXT NOT NULL,
   `wins` INT(11) NOT NULL,

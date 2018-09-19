@@ -32,7 +32,7 @@ function procUser(profile, cb) {
             if(user_info.length == 0) {
                 //user currently not in database
                 //insert user into database
-                con.query("INSERT INTO users VALUE (NULL, '"+ profile.emails[0].value +"', '" + profile.name.givenName + "', '" + profile.name.familyName + "', " +
+                con.query("INSERT INTO users VALUE (NULL, '"+ profile.emails[0].value +"','" + profile.displayName + "' ,'" + profile.name.givenName + "', '" + profile.name.familyName + "', " +
                     "0, 0, 0, 0)");
             }
             //pass user information to server
