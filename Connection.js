@@ -32,8 +32,17 @@ function procUser(profile, cb) {
             if(user_info.length == 0) {
                 //user currently not in database
                 //insert user into database
-                con.query("INSERT INTO users VALUE (NULL, '"+ profile.emails[0].value +"', '" + profile.name.givenName + "', '" + profile.name.familyName + "', " +
+                con.query("INSERT INTO users VALUE (NULL, '"+ profile.emails[0].value +"','" + profile.displayName + "' ,'" + profile.name.givenName + "', '" + profile.name.familyName + "', " +
                     "0, 0, 0, 0)");
+            } else {
+                con.query("SELECT * FROM users WHERE email = '" + profile.emails[0].value + "' AND displayName = '" + profile.displayName +"'", function(err, result){
+                    if(result.displayName == profile.displayName && result.email == profile.emails[0].value){
+                        var z = JSON.parse(JSON.stringify(result.displayName));
+                        cb(z);
+                    } else {
+                        cb("error finding user")
+                    }
+                });
             }
             //pass user information to server
         }
