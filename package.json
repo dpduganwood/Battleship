@@ -18,8 +18,16 @@
     "express-bootstrapper": "^1.0.2",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
+    "jasmine": "^3.2.0",
+    "jasmine-xml-reporter": "^1.2.1",
     "morgan": "~1.9.0",
     "mysql": "^2.16.0",
+    "passport": "latest",
+    "passport-google-oauth20": "latest",
     "utils-merge": "^1.0.1"
+  },
+  "devDependencies": {
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2"
   }
 }

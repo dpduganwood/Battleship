@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites disabled="0" errors="0" failures="1" tests="1" time="0.005">
+ <testsuite name="Addition" timestamp="2018-09-20T00:49:34" hostname="localhost" time="0.005" errors="0" tests="1" skipped="0" disabled="0" failures="1">
+  <testcase classname="Addition" name="The function should add 2 numbers" time="0.003">
+   <failure type="toBe" message="Expected 10 to be 11."><![CDATA[Error: Expected 10 to be 11.
+    at <Jasmine>
+    at UserContext.<anonymous> (/Users/DavidDuganWood/Documents/GitHub/Battleship/spec/addspec.js:5:23)
+    at <Jasmine>]]>
+   </failure>
+  </testcase>
+ </testsuite>
+</testsuites>

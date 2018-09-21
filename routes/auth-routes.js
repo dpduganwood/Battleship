@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport=require('passport');
-var db = require('../tables/db');
+var db = require('../Connection');
 
 // auth login
 router.get('/login', function (req, res) {
@@ -33,7 +33,6 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
  	res.redirect('/profile');
 });
 
-router.get('/facebook',
-  passport.authenticate('facebook'));
+
 
 module.exports = router;
