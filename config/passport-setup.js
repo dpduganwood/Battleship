@@ -45,12 +45,14 @@ passport.use(
 
         });*/
         Server.register(profile, function(user){
+            console.log("user: "+user);
             return done(null);
         });
 
+
 //        var sql_select='SELECT * from users where email=\''+profile.emails[0].value+'\'';
 //        var sql_insert='INSERT into users(email,fname,lname,profile_pic_url) VALUES (\''+profile.emails[0].value+'\',\''
-        +profile.name.familyName+'\',\''+profile.name.givenName+'\',\''+profile.photos[0].value+'\')';
+//        +profile.name.familyName+'\',\''+profile.name.givenName+'\',\''+profile.photos[0].value+'\')';
 // db.query(sql_select,function(err,user){
 //       if(err || user.length<1){
 //           console.log(user);

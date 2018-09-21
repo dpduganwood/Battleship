@@ -18,6 +18,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">BoilerTracks</a>
+    <%
+        console.log("playerName: "+playerName);
+    if (playerName != ''){
+        %>
+    <a class="navbar-brand" href="#"><%=playerName%></a>
+    <%
+    }
+    %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,11 +56,11 @@
     <h1 class="display-3">Welcome To Boiler Tracks!</h1>
     <p class="lead">Compete against your fellow boilermakers and rise to be the champion of them all.</p>
     <hr class="my-4">
-    <p>Create an account to get started today! Must be a Purdue Student To Join</p>
+    <!--p>Create an account to get started today! Must be a Purdue Student To Join</p>
     <p class="lead">
         <a class="btn btn-primary btn-lg" href="/register" role="button">Create Account</a>
     </p>
-    <p>Or, if you already have an account:</p>
+    <p>Or, if you already have an account:</p-->
     <p class="lead">
         <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
     </p>

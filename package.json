@@ -24,7 +24,8 @@
     "mysql": "^2.16.0",
     "passport": "latest",
     "passport-google-oauth20": "latest",
-    "utils-merge": "^1.0.1"
+    "utils-merge": "^1.0.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "karma-chrome-launcher": "^2.2.0",

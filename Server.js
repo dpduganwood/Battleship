@@ -1,5 +1,6 @@
 //load necessities
 var express = require('express');
+var router = express.Router();
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -11,6 +12,10 @@ var path = require('path');
 var passportSetup=require('./config/passport-setup');
 var authRoutes = require('./routes/auth-routes');
 const passport=require('passport');
+
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var xhr = new XMLHttpRequest();
+
 
 
 // initialize passport
@@ -56,22 +61,12 @@ app.get('/', function (req, res) {
     }
 });
 
-exports.register = register;
-function register(profile, user) {
-    Connection.procUser(profile, function(status) {
-        user(status);
-        //res.cookie('playerName', status, {maxAge: 9000000});
-        //res.render('pages/index', {playerName:status});
-    });
-}
-
 app.get('/logout', function (req, res){
     res.cookie('playerName', '', {maxAge: 9000000});
     res.render('pages/index', {playerName:''});
 });
-
+/*
 var grids = new Array(100);
-
 class Grid {
     constructor(height, width){
         this.height = height;
@@ -87,16 +82,31 @@ class Grid {
         }
     }
     //grid settings: 0 = empty, 1 = ship (unhit), 2 = ship (hit), 3 = miss
-    /*
     setShip(x,y, dir) {
-
-    }*/
+    }
 }
-
-
+*/
+exports.register = register;
+function register(profile, user) {
+    console.log("Test register func.");
+    Connection.procUser(profile, function(status) {
+        /*var link = "login?profile="+status;
+        console.log("link: "+link);
+        xhr.open("POST", "Server.js", true);
+        xhr.send(link);*/
+        user(status);
+    });
+}
 /*
-app.get('/setup', function (req, res) {
-    var grid = Grid(req.cookies.gridHeight,req.cookies.gridWidth);
+app.get('/login', function(req, res) {
+    console.log(req.body);
+    console.log("Status from passport/register: "+req.body.profile);
+    res.cookie('playerName', req.body.profile, {maxAge: 9000000});
+    res.render('pages/index', {playerName:req.body.profile});
+});
+*/
+/*
+app.get('/register', function (req, res) {
 
 });
 */
