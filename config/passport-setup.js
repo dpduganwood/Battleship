@@ -44,8 +44,10 @@ passport.use(
         /*Connection.procUser(profile, function(status) {
 
         });*/
-        Server.register(profile);
-        return done(null);
+        Server.register(profile, function(user){
+            return done(null);
+        });
+
 //        var sql_select='SELECT * from users where email=\''+profile.emails[0].value+'\'';
 //        var sql_insert='INSERT into users(email,fname,lname,profile_pic_url) VALUES (\''+profile.emails[0].value+'\',\''
         +profile.name.familyName+'\',\''+profile.name.givenName+'\',\''+profile.photos[0].value+'\')';

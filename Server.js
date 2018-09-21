@@ -56,10 +56,11 @@ app.get('/', function (req, res) {
     }
 });
 
-function register(profile) {
+function register(profile, user) {
     Connection.procUser(profile, function(status) {
-        res.cookie('playerName', status, {maxAge: 9000000});
-        res.render('pages/index', {playerName:status});
+        user(status);
+        //res.cookie('playerName', status, {maxAge: 9000000});
+        //res.render('pages/index', {playerName:status});
     });
 }
 
