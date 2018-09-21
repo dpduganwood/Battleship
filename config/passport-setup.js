@@ -46,7 +46,7 @@ passport.use(
         });*/
         Server.register(profile, function(user){
             console.log("user: "+user);
-            return done(null);
+            return done(null, user);
         });
 
 
