@@ -56,7 +56,12 @@ app.get('/', function (req, res) {
     }
 });
 
+<<<<<<< HEAD
 function register(profile, user) {
+=======
+exports.register = register;
+function register(profile) {
+>>>>>>> 20673019349988455097692391aaecbc97ed6a72
     Connection.procUser(profile, function(status) {
         user(status);
         //res.cookie('playerName', status, {maxAge: 9000000});
