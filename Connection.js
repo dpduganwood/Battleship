@@ -59,8 +59,13 @@ exports.addPlayerHit = addPlayerHit;
 function addPlayerHit(playerName){
     con.query("UPDATE users SET hits = hits + 1 WHERE displayName = '" + playerName + "'", function(err, result){
         if(err){
-            console.log(playerNmae);
+            console.log(playerName);
             console.log(err);
         }
     });
+}
+
+exports.addPlayerMiss = addPlayerMiss;
+function addPlayerMiss(playerName) {
+
 }
