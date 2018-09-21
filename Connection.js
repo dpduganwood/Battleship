@@ -50,3 +50,13 @@ function procUser(profile, cb) {
 }
 
 //module.exports = con;
+
+exports.addPlayerHit = addPlayerHit;
+function addPlayerHit(playerName){
+    con.query("UPDATE users SET hits = hits + 1 WHERE displayName = '" + playerName + "'", function(err, result){
+        if(err){
+            console.log(playerNmae);
+            console.log(err);
+        }
+    });
+}

@@ -1,3 +1,5 @@
+var Connection = require(__dirname + "/Connection.js")
+
 //default map mainly for testing purposes
 var map = [ [ 0, 4, 4, 4, 0, 0, 0, 0, 0, 0],
             [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -22,8 +24,10 @@ var map = [ [ 0, 4, 4, 4, 0, 0, 0, 0, 0, 0],
 //[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 exports.setMap = setMap;
-function setMap(map){
+function setMap(newMap, cb){
     //meant for use during testing
+    map = newMap;
+    cb(1);
 }
 
 exports.getMap = getMap;
@@ -32,17 +36,22 @@ function getMap() {
     return map;
 }
 
-exports.checkHit = checkHit;
-function checkHit(x, y){
+exports.checkHit_test = checkHit_test;
+function checkHit_test(x, y){
     var loc = map[x][y];
     if(location % 2 == 0) {
-        map[x][y] = loc + 1
+        map[x][y] = loc + 1;
         if(loc == 0){
-            return 0
+            return 0;
         } else {
-            return  2
+            return  2;
         }
     } else {
-        return 1
+        return 1;
     }
+}
+
+exports.checkHit = checkHit;
+function checkHit(playerName, gameMap, x, y){
+    var loc = gameMap[x][y];
 }
