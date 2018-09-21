@@ -1,4 +1,4 @@
-var Connection = require(__dirname + "/Connection.js")
+var Connection = require(__dirname + "/Connection.js");
 
 //default map mainly for testing purposes
 var map = [ [ 0, 4, 4, 4, 0, 0, 0, 0, 0, 0],
@@ -38,16 +38,16 @@ function getMap() {
 
 exports.checkHit_test = checkHit_test;
 function checkHit_test(x, y){
-    var loc = map[x][y];
-    if(location % 2 == 0) {
-        map[x][y] = loc + 1;
+    var loc = map[y][x];
+    if(loc % 2 == 0) {
+        map[y][x] = loc + 1;
         if(loc == 0){
-            return 0;
+            return 0; //miss
         } else {
-            return  2;
+            return  2; //hit
         }
     } else {
-        return 1;
+        return 1; //invalid target
     }
 }
 
