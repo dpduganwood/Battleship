@@ -6,6 +6,7 @@ var con = mysql.createConnection({
     password: "sql123",
     database: "Battletracks_db"
 });
+exports.con = con;
 
 con.connect(function(err) {
     if(err) throw err;
