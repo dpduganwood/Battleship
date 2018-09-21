@@ -36,8 +36,12 @@ function procUser(profile, cb) {
                     "0, 0, 0, 0)");
             } else {
                 con.query("SELECT * FROM users WHERE email = '" + profile.emails[0].value + "' AND displayName = '" + profile.displayName +"'", function(err, result){
-                    if(result.displayName == profile.displayName && result.email == profile.emails[0].value){
-                        var z = JSON.parse(JSON.stringify(result.displayName));
+                    console.log(result);
+                    console.log(result[0].displayName);
+                    console.log("result[0].displayName: "+result[0].displayName+" profile.displayName: "+profile.displayName);
+                    console.log("result[0].email: "+result[0].email+" profile.emails[0].value: "+profile.emails[0].value);
+                    if(result[0].displayName == profile.displayName && result[0].email == profile.emails[0].value){
+                        var z = JSON.parse(JSON.stringify(result[0].displayName));
                         cb(z);
                     } else {
                         cb("error finding user")
