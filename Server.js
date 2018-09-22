@@ -97,14 +97,13 @@ function register(profile, user) {
         user(status);
     });
 }
-/*
-app.get('/login', function(req, res) {
-    console.log(req.body);
-    console.log("Status from passport/register: "+req.body.profile);
-    res.cookie('playerName', req.body.profile, {maxAge: 9000000});
-    res.render('pages/index', {playerName:req.body.profile});
+
+app.get('/login2', function(req, res) {
+    console.log("Status from passport/register: "+req.query.profileName);
+    res.cookie('playerName', req.query.profileName, {maxAge: 9000000});
+    res.render('pages/index', {playerName:req.query.profileName});
 });
-*/
+
 /*
 app.get('/register', function (req, res) {
 

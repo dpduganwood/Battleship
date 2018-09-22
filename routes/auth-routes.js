@@ -30,7 +30,8 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
  //    res.render('Pages/newdashboard');
  console.log("=========IN GOOGLE REDIRECT=========\n");
  	console.log(req.user.email);
- 	res.redirect('/');
+ 	console.log("res.user "+res.user + "\n req.user "+req.user);
+ 	res.redirect('/login2?profileName='+req.user);
 });
 
 
