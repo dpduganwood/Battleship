@@ -6,3 +6,6 @@ https://docs.google.com/document/d/18QIb-7hHexY_Av6iocKP_4yabBd23OqXwdqViVr9JEQ/
 
 Product Backlog:
 https://docs.google.com/document/d/1ATOZqSzYpVYdHmXtVY7FSDkepg9-Nq_-lAl_1_MMF24/edit?usp=sharing
+
+Design Inspection, Code Inspection, and Unit Testing
+https://docs.google.com/document/d/1VUulcZSe6RIskFcQFZ641QtKjfacmgrxwJ-2AQlYzY4/edit?usp=sharing

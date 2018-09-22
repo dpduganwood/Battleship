@@ -3,7 +3,7 @@
 module.exports ={
    google:{
        clientID:'745630212475-91kfkjehcman39bh2serhq7rku3g1lrj.apps.googleusercontent.com',
-       clientSecret:'qxWarKKhXNfulhkA6UAINLQM'
+       clientSecret:'Y6G1ROjPbCohEnVxF2jK1-kX'
    },
    facebook:{
        appID:'310600522803347',
