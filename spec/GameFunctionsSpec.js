@@ -15,7 +15,13 @@ describe("checkHit_test",function(){
     });
 });
 
-
+describe("placeShip_test",function(){
+    it("The function should result in a miss",function() {
+        app.placeShip(3,5);
+        expect(app.getPlacementMap()[5][3]).toBe(2);
+        expect(app.getPlacementMap()[6][3]).toBe(2);
+    });
+});
 
 
 /*var prof = {displayName: "David Wood", emails: [{value: "dpduganwood@gmail.com"}], name: {givenName: "David", familyName: "Wood"}};
