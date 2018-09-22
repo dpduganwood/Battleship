@@ -30,6 +30,18 @@ var map = [ [ 0, 4, 4, 4, 0, 0, 0, 0, 0, 0],
 //[ 0, 0, 0, 0, 8, 0, 0, 0, 0, 0]
 //[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+//empty map
+var placementMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
 /*
 schema:
 0: unhit ocean
@@ -57,6 +69,17 @@ exports.getMap = getMap;
 function getMap() {
     //meant for use during testing
     return map;
+}
+
+exports.getPlacementMap = getPlacementMap;
+function getPlacementMap() {
+    return  placementMap;
+}
+
+exports.placeShip = placeShip;
+function placeShip(x,y) {
+    placementMap[y][x] = 2;
+    placementMap[y+1][x] = 2;
 }
 
 exports.checkHit_test = checkHit_test;
