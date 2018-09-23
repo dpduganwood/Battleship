@@ -1,17 +1,16 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
-    <!-- Bootstrap core CSS -->
-    <link href="../../bootstrap-4/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+  <!-- Bootstrap core CSS -->
+  <link href="../../bootstrap-4/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <title>Boiler Tracks!</title>
+  <title>Boiler Tracks!</title>
 </head>
 <body>
 <!--  <h1>Hello, world!</h1> -->
@@ -19,6 +18,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">BoilerTracks</a>
+  <%
+  console.log("playerName: "+playerName);
+  if (playerName != ''){
+  %>
+  <a class="navbar-brand" href="#"><%=playerName%></a>
+  <%
+  }
+  %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -43,20 +50,24 @@
 </nav>
 
 <div class="jumbotron">
-    <h1 class="display-3">Welcome To Boiler Tracks!</h1>
-    <p class="lead">Compete against your fellow boilermakers and rise to be the champion of them all.</p>
-    <hr class="my-4">
-    <p>Create an account to get started today! Must be a Purdue Student To Join</p>
+  <h1 class="display-3">Welcome To Boiler Tracks!</h1>
+  <p class="lead">Compete against your fellow boilermakers and rise to be the champion of them all.</p>
+  <hr class="my-4">
+
+  <%if (playerName != ''){%>
+  <p>Select a game mode!</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#multiplayer" role="button">Join Multiplayer</a>
   </p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#singleplayer" role="button">SinglePlayer</a>
   </p>
-    <p>Or, if you already have an account:</p>
-    <p class="lead">
-        <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
-    </p>
+  <%}else{%>
+  <p>Login with Google to get started today!</p>
+  <p class="lead">
+    <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
+  </p>
+  <%}%>
 </div>
 
 <br>
@@ -67,24 +78,22 @@
     <h4 class="card-title">Enter Move</h4>
     <p class="card-text">Example Coordinate (0,4) (5,3)</p>
 
-        <div class="form-group">
+    <div class="form-group">
       <label class="col-form-label col-form-label-lg" for="inputLarge">X Coordinate</label>
       <input class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="inputLarge">
-        </div>
+    </div>
 
-        <div class="form-group">
+    <div class="form-group">
       <label class="col-form-label col-form-label-lg" for="inputLarge">Y Coordinate</label>
       <input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="inputLarge">
-        </div>
-
-        <button type="button" class="btn btn-outline-success">Submit</button>
+    </div>
 
   </div>
 </div>
 
 <div class="form-group">
-      <label for="exampleTextarea">Option 1 For Output</label>
-      <grammarly-ghost spellcheck="false"><div data-id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" data-gramm_id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" data-gramm="gramm" data-gramm_editor="true" class="gr_ver_2" gramm="true" contenteditable="true" style="position: absolute; color: transparent; overflow: hidden; white-space: pre-wrap; border-top-left-radius: 555px 25px; border-top-right-radius: 25px 5px; border-bottom-right-radius: 15px 35px; border-bottom-left-radius: 25px 555px; box-sizing: border-box; height: 88px; width: 540px; margin: 554px 0px 0px; padding: 6px 12px; z-index: 0; border-width: 2px; border-style: solid; background-image: none; background-size: auto; background-attachment: scroll; background-origin: padding-box; background-clip: padding-box; background-color: rgb(255, 255, 255); top: 0px; left: 0px; background-position: 0% 0%; background-repeat: repeat repeat;"><span style="display: inline-block; line-height: 24px; color: transparent; overflow: hidden; text-align: left; clear: none; box-sizing: border-box; vertical-align: baseline; white-space: pre-wrap; width: 100%; margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 16px; font-family: Neucha, -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; letter-spacing: normal; text-shadow: none; height: 84px;"></span><br></div></grammarly-ghost><textarea class="form-control" id="exampleTextarea" rows="3" data-gramm="true" data-txt_gramm_id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" data-gramm_id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" spellcheck="false" data-gramm_editor="true" style="z-index: auto; position: relative; line-height: 24px; font-size: 16px; transition: none; background-color: transparent !important; background-position: initial initial !important; background-repeat: initial initial !important;"></textarea><grammarly-btn><div class="_1BN1N Kzi1t _2DJZN" style="z-index: 2; transform: translate(508px, 610px);"><div class="_1HjH7"><div title="Protected by Grammarly" class="_3qe6h">&nbsp;</div></div></div></grammarly-btn>
+  <label for="exampleTextarea">Option 1 For Output</label>
+  <grammarly-ghost spellcheck="false"><div data-id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" data-gramm_id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" data-gramm="gramm" data-gramm_editor="true" class="gr_ver_2" gramm="true" contenteditable="true" style="position: absolute; color: transparent; overflow: hidden; white-space: pre-wrap; border-top-left-radius: 555px 25px; border-top-right-radius: 25px 5px; border-bottom-right-radius: 15px 35px; border-bottom-left-radius: 25px 555px; box-sizing: border-box; height: 88px; width: 540px; margin: 554px 0px 0px; padding: 6px 12px; z-index: 0; border-width: 2px; border-style: solid; background-image: none; background-size: auto; background-attachment: scroll; background-origin: padding-box; background-clip: padding-box; background-color: rgb(255, 255, 255); top: 0px; left: 0px; background-position: 0% 0%; background-repeat: repeat repeat;"><span style="display: inline-block; line-height: 24px; color: transparent; overflow: hidden; text-align: left; clear: none; box-sizing: border-box; vertical-align: baseline; white-space: pre-wrap; width: 100%; margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 16px; font-family: Neucha, -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; letter-spacing: normal; text-shadow: none; height: 84px;"></span><br></div></grammarly-ghost><textarea class="form-control" id="exampleTextarea" rows="3" data-gramm="true" data-txt_gramm_id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" data-gramm_id="c7abedf7-e0ea-68f5-dffb-f43c7ad6fd3a" spellcheck="false" data-gramm_editor="true" style="z-index: auto; position: relative; line-height: 24px; font-size: 16px; transition: none; background-color: transparent !important; background-position: initial initial !important; background-repeat: initial initial !important;"></textarea><grammarly-btn><div class="_1BN1N Kzi1t _2DJZN" style="z-index: 2; transform: translate(508px, 610px);"><div class="_1HjH7"><div title="Protected by Grammarly" class="_3qe6h">&nbsp;</div></div></div></grammarly-btn>
 </div>
 
 <div class="card bg-light mb-3" style="max-width: 20rem;">
@@ -98,7 +107,6 @@
     <p class="card-text"> -> (3,2) was a hit...</p>
   </div>
 </div>
-
 
 <!-- //////////////////////////////////// Multiplayer MODAL ////////////////////////// -->
 
@@ -117,8 +125,8 @@
         <form>
           <fieldset>
             <div class="form-group">
-                <label class="col-form-label" for="inputDefault">Multiplayer Code</label>
-                <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+              <label class="col-form-label" for="inputDefault">Multiplayer Code</label>
+              <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
             </div>
           </fieldset>
         </form>
@@ -160,6 +168,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
