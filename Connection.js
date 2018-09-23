@@ -18,7 +18,7 @@ exports.con=con;
 exports.procUser = procUser;
 function procUser(profile, cb) {
     //login or register user
-    console.log(profile.emails[0].value);
+    //console.log(profile.emails[0].value);
     con.query("SELECT * FROM users WHERE email = '" + profile.emails[0].value + "'", function(err, user_info) {
         if(err) {
             //console.log("error");
@@ -34,6 +34,7 @@ function procUser(profile, cb) {
                 //insert user into database
                 con.query("INSERT INTO users VALUE (NULL, '"+ profile.emails[0].value +"','" + profile.displayName + "' ,'" + profile.name.givenName + "', '" + profile.name.familyName + "', " +
                     "0, 0, 0, 0)");
+                cb(profile.displayName);
             } else {
                 con.query("SELECT * FROM users WHERE email = '" + profile.emails[0].value + "' AND displayName = '" + profile.displayName +"'", function(err, result){
                     /*console.log(result);
