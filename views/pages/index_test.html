@@ -47,9 +47,12 @@
     <p class="lead">Compete against your fellow boilermakers and rise to be the champion of them all.</p>
     <hr class="my-4">
     <p>Create an account to get started today! Must be a Purdue Student To Join</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="/register" role="button">Create Account</a>
-    </p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#multiplayer" role="button">Join Multiplayer</a>
+  </p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#singleplayer" role="button">SinglePlayer</a>
+  </p>
     <p>Or, if you already have an account:</p>
     <p class="lead">
         <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
@@ -96,89 +99,67 @@
   </div>
 </div>
 
-<!-- Potential Check Boxes -->
-<!-- <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" value="" checked="">
-          
-        </label>
-      </div>
- -->
- <!-- 
-<h1> Leaderboards! </h1>
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col">Type</th>
-        <th scope="col">Column heading</th>
-        <th scope="col">Column heading</th>
-        <th scope="col">Column heading</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="table-active">
-        <th scope="row">Active</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr>
-        <th scope="row">Default</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-primary">
-        <th scope="row">Primary</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-secondary">
-        <th scope="row">Secondary</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-success">
-        <th scope="row">Success</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-danger">
-        <th scope="row">Danger</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-warning">
-        <th scope="row">Warning</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-info">
-        <th scope="row">Info</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-light">
-        <th scope="row">Light</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    <tr class="table-dark">
-        <th scope="row">Dark</th>
-        <td>Column content</td>
-        <td>Column content</td>
-        <td>Column content</td>
-    </tr>
-    </tbody>
-</table> -->
 
+<!-- //////////////////////////////////// Multiplayer MODAL ////////////////////////// -->
+
+<div class="modal" id="multiplayer" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enter Multiplayer Code</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please Enter Multiplayer Code You Have Recieved</p>
+
+        <form>
+          <fieldset>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Multiplayer Code</label>
+                <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+            </div>
+          </fieldset>
+        </form>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Enter Game!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- //////////////////////////////////// SINGLE PLAYER MODAL ////////////////////////// -->
+<div class="modal" id="singleplayer" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Good Luck BoilerMaker</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please choose a level of difficulty!</p>
+
+        <button type="button" class="btn btn-outline-success">Easy</button>
+        <button type="button" class="btn btn-outline-danger">Hard</button>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Enter Game!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
