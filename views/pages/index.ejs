@@ -53,16 +53,21 @@
     <h1 class="display-3">Welcome To Boiler Tracks!</h1>
     <p class="lead">Compete against your fellow boilermakers and rise to be the champion of them all.</p>
     <hr class="my-4">
-    <p>Create an account to get started today! Must be a Purdue Student To Join</p>
+
+<%if (playerName != ''){%>
+  <p>Select a game mode!</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#multiplayer" role="button">Join Multiplayer</a>
   </p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#singleplayer" role="button">SinglePlayer</a>
   </p>
+  <%}else{%>
+    <p>Login with Google to get started today!</p>
     <p class="lead">
         <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
     </p>
+  <%}%>
 </div>
 
 <br>
