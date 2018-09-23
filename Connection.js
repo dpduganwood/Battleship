@@ -13,11 +13,11 @@ con.connect(function(err) {
         console.log("Connected");
     }
 });
+exports.con=con;
 
 exports.procUser = procUser;
 function procUser(profile, cb) {
     //login or register user
-    //var z = JSON.parse(JSON.stringify(profile));
     console.log(profile.emails[0].value);
     con.query("SELECT * FROM users WHERE email = '" + profile.emails[0].value + "'", function(err, user_info) {
         if(err) {
@@ -57,16 +57,25 @@ function procUser(profile, cb) {
 //module.exports = con;
 
 exports.addPlayerHit = addPlayerHit;
-function addPlayerHit(playerName){
+function addPlayerHit(playerName, cb){
     con.query("UPDATE users SET hits = hits + 1 WHERE displayName = '" + playerName + "'", function(err, result){
         if(err){
             console.log(playerName);
             console.log(err);
+            cb(1);
+        } else {
+            cb(0);
         }
     });
 }
 
 exports.addPlayerMiss = addPlayerMiss;
-function addPlayerMiss(playerName) {
-
+function addPlayerMiss(playerName, cb) {
+    con.query("UPDATE users SET hits = hits - 1 WHERE displayName = '" + playerName + "'", function(err,result) {
+        if(err) {
+            cb(1);
+        } else {
+            cb(0);
+        }
+    });
 }
