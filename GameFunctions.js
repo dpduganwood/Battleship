@@ -163,16 +163,16 @@ function placeShip(x,y) {
 
 exports.checkHit_test = checkHit_test;
 function checkHit_test(x, y){
-    var loc = map[x][y];
-    if(loc % 2 === 0) {
-        map[x][y] = loc + 1;
-        if(loc === 0){
-            return 0;
+    var loc = map[y][x];
+    if(loc % 2 == 0) {
+        map[y][x] = loc + 1;
+        if(loc == 0){
+            return 0; //miss
         } else {
-            return  2;
+            return  2; //hit
         }
     } else {
-        return 1;
+        return 1; //invalid target
     }
 }
 
