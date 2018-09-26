@@ -104,6 +104,12 @@ app.get('/login2', function(req, res) {
     res.render('pages/index', {playerName:req.query.profileName});
 });
 
+app.get('/join', function(req,res){
+   console.log("Joining game: "+req.query.key);
+   res.cookie('key', req.query.key, {maxAge: 9000000});
+   res.render('pages/game', {playerName:req.cookie.playerName});
+});
+
 /*
 app.get('/register', function (req, res) {
 
