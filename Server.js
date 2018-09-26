@@ -85,11 +85,24 @@ app.get('/login2', function(req, res) {
     res.cookie('playerName', req.query.profileName, {maxAge: 9000000});
     res.render('pages/index', {playerName:req.query.profileName});
 });
-
+var keys = new Array(100000).fill(0);
+function genKey(){
+    for(var i = 0; i < 100000; i++){
+        if(keys[i] == 0){
+            keys[i] = 1;
+            return i;
+        }
+    }
+}
+function exitGame(key){
+    keys[key] = 0;
+}
 app.get('/join', function(req,res){
    console.log("Joining game: "+req.query.key);
    if(req.query.key == "single"){
-       var game = new GameController();
+       var tempKey = genKey();
+       var game = new GameFunction.GameController(tempKey);
+
    }
    res.cookie('key', req.query.key, {maxAge: 9000000});
    res.render('pages/game', {playerName:req.cookie.playerName});

@@ -48,7 +48,7 @@ class Player {
         }
     }
 }
-exports.GameController = GameController;
+
 class GameController {
     /*constructor(user1_name, user2_name, user1_map, user2_map, gameKey) {
         this.user1_name;
@@ -86,6 +86,7 @@ class GameController {
         });
     }
 }
+exports.GameController = GameController;
 
 //default map mainly for testing purposes
 var map = [ [ 0, 4, 4, 4, 0, 0, 0, 0, 0, 0],
