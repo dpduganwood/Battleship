@@ -48,7 +48,6 @@ class Player {
         }
     }
 }
-
 class GameController {
     /*constructor(user1_name, user2_name, user1_map, user2_map, gameKey) {
         this.user1_name;
@@ -178,7 +177,42 @@ function checkHit_test(x, y){
     }
 }
 
-exports.checkHit = checkHit;
+/*exports.checkHit = checkHit;
 function checkHit(playerName, gameMap, x, y){
     var loc = gameMap[x][y];
+}*/
+
+function genRandomMap() {
+    var i = 10;
+    while(i > 0) {
+        //var orientation = Math.floor(Math.random*(1-0+1));
+        var orientation = Math.round(Math.random());
+        //0 = vertical, 1 = horizontal
+        var x = Math.floor(Math.random()*10);
+        var y = Math.floor(Math.random()*10);
+        if(i == 10) {
+            //carrier
+            if(orientation == 0) {
+                //vertical
+                if(y + 5 > 9) {
+                    //invalid
+                    continue();
+                }
+            } else {
+                //horizontal
+                if(x + 5 > 9) {
+                    //invalid
+                    continue();
+                }
+            }
+        } else if(i == 8) {
+            //Cruiser
+        } else if(i == 6) {
+            //battleship
+        } else if(i == 4) {
+            //submarine
+        } else if(i == 2) {
+            //destroyer
+        }
+    }
 }
