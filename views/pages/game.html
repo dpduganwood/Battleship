@@ -18,14 +18,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">BoilerTracks</a>
-  <%
+<!--   <%
   console.log("playerName: "+playerName);
   if (playerName != ''){
-  %>
-  <a class="navbar-brand" href="#"><%=playerName%></a>
-  <%
+  %> -->
+  <!-- <a class="navbar-brand" href="#"><%=playerName%></a> -->
+<!--   <%
   }
-  %>
+  %> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -50,11 +50,10 @@
 </nav>
 
 <div class="jumbotron">
-  <h1 class="display-3">Welcome To Boiler Tracks!</h1>
-  <p class="lead">Compete against your fellow boilermakers and rise to be the champion of them all.</p>
+  <h1 class="display-3">Pick A Game Mode!</h1>
+  <p class="lead">Join A Game, Create A Game, Or Challenge The Computer</p>
   <hr class="my-4">
 
-  <%if (playerName != ''){%>
   <p>Select a game mode!</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#multiplayer" role="button">Join Multiplayer</a>
@@ -62,17 +61,11 @@
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#singleplayer" role="button">SinglePlayer</a>
   </p>
-  <%}else{%>
-  <p>Login with Google to get started today!</p>
-  <p class="lead">
-    <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
-  </p>
-  <%}%>
 </div>
 
 <br>
 
-<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+<!-- <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
   <div class="card-header">Enter Your Move Here</div>
   <div class="card-body">
     <h4 class="card-title">Enter Move</h4>
@@ -81,6 +74,9 @@
     <div class="form-group">
       <label class="col-form-label col-form-label-lg" for="inputLarge">X Coordinate</label>
       <input class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="inputLarge">
+
+      <label class="col-form-label col-form-label-lg" for="inputLarge">Y Coordinate</label>
+      <input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="inputLarge">
     </div>
 
     <div class="form-group">
@@ -89,9 +85,104 @@
     </div>
 
   </div>
+</div> -->
+
+<div style="width: 100%; display: table;">
+    <div style="display: table-row">
+       <!-- <div style="width: 600px; display: table-cell;"> Left </div> -->
+        
+        <div class="card text-white bg-dark mb-3" style="width: 600px; display: table-cell;">
+          <div class="card-header">Enter Your Move Here</div>
+          <div class="card-body">
+            <h4 class="card-title">Enter Move</h4>
+            <p class="card-text">Example Coordinate (0,4) (5,3)</p>
+
+            <div class="form-group">
+              <label class="col-form-label col-form-label-lg" for="inputLarge">X Coordinate</label>
+              <input class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="inputLarge">
+
+              <label class="col-form-label col-form-label-lg" for="inputLarge">Y Coordinate</label>
+              <input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="inputLarge">
+            </div>
+
+            <div class="form-group">
+              <label class="col-form-label col-form-label-lg" for="inputLarge">Y Coordinate</label>
+              <input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="inputLarge">
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- <div style="display: table-cell;"> Right </div> -->
+        <!-- RIGHT SIDE COMPONENT -->
+        <div class="card bg-light mb-3" style="display: table-cell;"">
+          <div class="card-header">Option 2 For Output</div>
+          <div class="card-body">
+            <h4 class="card-title">Your Move...</h4>
+            <p class="card-text"> -> Ship Has Been Sunk!.</p>
+            <br>
+            <p class="card-text"> -> (4,1) was a miss. (Nice try tho..)</p>
+            <br>
+            <p class="card-text"> -> (3,2) was a hit...</p>
+          </div>
+        </div>
+
+
+    </div>
 </div>
 
 
+<!-- <div style="width: 100%; display: table;">
+  <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+    <div style="display: table-row">
+      <div style="width: 6000px; display: table-cell;" class="card-header">Enter Your Move Here</div>
+          <div style="width: 600px; display: table-cell;" class="card-body">
+            <h4 style="width: 600px; display: table-cell;" class="card-title">Enter Move</h4>
+            <p style="width: 600px; display: table-cell;" class="card-text">Example Coordinate (0,4) (5,3)</p>
+
+            <div style="width: 600px; display: table-cell;" class="form-group">
+              <label style="width: 600px; display: table-cell;"class="col-form-label col-form-label-lg" for="inputLarge">X Coordinate</label>
+              <input style="width: 600px; display: table-cell;"class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="inputLarge">
+
+              <label style="width: 600px; display: table-cell;"class="col-form-label col-form-label-lg" for="inputLarge">Y Coordinate</label>
+              <input style="width: 600px; display: table-cell;"class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="inputLarge">
+            </div>
+
+            <div style="width: 600px; display: table-cell;"class="form-group">
+              <label style="width: 600px; display: table-cell;"class="col-form-label col-form-label-lg" for="inputLarge">Y Coordinate</label>
+              <input style="width: 600px; display: table-cell;"class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="inputLarge">
+            </div>
+
+          </div>
+
+          <div style="display: table-cell;" class="card bg-light mb-3" >
+            <div style="display: table-cell;"class="card-header">Option 2 For Output</div>
+            <div style="display: table-cell;" class="card-body">
+              <h4 class="card-title">Your Move...</h4>
+              <p class="card-text"> -> Ship Has Been Sunk!.</p>
+              <br>
+              <p class="card-text"> -> (4,1) was a miss. (Nice try tho..)</p>
+              <br>
+              <p class="card-text"> -> (3,2) was a hit...</p>
+            </div>
+          </div>
+
+
+
+  </div>
+</div>
+</div> -->
+
+
+
+
+
+<!-- 
 <div class="card bg-light mb-3" style="max-width: 20rem;">
   <div class="card-header">Option 2 For Output</div>
   <div class="card-body">
@@ -102,7 +193,7 @@
     <br>
     <p class="card-text"> -> (3,2) was a hit...</p>
   </div>
-</div>
+</div> -->
 
 <!-- //////////////////////////////////// Multiplayer MODAL ////////////////////////// -->
 
