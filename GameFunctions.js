@@ -196,13 +196,12 @@ function genRandomMap() {
                 //vertical
                 if(y + 5 > 9) {
                     //invalid
-                    continue();
                 }
             } else {
                 //horizontal
                 if(x + 5 > 9) {
                     //invalid
-                    continue();
+
                 }
             }
         } else if(i == 8) {

@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var cookieParser = require('cookie-parser');
 var Connection = require(__dirname + "/Connection.js");
-var GameFunction = require(__dirname + "/GameFunction.js");
+var GameFunction = require(__dirname + "/GameFunctions.js");
 var path = require('path');
 
 var passportSetup=require('./config/passport-setup');
