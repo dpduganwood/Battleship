@@ -48,6 +48,7 @@ class Player {
         }
     }
 }
+exports.GameController = GameController;
 class GameController {
     /*constructor(user1_name, user2_name, user1_map, user2_map, gameKey) {
         this.user1_name;

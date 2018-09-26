@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var cookieParser = require('cookie-parser');
 var Connection = require(__dirname + "/Connection.js");
+var GameFunction = require(__dirname + "/GameFunction.js");
 var path = require('path');
 
 var passportSetup=require('./config/passport-setup');
@@ -62,30 +63,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/logout', function (req, res){
+    console.log("Logging out user: "+req.cookie.playerName);
     res.cookie('playerName', '', {maxAge: 9000000});
     res.render('pages/index', {playerName:''});
 });
-/*
-var grids = new Array(100);
-class Grid {
-    constructor(height, width){
-        this.height = height;
-        this.width = width;
-        this.grid = new Array(height);
-        for(var i = 0; i < this.grid.length; i++){
-            this.grid[i] = new Array(this.width);
-        }
-        for(var i = 0; i < this.grid.length; i++){
-            for(var j = 0; j < this.grid[i].length; j++){
-                this.grid[i][j] = 0;
-            }
-        }
-    }
-    //grid settings: 0 = empty, 1 = ship (unhit), 2 = ship (hit), 3 = miss
-    setShip(x,y, dir) {
-    }
-}
-*/
+
 exports.register = register;
 function register(profile, user) {
     console.log("Test register func.");
@@ -106,15 +88,12 @@ app.get('/login2', function(req, res) {
 
 app.get('/join', function(req,res){
    console.log("Joining game: "+req.query.key);
+   if(req.query.key == "single"){
+       var game = new GameController();
+   }
    res.cookie('key', req.query.key, {maxAge: 9000000});
    res.render('pages/game', {playerName:req.cookie.playerName});
 });
-
-/*
-app.get('/register', function (req, res) {
-
-});
-*/
 
 app.listen(6009);
 console.log('6009 is the open port');
