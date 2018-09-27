@@ -48,6 +48,7 @@ class Player {
         }
     }
 }
+exports.Player = Player;
 class GameController {
     /*constructor(user1_name, user2_name, user1_map, user2_map, gameKey) {
         this.user1_name;
@@ -177,12 +178,37 @@ function checkHit_test(x, y){
     }
 }
 
+exports.AIcheckHit = AIcheckHit;
+function AIcheckHit(x, y, checkMap) {
+    var loc = checkMap[y][x];
+    if(loc % 2 == 0) {
+        //checkMap[y][x] = loc + 1;
+        if(loc == 0){
+            return 0; //miss
+        } else {
+            return  2; //hit
+        }
+    } else {
+        return 1; //invalid target
+    }
+}
+
 /*exports.checkHit = checkHit;
 function checkHit(playerName, gameMap, x, y){
     var loc = gameMap[x][y];
 }*/
-
+exports.genRandomMap = genRandomMap;
 function genRandomMap() {
+    var genMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
     var i = 10;
     while(i > 0) {
         //var orientation = Math.floor(Math.random*(1-0+1));
@@ -191,27 +217,148 @@ function genRandomMap() {
         var x = Math.floor(Math.random()*10);
         var y = Math.floor(Math.random()*10);
         if(i == 10) {
-            //carrier
+            //carrier length 5
             if(orientation == 0) {
                 //vertical
-                if(y + 5 > 9) {
-                    //invalid
+                if(y + 4 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 4; j++) {
+                        genMap[y+j][x] = 10;
+                    }
                 }
             } else {
                 //horizontal
-                if(x + 5 > 9) {
-                    //invalid
-
+                if(x + 4 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 4; j++) {
+                        genMap[y][x+j] = 10;
+                    }
                 }
             }
         } else if(i == 8) {
-            //Cruiser
+            //Cruiser length 4
+            if(orientation == 0) {
+                //vertical
+                if(y + 3 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    //check if another ship is already in its path
+                    for(j = 0; j <= 3; j++) {
+                        if(genMap[y+j][x] == 10) {
+                            continue;
+                        }
+                    }
+                    for(j = 0; j <= 3; j++) {
+                        genMap[y+j][x] = 8;
+                    }
+                }
+            } else {
+                //horizontal
+                if(x + 3 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    //check if aother ship is already in its path
+                    for(j = 0; j <= 3; j++) {
+                        if(genMap[y][x+j] == 10) {
+                            continue;
+                        }
+                    }
+                    for(j = 0; j <= 3; j++) {
+                        genMap[y][x+j] = 8;
+                    }
+                }
+            }
         } else if(i == 6) {
-            //battleship
+            //battleship length 3
+            if(orientation == 0) {
+                //vertical
+                if(y + 2 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 2; j++) {
+                        genMap[y+j][x] = 6;
+                    }
+                }
+            } else {
+                //horizontal
+                if(x + 2 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 2; j++) {
+                        genMap[y][x+j] = 6;
+                    }
+                }
+            }
         } else if(i == 4) {
-            //submarine
+            //submarine length 3
+            if(orientation == 0) {
+                //vertical
+                if(y + 2 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 2; j++) {
+                        genMap[y+j][x] = 4;
+                    }
+                }
+            } else {
+                //horizontal
+                if(x + 2 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 2; j++) {
+                        genMap[y][x+j] = 4;
+                    }
+                }
+            }
         } else if(i == 2) {
-            //destroyer
+            //destroyer length 3
+            if(orientation == 0) {
+                //vertical
+                if(y + 1 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 1; j++) {
+                        genMap[y+j][x] = 2;
+                    }
+                }
+            } else {
+                //horizontal
+                if(x + 1 > 9) {
+                    //invalid location
+                    continue;
+                } else {
+                    //valid location
+                    for(j = 0; j <= 1; j++) {
+                        genMap[y][x+j] = 2;
+                    }
+                }
+            }
+        }
+        i+=2;
+    }
+    for(i = 0; i < 9; i++) {
+        for(j = 0; j < 9; j++) {
+
         }
     }
 }
