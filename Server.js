@@ -99,12 +99,16 @@ function exitGame(key){
 }
 app.get('/join', function(req,res){
    console.log("Joining game: "+req.query.key);
+   var game;
    if(req.query.key == "single"){
        var tempKey = genKey();
-       var game = new GameFunction.GameController(tempKey);
-
+       game = new GameFunction.GameController(tempKey);
+       res.cookie('key', tempKey, {maxAge: 9000000});
+   }else{
+       game = new GameFunction.GameController(req.query.key);
+       res.cookie('key', req.query.key, {maxAge: 9000000});
    }
-   res.cookie('key', req.query.key, {maxAge: 9000000});
+
    res.render('pages/game', {playerName:req.cookie.playerName});
 });
 
