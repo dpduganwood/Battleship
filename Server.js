@@ -99,6 +99,7 @@ function exitGame(key){
 }
 app.get('/join', function(req,res){
    console.log("Joining game: "+req.query.key);
+   console.log("Easy or hard AI: "+req.query.eOrH);
    var game;
    if(req.query.key == "single"){
        var tempKey = genKey();
@@ -108,7 +109,7 @@ app.get('/join', function(req,res){
        game = new GameFunction.GameController(req.query.key);
        res.cookie('key', req.query.key, {maxAge: 9000000});
    }
-
+    console.log("Easy and hard are not complete and supposed to crash.");
    res.render('pages/game', {playerName:req.cookie.playerName});
 });
 
