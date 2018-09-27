@@ -178,23 +178,8 @@ function checkHit_test(x, y){
     }
 }
 
-exports.AIcheckHit = AIcheckHit;
-function AIcheckHit(x, y, checkMap) {
-    var loc = checkMap[y][x];
-    if(loc % 2 == 0) {
-        //checkMap[y][x] = loc + 1;
-        if(loc == 0){
-            return 0; //miss
-        } else {
-            return  2; //hit
-        }
-    } else {
-        return 1; //invalid target
-    }
-}
-
 exports.AIcheckSunk = AIcheckSunk;
-function AIcheckSunk(x, y, checkMap) {
+function AIcheckSunk(x, y, checkMap) { //returns true if this hit will result in a sunk ship
     var loc = checkMap[y][x];
     if(loc == 0) {
         return false;
