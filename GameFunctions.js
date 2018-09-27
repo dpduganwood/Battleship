@@ -253,10 +253,14 @@ function genRandomMap() {
                 } else {
                     //valid location
                     //check if another ship is already in its path
+                    var collision = false;
                     for(j = 0; j <= 3; j++) {
-                        if(genMap[y+j][x] == 10) {
-                            continue;
+                        if(genMap[y+j][x] != 0) {
+                            collision = true;
                         }
+                    }
+                    if(collision == true) {
+                        continue;
                     }
                     for(j = 0; j <= 3; j++) {
                         genMap[y+j][x] = 8;
@@ -270,10 +274,14 @@ function genRandomMap() {
                 } else {
                     //valid location
                     //check if aother ship is already in its path
+                    var collision = false;
                     for(j = 0; j <= 3; j++) {
-                        if(genMap[y][x+j] == 10) {
-                            continue;
+                        if(genMap[y][x+j] != 0) {
+                            collision = true;
                         }
+                    }
+                    if(collision == true) {
+                        continue;
                     }
                     for(j = 0; j <= 3; j++) {
                         genMap[y][x+j] = 8;
@@ -289,6 +297,16 @@ function genRandomMap() {
                     continue;
                 } else {
                     //valid location
+                    var collision = false;
+                    for(j = 0; j <= 2; j++) {
+                        if(genMap[y+j][x] != 0) {
+                            collision = true;
+                        }
+                    }
+                    if(collision == true) {
+                        continue;
+                    }
+
                     for(j = 0; j <= 2; j++) {
                         genMap[y+j][x] = 6;
                     }
@@ -300,6 +318,15 @@ function genRandomMap() {
                     continue;
                 } else {
                     //valid location
+                    var collision = false;
+                    for(j = 0; j <= 2; j++) {
+                        if(genMap[y][x+j] != 0) {
+                            collision = true;
+                        }
+                    }
+                    if(collision == true) {
+                        continue;
+                    }
                     for(j = 0; j <= 2; j++) {
                         genMap[y][x+j] = 6;
                     }
@@ -314,6 +341,15 @@ function genRandomMap() {
                     continue;
                 } else {
                     //valid location
+                    var collision = false;
+                    for(j = 0; j <= 2; j++) {
+                        if(genMap[y+j][x] != 0) {
+                            collision = true;
+                        }
+                    }
+                    if(collision == true) {
+                        continue;
+                    }
                     for(j = 0; j <= 2; j++) {
                         genMap[y+j][x] = 4;
                     }
@@ -325,6 +361,15 @@ function genRandomMap() {
                     continue;
                 } else {
                     //valid location
+                    var collision = false;
+                    for(j = 0; j <= 2; j++) {
+                        if(genMap[y][x+j] != 0) {
+                            collision = true;
+                        }
+                    }
+                    if(collision == true) {
+                        continue;
+                    }
                     for(j = 0; j <= 2; j++) {
                         genMap[y][x+j] = 4;
                     }
@@ -339,6 +384,15 @@ function genRandomMap() {
                     continue;
                 } else {
                     //valid location
+                    var collision = false;
+                    for(j = 0; j <= 1; j++) {
+                        if(genMap[y+j][x] != 0) {
+                            collision = true;
+                        }
+                    }
+                    if(collision == true) {
+                        continue;
+                    }
                     for(j = 0; j <= 1; j++) {
                         genMap[y+j][x] = 2;
                     }
@@ -350,17 +404,22 @@ function genRandomMap() {
                     continue;
                 } else {
                     //valid location
+                    var collision = false;
+                    for(j = 0; j <= 1; j++) {
+                        if(genMap[y][x+j] != 0) {
+                            collision = true;
+                        }
+                    }
+                    if(collision == true) {
+                        continue;
+                    }
                     for(j = 0; j <= 1; j++) {
                         genMap[y][x+j] = 2;
                     }
                 }
             }
         }
-        i+=2;
+        i-=2;
     }
-    for(i = 0; i < 9; i++) {
-        for(j = 0; j < 9; j++) {
-
-        }
-    }
+    return(genMap);
 }
