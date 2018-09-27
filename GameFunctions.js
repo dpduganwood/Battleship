@@ -193,6 +193,23 @@ function AIcheckHit(x, y, checkMap) {
     }
 }
 
+exports.AIcheckSunk = AIcheckSunk;
+function AIcheckSunk(x, y, checkMap) {
+    var loc = checkMap[y][x];
+    if(loc == 0) {
+        return false;
+    }
+    checkMap[y][x] += 1;
+    for(i = 0; i < 10; i++){
+        if(checkMap[i].includes(loc)){
+            checkMap[y][x] -= 1;
+            return false;
+        }
+    }
+    checkMap[y][x] -= 1;
+    return true;
+}
+
 /*exports.checkHit = checkHit;
 function checkHit(playerName, gameMap, x, y){
     var loc = gameMap[x][y];
