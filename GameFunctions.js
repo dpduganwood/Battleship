@@ -438,5 +438,3 @@ function genRandomMap() {
     }
     return(genMap);
 }
-
-console.log(genRandomMap());
