@@ -78,15 +78,9 @@
               <input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="inputLargeY">
             </div>
 
-            <button onclick="xyInput()" type="submit" class="btn btn-primary">Submit</button>
+            <button onclick="xyInput()" class="btn btn-primary">Submit</button>
 
-         <script>
-          function xyInput() {
-           document.getElementById("xyOutput").innerHTML = "Hello World";   
-
-          }
-        </script>
-
+         
 
           </div>
         </div>
@@ -102,11 +96,8 @@
           <div class="card-header">Game Console!</div>
           <div class="card-body">
             <h4 class="card-title">Your Move...</h4>
-            <p id=xyOutput class="card-text"> -> Ship Has Been Sunk!.</p>
-            <br>
-            <p class="card-text"> -> (4,1) was a miss. (Nice try tho..)</p>
-            <br>
-            <p class="card-text"> -> (3,2) was a hit...</p>
+            <p id=xyOutput class="card-text"></p>
+           
           </div>
         </div>
 
@@ -114,6 +105,16 @@
     </div>
 </div>
 
+<script>
+          function xyInput() {
+
+          var x = document.getElementById("inputLargeX").value;
+          var y = document.getElementById("inputLargeY").value;
+
+           document.getElementById("xyOutput").innerHTML = x + " , " +  y;   
+
+          }
+        </script>
 
 
 <!-- //////////////////////////////////// Multiplayer MODAL ////////////////////////// -->
