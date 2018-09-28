@@ -98,19 +98,41 @@ function exitGame(key){
     keys[key] = 0;
 }
 app.get('/join', function(req,res){
-   console.log("Joining game: "+req.query.key);
-   console.log("Easy or hard AI: "+req.query.eOrH);
-   var game;
-   if(req.query.key == "single"){
-       var tempKey = genKey();
-       game = new GameFunction.GameController(tempKey);
-       res.cookie('key', tempKey, {maxAge: 9000000});
-   }else{
-       game = new GameFunction.GameController(req.query.key);
-       res.cookie('key', req.query.key, {maxAge: 9000000});
-   }
-    console.log("playerName: " + req.playerName);
-   res.render('pages/game.ejs', {playerName:req.cookies.playerName});
+    console.log("Joining game: "+req.query.key);
+    console.log("Easy or hard AI: "+req.query.eOrH);
+    var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+    var game;
+    if(req.query.key == "single"){
+        var tempKey = genKey();
+        res.cookie('key', tempKey, {maxAge: 9000000});
+        var player = new GameFunction.Player(req.cookies.playerName, emptyMap);
+        var ai;
+        if(req.query.eOrH == "easy"){
+            ai = new GameFunction.Player("Easy", emptyMap);
+        }else{
+            ai = new GameFunction.Player("Hard", emptyMap);
+        }
+        game = new GameFunction.GameController(player, ai, tempKey);
+    }else{
+        //game = new GameFunction.GameController(req.query.key);
+        res.cookie('key', req.query.key, {maxAge: 9000000});
+    }
+    console.log("Easy and hard are not complete and supposed to crash.");
+
+    res.render('pages/game.ejs', {playerName:req.cookies.playerName});
+});
+
+app.get('/action',function(req,res){
+    console.log(req.query);
 });
 
 app.listen(6009);
