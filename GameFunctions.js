@@ -257,6 +257,7 @@ function genRandomMap() {
                     for(j = 0; j <= 3; j++) {
                         if(genMap[y+j][x] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
@@ -278,6 +279,7 @@ function genRandomMap() {
                     for(j = 0; j <= 3; j++) {
                         if(genMap[y][x+j] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
@@ -301,6 +303,7 @@ function genRandomMap() {
                     for(j = 0; j <= 2; j++) {
                         if(genMap[y+j][x] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
@@ -322,6 +325,7 @@ function genRandomMap() {
                     for(j = 0; j <= 2; j++) {
                         if(genMap[y][x+j] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
@@ -345,6 +349,7 @@ function genRandomMap() {
                     for(j = 0; j <= 2; j++) {
                         if(genMap[y+j][x] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
@@ -365,6 +370,7 @@ function genRandomMap() {
                     for(j = 0; j <= 2; j++) {
                         if(genMap[y][x+j] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
@@ -388,6 +394,7 @@ function genRandomMap() {
                     for(j = 0; j <= 1; j++) {
                         if(genMap[y+j][x] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
@@ -408,6 +415,7 @@ function genRandomMap() {
                     for(j = 0; j <= 1; j++) {
                         if(genMap[y][x+j] != 0) {
                             collision = true;
+                            break;
                         }
                     }
                     if(collision == true) {
