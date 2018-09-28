@@ -12,7 +12,7 @@ class AIOpponent {
         while (true) {
             var x = Math.floor(Math.random()*10);
             var y = Math.floor(Math.random()*10);
-            if (isValid(map, x, y)) {
+            if (isValid(map, x, y) && aicheckHit(x, y, map) == 0) {
                 return [x, y];
             }
         }
@@ -21,13 +21,17 @@ class AIOpponent {
     hardAISelectLocation(map) { //map is the enemy's map
         for (var i = 0; i < 10; i++) {
             for (var j = 0; j < 10; j++) {
-                if (aicheckHit(i, j, map) == 2 && locationsOfSunkShips(map).includes([i, j])) { //if there is existing hit on board and ship not sunk
+
+                //if there is existing hit on board that is not part of ship that is sunk
+                if (aicheckHit(i, j, map) == 2 && !locationsOfSunkShips(map).includes([i, j])) {
 
                     //previous hit is next to other previous hit (checks both sides)
                     var increaseX = 1;
+                    //keep incrementing along all of the hits in right direction
                     while (isValid(map, i+increaseX, j) && aicheckHit(i+increaseX, j, map) == 2) {
                         increaseX++;
                     }
+                    //once reach end of consecutive hits in right direction, if spot is empty, guess it
                     if (isValid(map, i+increaseX, j) && aicheckHit(i+increaseX, j, map) == 0) {
                         return [i+increaseX, j];
                     }
@@ -40,8 +44,6 @@ class AIOpponent {
                             return [i-decreaseX, j];
                         }
                     }
-                    increaseX = 1;
-                    decreaseX = 1;
 
                     //previous hit is next to other previous hit (checks above and below)
                     var increaseY= 1;
@@ -60,28 +62,25 @@ class AIOpponent {
                             return [i, j-decreaseY];
                         }
                     }
-                    increaseY = 1;
-                    decreaseY = 1;
 
                     //previous hit is not next to any other hits, so guess adjacent space
-                    if ((isValid(map, i+1, j) && aicheckHit(i+1, j, map) == 1 || aicheckHit(i+1, j, map) == 0)) //right valid
+                    if ((isValid(map, i+1, j) && aicheckHit(i+1, j, map) == 0)) //if right valid
                         return [i+1, j];
-                    else if ((isValid(map, i-1, j) && aicheckHit(i-1, j, map) == 1 || aicheckHit(i-1, j, map) == 0)) //left valid
+                    else if ((isValid(map, i-1, j) && aicheckHit(i-1, j, map) == 0)) //if left valid
                         return [i-1, j];
-                    else if ((isValid(map, i, j+1) && aicheckHit(i, j+1, map) == 1 || aicheckHit(i, j+1, map) == 0)) //top valid
+                    else if ((isValid(map, i, j+1) && aicheckHit(i, j+1, map) == 0)) //if top valid
                         return [i, j+1];
-                    else if ((isValid(map, i, j-1) && aicheckHit(i, j-1, map) == 1 || aicheckHit(i, j-1, map) == 0)) //bottom valid
+                    else if ((isValid(map, i, j-1) && aicheckHit(i, j-1, map) == 0)) //if bottom valid
                         return [i, j-1];
                 }
             }
         }
 
-        //if all visible ships are sunk or no successful hits yet, then guess randomly in valid location
-        var x = Math.floor(Math.random() * 10);
-        var y = Math.floor(Math.random() * 10);
-        return [x, y];
+        //if all visible ships are sunk or no successful hits yet, then guess randomly in valid location like easy AI
+        return this.easyAISelectLocation(map);
     }
 }
+exports.AIOpponent = AIOpponent;
 
 exports.isValid = isValid;
 function isValid(map, x, y) {
