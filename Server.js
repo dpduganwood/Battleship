@@ -8,6 +8,7 @@ var mysql = require('mysql');
 var cookieParser = require('cookie-parser');
 var Connection = require(__dirname + "/Connection.js");
 var GameFunction = require(__dirname + "/GameFunctions.js");
+var AIFunction = require(__dirname + "/AIFunctions.js");
 var path = require('path');
 
 var passportSetup=require('./config/passport-setup');
@@ -117,9 +118,9 @@ app.get('/join', function(req,res){
         var player = new GameFunction.Player(req.cookies.playerName, emptyMap);
         var ai;
         if(req.query.eOrH == "easy"){
-            ai = new GameFunction.Player("Easy", emptyMap);
+            ai = new AIFunction.AIOpponent(tempKey, emptyMap);
         }else{
-            ai = new GameFunction.Player("Hard", emptyMap);
+            ai = new AIFunction.AIOpponent(tempKey, emptyMap);
         }
         game = new GameFunction.GameController(player, ai, tempKey);
     }else{
