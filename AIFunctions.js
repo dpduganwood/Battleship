@@ -6,6 +6,38 @@ class AIOpponent {
     constructor(gamekey, map) {
         this.gamekey = gamekey;
         this.map = map;
+        var isAIReady;
+        var hits = 0;
+        var misses = 0;
+    }
+
+    getAIReady() {
+        return isAIReady;
+    }
+
+    setAIReady(isReady) {
+        isAIReady = this.isReady;
+    }
+
+    getMap() {
+        return map;
+    }
+
+    setMap(map) {
+        this.map = map;
+    }
+
+    checkHit(x,y, cb) {
+        if(this.map[y][x] % 2 == 0) {
+            if(this.map[y][x] == 0) {
+                cb(0); //target id zero. MISS
+            } else {
+                cb(2); //target id even. HIT
+            }
+            this.map[y][x] += 1;
+        } else {
+            cb(1); //target id odd. INVALID TARGET
+        }
     }
 
     easyAISelectLocation(map) {
