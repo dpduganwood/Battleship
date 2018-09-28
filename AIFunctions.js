@@ -23,7 +23,7 @@ class AIOpponent {
             for (var j = 0; j < 10; j++) {
                 if (aicheckHit(i, j, map) == 2 && locationsOfSunkShips(map).includes([i, j])) { //if there is existing hit on board and ship not sunk
 
-                    //previous hit and next to other hit (horizontal checks)
+                    //previous hit is next to other previous hit (checks both sides)
                     var increaseX = 1;
                     while (isValid(map, i+increaseX, j) && aicheckHit(i+increaseX, j, map) == 2) {
                         increaseX++;
@@ -43,7 +43,7 @@ class AIOpponent {
                     increaseX = 1;
                     decreaseX = 1;
 
-                    //previous hit and next to other hit (vertical checks)
+                    //previous hit is next to other previous hit (checks above and below)
                     var increaseY= 1;
                     while (isValid(map, i, j+increaseY) && aicheckHit(i, j+increaseY, map) == 2) {
                         increaseY++;
@@ -63,7 +63,7 @@ class AIOpponent {
                     increaseY = 1;
                     decreaseY = 1;
 
-                    //hit is not next to any other hits, so guess adjacent space
+                    //previous hit is not next to any other hits, so guess adjacent space
                     if ((isValid(map, i+1, j) && aicheckHit(i+1, j, map) == 1 || aicheckHit(i+1, j, map) == 0)) //right valid
                         return [i+1, j];
                     else if ((isValid(map, i-1, j) && aicheckHit(i-1, j, map) == 1 || aicheckHit(i-1, j, map) == 0)) //left valid
