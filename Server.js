@@ -109,8 +109,8 @@ app.get('/join', function(req,res){
        game = new GameFunction.GameController(req.query.key);
        res.cookie('key', req.query.key, {maxAge: 9000000});
    }
-    console.log("Easy and hard are not complete and supposed to crash.");
-   res.render('pages/game', {playerName:req.cookie.playerName});
+    console.log("playerName: " + req.playerName);
+   res.render('pages/game.ejs', {playerName:req.cookies.playerName});
 });
 
 app.listen(6009);
