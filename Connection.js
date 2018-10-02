@@ -34,7 +34,7 @@ function procUser(profile, cb) {
                 //user currently not in database
                 //insert user into database
                 con.query("INSERT INTO users VALUE (NULL, '"+ profile.emails[0].value +"','" + profile.displayName + "' ,'" + profile.name.givenName + "', '" + profile.name.familyName + "', " +
-                    "0, 0, 0, 0)");
+                    "0, 0, 0, 0, 0, 0)");
                 cb(profile.displayName);
             } else {
                 con.query("SELECT * FROM users WHERE email = '" + profile.emails[0].value + "' AND displayName = '" + profile.displayName +"'", function(err, result){
