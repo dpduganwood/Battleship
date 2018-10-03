@@ -54,6 +54,7 @@ insert into users value(
     3400);
     
 insert into users value(
+    NULL,
 	"dorkfaceemail@email.com",
     "dorkface",
     "dork",
@@ -66,6 +67,7 @@ insert into users value(
     1891);
     
 insert into users value (
+    NULL,
 	"johnsmithemail@email.com",
     "johnsmith",
     "john",
