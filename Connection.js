@@ -82,7 +82,7 @@ function addPlayerMiss(playerName, cb) {
     });
 }
 
-exports.getLeaderboard = getleaderboard;
+
 function getLeaderboard(cb) {
     con.query("SELECT displayName, mp_wins, mp_loses, hits, misses FROM users ORDER BY (mp_wins-mp_loses) DESC LIMIT 100", function(err, result){
         if(err) {
@@ -92,4 +92,6 @@ function getLeaderboard(cb) {
             cb(z);
         }
     });
+
+    exports.getLeaderboard = getleaderboard;
 }
