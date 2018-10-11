@@ -116,7 +116,7 @@ function addPlayerSPWin(playerName, cb) {
 }
 
 exports.addPlayerMPWin = addPlayerMPWin;
-function addPlayerWin(playerName, cb) {
+function addPlayerMPWin(playerName, cb) {
     con.query("UPDATE users SET mp_wins = mp_wins + 1 WHERE displayName = '" + playerName + "'", function(err, result) {
         if(err) {
             cb(1);
