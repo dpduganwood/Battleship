@@ -127,20 +127,22 @@ app.get('/join', function(req,res){
         //game = new GameFunction.GameController(req.query.key);
         res.cookie('key', req.query.key, {maxAge: 9000000});
     }
+    res.cookie('turn', 0,{maxAge: 9000000});
     res.cookie('lastAttack', "", {maxAge: 9000000});
     console.log("Easy and hard are not complete.");
 
-    res.render('pages/game.ejs', {playerName:req.cookies.playerName});
+    res.render('pages/game.ejs', {playerName:req.cookies.playerName,turn:0,shipsLeft:[2,3,3,4,5]});
 });
 
 app.get('/attack',function(req,res){
     var temp = "("+req.query.X+","+req.query.Y+")";
     console.log(temp);
     if(req.cookies.lastAttack === temp){
-        res.render('pages/game.ejs', {playerName:req.cookies.playerName});
+        res.render('pages/game.ejs', {playerName:req.cookies.playerName,turn:req.cookies.turn});
     }else{
         res.cookie('lastAttack', temp, {maxAge: 9000000});
-        res.render('pages/game.ejs', {playerName:req.cookies.playerName});
+        res.cookie('turn', (req.cookies.turn)+1, {maxAge: 9000000});
+        res.render('pages/game.ejs', {playerName:req.cookies.playerName,turn:req.cookies.turn});
     }
 
 });
