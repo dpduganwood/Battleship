@@ -86,6 +86,9 @@ app.get('/login2', function(req, res) {
     res.cookie('playerName', req.query.profileName, {maxAge: 9000000});
     res.render('pages/index', {playerName:req.query.profileName});
 });
+
+var games = new Array(100000).fill(null);
+exports.games = games;
 var keys = new Array(100000).fill(0);
 function genKey(){
     for(var i = 0; i < 100000; i++){
@@ -97,6 +100,7 @@ function genKey(){
 }
 function exitGame(key){
     keys[key] = 0;
+    games[key] = null;
 }
 app.get('/join', function(req,res){
     console.log("Joining game: "+req.query.key);
@@ -115,7 +119,7 @@ app.get('/join', function(req,res){
     if(req.query.key == "single"){
         var tempKey = genKey();
         res.cookie('key', tempKey, {maxAge: 9000000});
-        var player = new GameFunction.Player(req.cookies.playerName, emptyMap);
+        var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
         var ai;
         if(req.query.eOrH == "easy"){
             ai = new AIFunction.AIOpponent(tempKey, emptyMap);
@@ -123,6 +127,7 @@ app.get('/join', function(req,res){
             ai = new AIFunction.AIOpponent(tempKey, emptyMap);
         }
         game = new GameFunction.GameController(player, ai, tempKey);
+        games[tempKey] = game;
     }else{
         //game = new GameFunction.GameController(req.query.key);
         res.cookie('key', req.query.key, {maxAge: 9000000});

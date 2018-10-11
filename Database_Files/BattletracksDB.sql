@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `Battletracks_db`.`users` (
   `lastName` TEXT NOT NULL,
   `sp_wins` INT(11) NOT NULL,
   `mp_wins` INT(11) NOT NULL,
-  `sp_loses` INT(11) NOT NULL,
-  `mp_loses` INT(11) NOT NULL,
+  `sp_losses` INT(11) NOT NULL,
+  `mp_losses` INT(11) NOT NULL,
   `hits` INT(11) NOT NULL,
   `misses` INT(11) NOT NULL,
   PRIMARY KEY (`user_id`),
@@ -37,4 +37,3 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-

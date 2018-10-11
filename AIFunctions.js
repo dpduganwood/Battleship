@@ -1,12 +1,19 @@
 var Connection = require(__dirname + "/Connection.js");
 var GameFunctions = require(__dirname + "/GameFunctions.js");
+var Server = require(__dirname+"Server.js");
 
 class AIOpponent {
 
-    constructor(gamekey, map) {
+    constructor(gamekey, map, difficulty /*0 for player, 1 for easy, 2 for hard*/) {
+        //type should only be 1 or 2 in this case
         this.gamekey = gamekey;
         this.map = map;
         var isAIReady;
+
+        //game controller compatibility stuff:
+        this.type = difficulty;
+        this.displayName = "AInotPlayer";
+        //var isAIReady;
         var hits = 0;
         var misses = 0;
     }
@@ -41,6 +48,7 @@ class AIOpponent {
     }
 
     easyAISelectLocation(map) {
+        //var map = Serer.games[this.gamekey].player1.getMap();
         while (true) {
             var x = Math.floor(Math.random()*10);
             var y = Math.floor(Math.random()*10);
@@ -109,7 +117,7 @@ class AIOpponent {
         }
 
         //if all visible ships are sunk or no successful hits yet, then guess randomly in valid location like easy AI
-        return this.easyAISelectLocation(map);
+        return this.easyAISelectLocation(/*map*/);
     }
 }
 exports.AIOpponent = AIOpponent;

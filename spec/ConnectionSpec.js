@@ -26,7 +26,7 @@ describe("checkHit_test",function(){
 describe("addPlayerHit",function(){
     it("Testing add player hit function",function() {
         Connection.con.query("REMOVE FROM users WHERE email = 'dpduganwood@gmail.com'", function () {
-            Connection.addPlayerHit(function (result) {
+            Connection.addPlayerHit("David Wood",function (result) {
                 Connection.con.query("SELECT * FROM users WHERE displayName = '" + disp.displayName + "'", function (err, result) {
                     expect(result.length).toBe(1);
                 });

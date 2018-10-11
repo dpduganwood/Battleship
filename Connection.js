@@ -82,7 +82,73 @@ function addPlayerMiss(playerName, cb) {
     });
 }
 
+exports.addPlayerHitsBySum = addPlayerHitsBySum;
+function addPlayerHitsBySum(playerName, sum, cb) {
+    con.query("UPDATE users SET hits = hits + " + sum + "WHERE displayName = '" + playerName + "'", function(err, result){
+        if(err) {
+            cb(1);
+        } else {
+            cb(0);
+        }
+    });
+}
 
+exports.addPlayerMissesBySum = addPlayerMissesBySum;
+function addPlayerMissesBySum(playerName, sum, cb) {
+    con.query("UPDATE users SET misses = misses + " + sum + "WHERE displayName = '" + playerName + "'", function(err, result){
+        if(err) {
+            cb(1);
+        } else {
+            cb(0);
+        }
+    });
+}
+
+exports.addPlayerSPWin = addPlayerSPWin;
+function addPlayerSPWin(playerName, cb) {
+    con.query("UPDATE users SET sp_wins = sp_wins + 1 WHERE displayName = '" + playerName + "'", function(err, result) {
+        if(err) {
+            cb(1);
+        } else {
+            cb(0);
+        }
+    });
+}
+
+exports.addPlayerMPWin = addPlayerMPWin;
+function addPlayerMPWin(playerName, cb) {
+    con.query("UPDATE users SET mp_wins = mp_wins + 1 WHERE displayName = '" + playerName + "'", function(err, result) {
+        if(err) {
+            cb(1);
+        } else {
+            cb(0);
+        }
+    });
+}
+
+exports.addPlayerSPLoss = addPlayerSPLoss;
+function addPlayerSPLoss(playerName, cb) {
+    con.query("UPDATE users SET sp_losses = sp_losses + 1 WHERE displayName = '" + playerName + "'", function(err,result) {
+        if(err) {
+            cb(1);
+        } else {
+            cb(0);
+        }
+    });
+}
+
+exports.addPlayerMPLoss = addPlayerMPLoss;
+function addPlayerMPLoss(playerName, cb) {
+    con.query("UPDATE users SET mp_losses = mp_losses + 1 WHERE displayName = '" + playerName + "'", function(err,result) {
+        if(err) {
+            cb(1);
+        } else {
+            cb(0);
+        }
+    });
+}
+
+exports.getleaderboard = getLeaderboard;
 function getLeaderboard(cb) {
     con.query("SELECT displayName, mp_wins, mp_loses, hits, misses FROM users ORDER BY (mp_wins-mp_loses) DESC LIMIT 100", function(err, result){
         if(err) {
@@ -92,6 +158,4 @@ function getLeaderboard(cb) {
             cb(z);
         }
     });
-
-    exports.getLeaderboard = getleaderboard;
 }
