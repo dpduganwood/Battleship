@@ -138,6 +138,9 @@ app.get('/join', function(req,res){
 
     res.render('pages/game.ejs', {playerName:req.cookies.playerName,turn:0,shipsLeft:[2,3,3,4,5]});
 });
+app.get('/place',function(req,res) {
+
+}
 
 app.get('/attack',function(req,res){
     var temp = "("+req.query.X+","+req.query.Y+")";
