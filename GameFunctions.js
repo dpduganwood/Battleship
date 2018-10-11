@@ -1,4 +1,5 @@
 var Connection = require(__dirname + "/Connection.js");
+//var Server = require(__dirname + "Server.js");
 var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -12,9 +13,11 @@ var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 class Player {
     //player object containing the player name, map, hit and miss count
-    constructor(playerName, map) {
+    constructor(playerName, map, gameKey) {
         this.playerName = playerName;
         this.map = map;
+        this.gameKey = gameKey;
+        this.type = 0;
 
         //get hits and misses from the database
         Connection.con.query("SELECT hits, misses FROM users WHERE displayName = '" + playerName + "'", function(err, result) {
@@ -63,10 +66,10 @@ class GameController {
         this.gameKey = gameKey;
     }
 
-    checkHit(playerName, x, y, cb) {
+    checkHit(attackingPlayerName, x, y, cb) {
         var attackingPlayer;
         var checkPlayer;
-        if(this.player1.playerName === playerName) {
+        if(this.player1.playerName === attackingPlayerName) {
             attackingPlayer = this.player1;
             checkPlayer = this.player2;
         } else {
@@ -77,13 +80,27 @@ class GameController {
             if(result == 0) {
                 //miss
                 attackingPlayer.misses += 1;
+                //advance turn
             } else if(result == 2) {
                 //hit
                 attackingPlayer.hits += 1;
+                //advance turn
             }
             //else invalid
             cb(result);
         });
+        
+        if(checkPlayer.type != 0) {
+            //checkPlayer is an AI
+            //var loc = this.player2.easyAISelectLocation(this.player1.getMap());
+            if(checkPlayer.type == 1) {
+                //easy ai
+                var loc = checkPlayer.easyAISelectLocation(attackingPlayer.getMap());
+                this.checkHit(checkPlayer.displayName, loc[0], loc[1]);
+            } else {
+                //hard ai
+            }
+        }
     }
 }
 exports.GameController = GameController;
