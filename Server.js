@@ -132,13 +132,22 @@ app.get('/join', function(req,res){
         //game = new GameFunction.GameController(req.query.key);
         res.cookie('key', req.query.key, {maxAge: 9000000});
     }
-    console.log("Easy and hard are not complete and supposed to crash.");
+    res.cookie('lastAttack', "", {maxAge: 9000000});
+    console.log("Easy and hard are not complete.");
 
     res.render('pages/game.ejs', {playerName:req.cookies.playerName});
 });
 
-app.get('/action',function(req,res){
-    console.log(req.query);
+app.get('/attack',function(req,res){
+    var temp = "("+req.query.X+","+req.query.Y+")";
+    console.log(temp);
+    if(req.cookies.lastAttack === temp){
+        res.render('pages/game.ejs', {playerName:req.cookies.playerName});
+    }else{
+        res.cookie('lastAttack', temp, {maxAge: 9000000});
+        res.render('pages/game.ejs', {playerName:req.cookies.playerName});
+    }
+
 });
 
 app.listen(6009);
