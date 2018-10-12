@@ -275,8 +275,8 @@ form input {
         <div class="card text-white bg-dark mb-3" style="width: 500px; display: table-cell;">
           <div class="card-header">Enter Your Move Here  ....  i.e. (0,4) (5,3)</div>
           <div class="card-body">
-            <%if(turn != 0){%>
-            <div class="form-group" action="/attack">
+            <%if(turns != 0){%>
+            <form class="form-group" action="/attack">
                 <div style="float:left;">
               <label class="col-form-label col-form-label-lg" for="inputLarge">X Coordinate</label>
               <input class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="X" name="X" required>
@@ -288,9 +288,9 @@ form input {
               <div style="float:right;">
                   <input type="submit" name="fire" class="btn btn-primary" value="Fire!">
               </div>
-            </div>
+            </form>
             <%}else{%>
-              <div class="form-group" action="/place">
+              <form class="form-group" action="/place">
                   <div style="float:left;">
                       <label class="col-form-label col-form-label-lg" for="inputLarge">X Coordinate</label>
                       <input class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="X" name="X" required>
@@ -312,9 +312,9 @@ form input {
                       <input class="form-control form-control-lg" type="text" placeholder=<%=temp%> id="L" name="L" required>
                   </div>
                   <div style="float:right;">
-                      <input type="submit" name="fire" class="btn btn-primary" value="Fire!">
+                      <input type="submit" name="place" class="btn btn-primary" value="Place!">
                   </div>
-              </div>
+              </form>
               <%}%>
 
 

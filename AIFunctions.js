@@ -1,6 +1,6 @@
 var Connection = require(__dirname + "/Connection.js");
 var GameFunctions = require(__dirname + "/GameFunctions.js");
-var Server = require(__dirname+"Server.js");
+var Server = require(__dirname+"/Server.js");
 
 class AIOpponent {
 
