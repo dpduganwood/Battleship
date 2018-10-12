@@ -140,11 +140,41 @@ app.get('/join', function(req,res){
     res.render('pages/game.ejs', {
         playerName:req.cookies.playerName,
         turns:0,
-        shipsLeft:[2,3,3,4,5]
+        shipsLeft:[2,3,3,4,5],
+        error:""
     });
 });
 app.get('/place',function(req,res) {
-
+    var temp = "("+req.query.X+","+req.query.Y+","+req.query.L+","+req.query.D+")";
+    console.log(temp);
+    console.log(req.cookies.shipsLeft);
+    console.log(req.query.L);
+    var arr = req.cookies.shipsLeft;
+    var index;
+    for(var i = 0; i < arr.length; i++){
+        if(arr[i] == req.query.L){
+            index = i;
+            break;
+        }
+    }
+    console.log(index);
+    arr.splice(index, 1);
+    res.cookie('shipsLeft',arr,{maxAge: 9000000});
+    if(arr.length > 0){
+        res.render('pages/game.ejs', {
+            playerName:req.cookies.playerName,
+            turns:0,
+            shipsLeft:arr,
+            error:""
+        });
+    }else{
+        res.render('pages/game.ejs', {
+            playerName:req.cookies.playerName,
+            turns:1,
+            shipsLeft:"",
+            error:""
+        });
+    }
 });
 
 app.get('/attack',function(req,res){
@@ -155,9 +185,13 @@ app.get('/attack',function(req,res){
     }else{
         res.cookie('lastAttack', temp, {maxAge: 9000000});
         res.cookie('turn', (req.cookies.turns)+1, {maxAge: 9000000});
-        res.render('pages/game.ejs', {playerName:req.cookies.playerName,turns:req.cookies.turns});
+        res.render('pages/game.ejs', {
+            playerName:req.cookies.playerName,
+            turns:req.cookies.turns,
+            shipsLeft:"",
+            error:""
+        });
     }
-
 });
 
 app.listen(6009);
