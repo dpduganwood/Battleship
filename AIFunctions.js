@@ -72,7 +72,9 @@ class AIOpponent {
                         increaseX++;
                     }
                     //once reach end of consecutive hits in right direction, if spot is empty, guess it
-                    if (isValid(map, i+increaseX, j) && aicheckHit(i+increaseX, j, map) == 0) {
+                    if (isValid(map, i+increaseX, j) && aicheckHit(i+increaseX, j, map) == 0 && increaseX > 1) {
+                        console.log(increaseX);
+                        console.log("mine1");
                         return [i+increaseX, j];
                     }
                     else {
@@ -80,7 +82,8 @@ class AIOpponent {
                         while (isValid(map, i-decreaseX, j) && aicheckHit(i-decreaseX, j, map) == 2) {
                             decreaseX--;
                         }
-                        if (isValid(map, i-decreaseX, j) && aicheckHit(i-decreaseX, j, map) == 0) {
+                        if (isValid(map, i-decreaseX, j) && aicheckHit(i-decreaseX, j, map) == 0 && decreaseX > 1) {
+                            console.log("mine2");
                             return [i-decreaseX, j];
                         }
                     }
@@ -90,7 +93,8 @@ class AIOpponent {
                     while (isValid(map, i, j+increaseY) && aicheckHit(i, j+increaseY, map) == 2) {
                         increaseY++;
                     }
-                    if (isValid(map, i, j+increaseY) && aicheckHit(i, j+increaseY, map) == 0) {
+                    if (isValid(map, i, j+increaseY) && aicheckHit(i, j+increaseY, map) == 0 && increaseY > 1) {
+                        console.log("mine3");
                         return [i, j+increaseY];
                     }
                     else {
@@ -98,20 +102,29 @@ class AIOpponent {
                         while (isValid(map, i, j-decreaseY) && aicheckHit(i, j-decreaseY, map) == 2) {
                             decreaseY--;
                         }
-                        if (isValid(map, i, j-decreaseY) && aicheckHit(i, j-decreaseY, map) == 0) {
+                        if (isValid(map, i, j-decreaseY) && aicheckHit(i, j-decreaseY, map) == 0 && decreaseY > 1) {
+                            console.log("mine4");
                             return [i, j-decreaseY];
                         }
                     }
 
                     //previous hit is not next to any other hits, so guess adjacent space
-                    if ((isValid(map, i+1, j) && aicheckHit(i+1, j, map) == 0)) //if right valid
-                        return [i+1, j];
-                    else if ((isValid(map, i-1, j) && aicheckHit(i-1, j, map) == 0)) //if left valid
-                        return [i-1, j];
-                    else if ((isValid(map, i, j+1) && aicheckHit(i, j+1, map) == 0)) //if top valid
-                        return [i, j+1];
-                    else if ((isValid(map, i, j-1) && aicheckHit(i, j-1, map) == 0)) //if bottom valid
-                        return [i, j-1];
+                    if ((isValid(map, i+1, j) && aicheckHit(i+1, j, map) == 0)) { //if right valid
+                        console.log("mine5");
+                        return [i + 1, j];
+                    }
+                    else if ((isValid(map, i-1, j) && aicheckHit(i-1, j, map) == 0)) { //if left valid
+                        console.log("mine6");
+                        return [i - 1, j];
+                    }
+                    else if ((isValid(map, i, j+1) && aicheckHit(i, j+1, map) == 0)) { //if top valid
+                        console.log("mine7");
+                        return [i, j + 1];
+                    }
+                    else if ((isValid(map, i, j-1) && aicheckHit(i, j-1, map) == 0)) {//if bottom valid
+                        console.log("mine8");
+                        return [i, j - 1];
+                    }
                 }
             }
         }
@@ -121,6 +134,9 @@ class AIOpponent {
     }
 }
 exports.AIOpponent = AIOpponent;
+exports.AIOpponent.prototype.easyAISelectLocation;
+exports.AIOpponent.prototype.hardAISelectLocation;
+
 
 exports.isValid = isValid;
 function isValid(map, x, y) {
@@ -133,7 +149,7 @@ function isValid(map, x, y) {
 exports.aicheckHit = aicheckHit;
 function aicheckHit(x, y, checkMap) {
     var loc = checkMap[y][x];
-    if(loc % 2 == 0) {
+    /*if(loc % 2 == 0) {
         //checkMap[y][x] = loc + 1;
         if(loc == 0){
             return 0; //miss
@@ -142,6 +158,20 @@ function aicheckHit(x, y, checkMap) {
         }
     } else {
         return 1; //invalid target
+    }*/
+
+    //0: open water unhit
+    //2: hit ship part
+    if(loc % 2 == 0) {
+        if(loc == 0) {
+            return 0;//open water
+        } else {
+            return 0;//unhit ship UNUSED
+        }
+    } else {
+        if(loc > 1) {
+            return 2; //hit ship
+        }
     }
 }
 

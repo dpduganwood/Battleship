@@ -1,6 +1,17 @@
 var app=require("../GameFunctions.js");
 var Connection = require("../Connection.js");
 
+var map = [ [ 0, 4, 4, 4, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0,10,10,10,10,10, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 7, 0],
+    [ 0, 0, 2, 0, 0, 0, 0, 0, 7, 0],
+    [ 0, 0, 2, 0, 8, 0, 0, 0, 6, 0],
+    [ 0, 0, 0, 0, 9, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 9, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 8, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
 describe("checkHit_test",function(){
     it("The function should result in a hit",function() {
         var value=app.checkHit_test(1,2);
@@ -24,8 +35,26 @@ describe("placeShip_test",function(){
 });
 
 describe("AIcheckSunk",function(){
-    it("")
+    it("Returns true if hit results in a sunk ship",function() {
+        var value=app.AIcheckSunk(8,5,map);
+        expect(value).toBe(true);
+    });
 });
+
+describe("AIcheckSunk",function(){
+    it("Returns true if hit results in a sunk ship",function() {
+        var value=app.AIcheckSunk(4,8,map);
+        expect(value).toBe(false);
+    });
+});
+
+describe("AIcheckSunk",function(){
+    it("Returns true if hit results in a sunk ship",function() {
+        var value=app.AIcheckSunk(0,0,map);
+        expect(value).toBe(false);
+    });
+});
+
 
 
 /*var prof = {displayName: "David Wood", emails: [{value: "dpduganwood@gmail.com"}], name: {givenName: "David", familyName: "Wood"}};
