@@ -102,6 +102,110 @@ class GameController {
             }
         }
     }
+
+    addShip(playerName, x, y, length, dir) {
+        var player;
+        if(playerName == this.player1.dispalyName) {
+            player = this.player1;
+        } else {
+            player = this.player2;
+        }
+
+        var map = player.getMap();
+
+        var boardVal = 0;
+
+        if(length == 2) {
+            boardVal = 2;
+        } else if(length == 31) {
+            length = 3;
+            boardVal = 4;
+        } else if(length == 32) {
+            length = 3;
+            baordVal = 6;
+        } else if(length == 4) {
+            boardVal = 8;
+        } else if(length == 10) {
+            boardVal = 10;
+        }
+
+        switch(dir) {
+            case 'U':
+                //check above
+                if(y - (length-1) < 0) {
+                    //out of bounds
+                    return(1);
+                }
+                for(i = 0; i < length; i++){
+                    //check for collision
+                    if(map[y-i][x] != 0) {
+                        //collision detected
+                        return(1);
+                    }
+                }
+                //is valid
+                for(i = 0; i < length; i++) {
+                    map[y-i][x] = boardVal;
+                }
+
+                break;
+            case 'D':
+                //check below
+                if(y + (length-1) > 9) {
+                    //out of bounds
+                    return(1);
+                }
+                for(i = 0; i < length; i++) {
+                    //check for collision
+                    if(map[y+i][x] != 0){
+                        //collision detected
+                        return(1);
+                    }
+                }
+                //is valid
+                for(i = 0; i < length; i++) {
+                    map[y+i][x] = boardVal;
+                }
+                break;
+            case 'L':
+                //check to the left
+                if(x - (length-1) < 0) {
+                    //out of bounds
+                    return(1);
+                }
+                for(i = 0; i < length; i++) {
+                    //check for collision
+                    if(map[y][x-i] != 0) {
+                        //collision detected
+                        return(1);
+                    }
+                }
+                //is valid
+                for(i = 0; i < lenght; i++) {
+                    map[y][x-i] = boardVal;
+                }
+                break;
+            case 'R':
+                //check to the right
+                if(x + (length-1) > 9) {
+                    //out of bounds
+                    return(1);
+                }
+                for(i = 0; i < lenght; i++) {
+                    //check for collision
+                    if(map[y][x+i] != 0) {
+                        //collision detected
+                        return(1);
+                    }
+                }
+                //is valid
+                for(i = 0; i < lenght; i++) {
+                    map[y][x+i] = baordVal;
+                }
+                break;
+        }
+        return(0);
+    }
 }
 exports.GameController = GameController;
 
