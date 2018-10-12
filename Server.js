@@ -160,6 +160,15 @@ app.get('/place',function(req,res) {
     //console.log(index);
     arr.splice(index, 1);
     res.cookie('shipsLeft',arr,{maxAge: 9000000});
+    var x = req.cookies.X-1;
+    var y = req.cookies.Y.charCodeAt(0)-65;
+    var l;
+    if(arr[index]==3){
+        l = 31;
+    }else{
+        l = 32;
+    }
+    var d = req.query.D;
     if(arr.length > 0){
         res.render('pages/game.ejs', {
             playerName:req.cookies.playerName,
@@ -168,6 +177,8 @@ app.get('/place',function(req,res) {
             error:""
         });
     }else{
+        res.cookie('shipsLeft',"",{maxAge: 9000000});
+        res.cookie('turns',1,{maxAge: 9000000});
         res.render('pages/game.ejs', {
             playerName:req.cookies.playerName,
             turns:1,
@@ -180,18 +191,33 @@ app.get('/place',function(req,res) {
 app.get('/attack',function(req,res){
     var temp = "("+req.query.X+","+req.query.Y+")";
     console.log(temp);
-    if(req.cookies.lastAttack === temp){
-        res.render('pages/game.ejs', {playerName:req.cookies.playerName,turns:req.cookies.turns});
-    }else{
-        res.cookie('lastAttack', temp, {maxAge: 9000000});
-        res.cookie('turn', (req.cookies.turns)+1, {maxAge: 9000000});
-        res.render('pages/game.ejs', {
-            playerName:req.cookies.playerName,
-            turns:req.cookies.turns,
-            shipsLeft:"",
-            error:""
-        });
-    }
+    res.cookie('turn', (req.cookies.turns)+1, {maxAge: 9000000});
+    games[req.cookies.key].checkHit(req.cookies.playerName, req.query.X, req.query.Y, function(hitOfMiss){
+        if(hitOrMiss == 0){
+            res.cookie('turns',req.cookies.turns+1,{maxAge: 9000000});
+            res.render('pages/game.ejs', {
+                    playerName:req.cookies.playerName,
+                    turns:req.cookies.turns+1,
+                    shipsLeft:"",
+                    error:""
+            });
+        }else if(hitOrMiss == 1){
+            res.render('pages/game.ejs', {
+                    playerName:req.cookies.playerName,
+                    turns:req.cookies.turns,
+                    shipsLeft:"",
+                    error:"Location already fired upon. Choose again."
+            });
+        }else{
+            res.cookie('turns',req.cookies.turns+1,{maxAge: 9000000});
+            res.render('pages/game.ejs', {
+                    playerName:req.cookies.playerName,
+                    turns:req.cookies.turns+1,
+                    shipsLeft:"",
+                    error:""
+            });
+        }
+    });
 });
 
 app.listen(6009);
