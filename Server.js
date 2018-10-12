@@ -147,8 +147,8 @@ app.get('/join', function(req,res){
 app.get('/place',function(req,res) {
     var temp = "("+req.query.X+","+req.query.Y+","+req.query.L+","+req.query.D+")";
     console.log(temp);
-    console.log(req.cookies.shipsLeft);
-    console.log(req.query.L);
+    //console.log(req.cookies.shipsLeft);
+    //console.log(req.query.L);
     var arr = req.cookies.shipsLeft;
     var index;
     for(var i = 0; i < arr.length; i++){
@@ -157,7 +157,7 @@ app.get('/place',function(req,res) {
             break;
         }
     }
-    console.log(index);
+    //console.log(index);
     arr.splice(index, 1);
     res.cookie('shipsLeft',arr,{maxAge: 9000000});
     if(arr.length > 0){
