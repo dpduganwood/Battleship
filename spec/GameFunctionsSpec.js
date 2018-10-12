@@ -23,6 +23,10 @@ describe("placeShip_test",function(){
     });
 });
 
+describe("AIcheckSunk",function(){
+    it("")
+});
+
 
 /*var prof = {displayName: "David Wood", emails: [{value: "dpduganwood@gmail.com"}], name: {givenName: "David", familyName: "Wood"}};
 console.log(prof);
