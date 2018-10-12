@@ -1,6 +1,7 @@
 //load necessities
 var express = require('express');
 var router = express.Router();
+var socket = require('socket.io');
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -220,5 +221,14 @@ app.get('/attack',function(req,res){
     });
 });
 
-app.listen(6009);
+//app.listen(6009);
+var serverListener = app.listen(6009);
 console.log('6009 is the open port');
+
+//THIS MAY NEED TO BE MOVED UP OR DOWN
+var io = socket(serverListener);
+
+io.on('connection', function(socket) {
+    //do a thing
+    console.log("socket connection established");
+});

@@ -8,3 +8,5 @@
 .idea/Battleship.iml
 .DS_Store
 .idea/workspace.xml
+npm-debug.log
+
