@@ -151,41 +151,50 @@ app.get('/place',function(req,res) {
     //console.log(req.cookies.shipsLeft);
     //console.log(req.query.L);
     var arr = req.cookies.shipsLeft;
-    var index;
+    var index = -1;
     for(var i = 0; i < arr.length; i++){
         if(arr[i] == req.query.L){
             index = i;
             break;
         }
     }
-    //console.log(index);
-    arr.splice(index, 1);
-    res.cookie('shipsLeft',arr,{maxAge: 9000000});
-    var x = req.cookies.X-1;
-    var y = req.cookies.Y.charCodeAt(0)-65;
-    var l;
-    if(arr[index]==3){
-        l = 31;
-    }else{
-        l = 32;
-    }
-    var d = req.query.D;
-    if(arr.length > 0){
+    if(index == -1){
         res.render('pages/game.ejs', {
             playerName:req.cookies.playerName,
             turns:0,
             shipsLeft:arr,
-            error:""
+            error:"Invalid Train Length"
         });
     }else{
-        res.cookie('shipsLeft',"",{maxAge: 9000000});
-        res.cookie('turns',1,{maxAge: 9000000});
-        res.render('pages/game.ejs', {
-            playerName:req.cookies.playerName,
-            turns:1,
-            shipsLeft:"",
-            error:""
-        });
+        //console.log(index);
+        arr.splice(index, 1);
+        res.cookie('shipsLeft',arr,{maxAge: 9000000});
+        var x = req.cookies.X-1;
+        var y = req.cookies.Y.charCodeAt(0)-65;
+        var l;
+        if(arr[index]==3){
+            l = 31;
+        }else{
+            l = 32;
+        }
+        var d = req.query.D;
+        if(arr.length > 0){
+            res.render('pages/game.ejs', {
+                playerName:req.cookies.playerName,
+                turns:0,
+                shipsLeft:arr,
+                error:""
+            });
+        }else{
+            res.cookie('shipsLeft',"",{maxAge: 9000000});
+            res.cookie('turns',1,{maxAge: 9000000});
+            res.render('pages/game.ejs', {
+                playerName:req.cookies.playerName,
+                turns:1,
+                shipsLeft:"",
+                error:""
+            });
+        }
     }
 });
 
