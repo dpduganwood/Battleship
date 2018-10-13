@@ -178,7 +178,7 @@ form input {
         </tr>
         <!-- battleship row 4 -->
         <tr>
-            <td id="4-1"style="background-color: transparent"></td><td id="40"style="background-color: transparent"></td><td id="41"style="background-color: transparent"></td><td id="42"style="background-color: transparent"></td><td id="43" background = "" style="background-color: transparent">Hello</td><td id="44"style="background-color: transparent"></td><td id="45"style="background-color: transparent"></td><td id="46"style="background-color: transparent"></td><td id="47"style="background-color: transparent"></td><td id="48"style="background-color: transparent"></td><td id="49"style="background-color: transparent"></td>
+            <td id="4-1"style="background-color: transparent"></td><td id="40"style="background-color: transparent"></td><td id="41"style="background-color: transparent"></td><td id="42"style="background-color: transparent"></td><td id="43" style="background-color: transparent">Hello</td><td id="44"style="background-color: transparent"></td><td id="45"style="background-color: transparent"></td><td id="46"style="background-color: transparent"></td><td id="47"style="background-color: transparent"></td><td id="48"style="background-color: transparent"></td><td id="49"style="background-color: transparent"></td>
         </tr>
         <!-- battleship row 5 -->
         <tr>
@@ -340,16 +340,64 @@ form input {
                       <!input class="form-control form-control-lg" type="text" placeholder="U, D, L, R" id="D" name="D" required>
                   </div>
                   <div style="float:right;">
-                      <input type="submit" name="place" class="btn btn-primary" value="Place!">
+                      <input type="submit" name="place" class="btn btn-primary" value="Place!" onclick="shipPlace()">
                   </div>
               </form>
               <%}%>
           </div>
         </div>
-        <button onclick="document.getElementById('43').background='../../images/train1.png'">Turn off the light</button>
+        <!--<button onclick="shipPlace()">Place Ship</button>-->
+                <!--document.getElementById("43").setAttribute("background", "../../images/train1.png");-->
 
 
+<script>
 
+    for(var i =0; i<10; i++){
+        for(var j =0; j<10; j++){
+            if(array[i][j]==0) {
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+            }
+
+            if(array[i][j]==1){
+
+            }
+
+            if(array[i][j]==2){
+
+            }
+
+            if(array[i][j]==3){
+
+            }
+            if(array[i][j]==4){
+
+            }
+            if(array[i][j]==5){
+
+            }
+            if(array[i][j]==6){
+
+            }
+            if(array[i][j]==7){
+
+            }
+            if(array[i][j]==8){
+
+            }
+            if(array[i][j]==9){
+
+            }
+            if(array[i][j]==10){
+
+            }
+
+        }
+    }
+
+
+</script>
 
 
         <!-- <div style="display: table-cell;"> Right </div> -->
