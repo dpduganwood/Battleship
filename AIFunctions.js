@@ -12,7 +12,7 @@ class AIOpponent {
 
         //game controller compatibility stuff:
         this.type = difficulty;
-        this.displayName = "AInotPlayer";
+        this.playerName = "AInotPlayer";
         //var isAIReady;
         var hits = 0;
         var misses = 0;
@@ -27,7 +27,7 @@ class AIOpponent {
     }
 
     getMap() {
-        return map;
+        return this.map;
     }
 
     setMap(map) {

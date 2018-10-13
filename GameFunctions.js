@@ -18,6 +18,7 @@ class Player {
         this.map = map;
         this.gameKey = gameKey;
         this.type = 0;
+        exports.map = map;
 
         //get hits and misses from the database
         Connection.con.query("SELECT hits, misses FROM users WHERE displayName = '" + playerName + "'", function(err, result) {
@@ -38,16 +39,20 @@ class Player {
         this.map = map;
     }
 
-    checkHit(x,y, cb) {
+    checkHit(x,y/*, cb*/) {
         if(this.map[y][x] % 2 == 0) {
-            if(this.map[y][x] == 0) {
-                cb(0); //target id zero. MISS
-            } else {
-                cb(2); //target id even. HIT
-            }
             this.map[y][x] += 1;
+            if(this.map[y][x] == 0) {
+                //cb(0); //target id zero. MISS
+                return 0;
+            } else {
+                //cb(2); //target id even. HIT
+                return 2;
+            }
+            //this.map[y][x] += 1;
         } else {
-            cb(1); //target id odd. INVALID TARGET
+            //cb(1); //target id odd. INVALID TARGET
+            return 1;
         }
     }
 }
@@ -64,19 +69,24 @@ class GameController {
         this.player1 = player1;
         this.player2 = player2;
         this.gameKey = gameKey;
+        this.player1Counter = 0;
+        this.player2Counter = 0;
     }
 
     checkHit(attackingPlayerName, x, y, cb) {
         var attackingPlayer;
         var checkPlayer;
+        var p = 0;
         if(this.player1.playerName === attackingPlayerName) {
             attackingPlayer = this.player1;
             checkPlayer = this.player2;
+            p = 1;
         } else {
             attackingPlayer = this.player2;
             checkPlayer = this.player1;
+            p = 2;
         }
-        checkPlayer.checkHit(x, y, function(result) {
+        /*checkPlayer.checkHit(x, y, function(result) {
             if(result == 0) {
                 //miss
                 attackingPlayer.misses += 1;
@@ -86,9 +96,37 @@ class GameController {
                 attackingPlayer.hits += 1;
                 //advance turn
             }
+            if(result != 1) {
+                if(p == 1) {
+                    this.playerName;
+                } else {
+                    this.player2Counter++;
+                }
+            }
             //else invalid
             cb(result);
-        });
+        });*/
+        var result = checkPlayer.checkHit(x,y);
+        if(result == 0) {
+            //miss
+            attackingPlayer.misses += 1;
+            //advance turn
+        } else if(result == 2) {
+            //hit
+            attackingPlayer.hits += 1;
+            //advance turn
+        }
+        if(result != 1) {
+            if(p == 1) {
+                this.player1Counter++;
+            } else {
+                this.player2Counter++;
+            }
+        }
+        //else invalid
+
+        cb(result);
+
         
         if(checkPlayer.type != 0) {
             //checkPlayer is an AI
