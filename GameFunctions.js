@@ -32,7 +32,7 @@ class Player {
     }
 
     getMap() {
-        return map;
+        return this.map;
     }
 
     setMap(map) {
@@ -143,14 +143,17 @@ class GameController {
 
     addShip(playerName, x, y, length, dir) {
         var player;
-        if(playerName == this.player1.dispalyName) {
+        //console.log("given name: "+playerName+", player1.playerName: "+this.player1.playerName);
+        if(playerName === this.player1.playerName) {
             player = this.player1;
+            //console.log("p1");
         } else {
             player = this.player2;
+            //console.log("p2");
         }
 
-        var map = player.getMap();
-
+        var playerMap = player.getMap();
+        //console.log(playerMap);
         var boardVal = 0;
 
         if(length == 2) {
@@ -160,30 +163,32 @@ class GameController {
             boardVal = 4;
         } else if(length == 32) {
             length = 3;
-            baordVal = 6;
+            boardVal = 6;
         } else if(length == 4) {
             boardVal = 8;
-        } else if(length == 10) {
+        } else if(length == 5) {
             boardVal = 10;
         }
-
+        var i;
         switch(dir) {
             case 'U':
                 //check above
                 if(y - (length-1) < 0) {
                     //out of bounds
+                    console.log("Out of bounds");
                     return(1);
                 }
                 for(i = 0; i < length; i++){
                     //check for collision
-                    if(map[y-i][x] != 0) {
+                    if(playerMap[y-i][x] != 0) {
                         //collision detected
+                        console.log("Collision detected");
                         return(1);
                     }
                 }
                 //is valid
                 for(i = 0; i < length; i++) {
-                    map[y-i][x] = boardVal;
+                    playerMap[y-i][x] = boardVal;
                 }
 
                 break;
@@ -191,57 +196,65 @@ class GameController {
                 //check below
                 if(y + (length-1) > 9) {
                     //out of bounds
+                    console.log("Out of bounds");
                     return(1);
                 }
                 for(i = 0; i < length; i++) {
                     //check for collision
-                    if(map[y+i][x] != 0){
+                    if(playerMap[y+i][x] != 0){
                         //collision detected
+                        console.log("Collision detected");
                         return(1);
                     }
                 }
                 //is valid
                 for(i = 0; i < length; i++) {
-                    map[y+i][x] = boardVal;
+                    playerMap[y+i][x] = boardVal;
                 }
                 break;
             case 'L':
                 //check to the left
                 if(x - (length-1) < 0) {
                     //out of bounds
+                    console.log("Out of bounds");
                     return(1);
                 }
                 for(i = 0; i < length; i++) {
                     //check for collision
-                    if(map[y][x-i] != 0) {
+                    if(playerMap[y][x-i] != 0) {
                         //collision detected
+                        console.log("Collision detected");
                         return(1);
                     }
                 }
                 //is valid
-                for(i = 0; i < lenght; i++) {
-                    map[y][x-i] = boardVal;
+                for(i = 0; i < length; i++) {
+                    playerMap[y][x-i] = boardVal;
                 }
                 break;
             case 'R':
                 //check to the right
                 if(x + (length-1) > 9) {
                     //out of bounds
+                    console.log("Out of bounds");
                     return(1);
                 }
-                for(i = 0; i < lenght; i++) {
+                for(i = 0; i < length; i++) {
                     //check for collision
-                    if(map[y][x+i] != 0) {
+                    if(playerMap[y][x+i] != 0) {
                         //collision detected
+                        console.log("Collision detected");
                         return(1);
                     }
                 }
                 //is valid
-                for(i = 0; i < lenght; i++) {
-                    map[y][x+i] = baordVal;
+                for(i = 0; i < length; i++) {
+                    playerMap[y][x+i] = boardVal;
                 }
                 break;
         }
+        console.log(playerMap);
+        player.setMap(playerMap);
         return(0);
     }
 }
