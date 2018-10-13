@@ -178,7 +178,7 @@ form input {
         </tr>
         <!-- battleship row 4 -->
         <tr>
-            <td id="4-1"style="background-color: transparent"></td><td id="40"style="background-color: transparent"></td><td id="41"style="background-color: transparent"></td><td id="42"style="background-color: transparent"></td><td id="43"style="background-color: transparent"></td><td id="44"style="background-color: transparent"></td><td id="45"style="background-color: transparent"></td><td id="46"style="background-color: transparent"></td><td id="47"style="background-color: transparent"></td><td id="48"style="background-color: transparent"></td><td id="49"style="background-color: transparent"></td>
+            <td id="4-1"style="background-color: transparent"></td><td id="40"style="background-color: transparent"></td><td id="41"style="background-color: transparent"></td><td id="42"style="background-color: transparent"></td><td id="43" background = "" style="background-color: transparent">Hello</td><td id="44"style="background-color: transparent"></td><td id="45"style="background-color: transparent"></td><td id="46"style="background-color: transparent"></td><td id="47"style="background-color: transparent"></td><td id="48"style="background-color: transparent"></td><td id="49"style="background-color: transparent"></td>
         </tr>
         <!-- battleship row 5 -->
         <tr>
@@ -324,7 +324,7 @@ form input {
                       <select class="form-control form-control-lg" name="L">
                           <%
                           for(var i = 0; i < shipsLeft.length; i++){%>
-                          <option value=<%=shipsLeft[i]%>><%=shipsLeft[i]%></option>
+                          <option value=<%=shipsLeft[i]%>><%=Math.floor(shipsLeft[i]/10)%></option>
                           <%}%>
                       </select>
                       <!input class="form-control form-control-lg" type="text" placeholder=<%=shipsLeft%> id="L" name="L" required>
@@ -346,7 +346,7 @@ form input {
               <%}%>
           </div>
         </div>
-
+        <button onclick="document.getElementById('43').background='../../images/train1.png'">Turn off the light</button>
 
 
 
@@ -385,5 +385,5 @@ form input {
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</>
+</body>
 </html>
