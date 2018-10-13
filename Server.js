@@ -122,10 +122,11 @@ app.get('/join', function(req,res){
         res.cookie('key', tempKey, {maxAge: 9000000});
         var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
         var ai;
+        var genMap = GameFunction.genRandomMap();
         if(req.query.eOrH == "easy"){
-            ai = new AIFunction.AIOpponent(tempKey, emptyMap);
+            ai = new AIFunction.AIOpponent(tempKey, genMap, 1);
         }else{
-            ai = new AIFunction.AIOpponent(tempKey, emptyMap);
+            ai = new AIFunction.AIOpponent(tempKey, genMap, 2);
         }
         game = new GameFunction.GameController(player, ai, tempKey);
         games[tempKey] = game;
@@ -133,16 +134,19 @@ app.get('/join', function(req,res){
         //game = new GameFunction.GameController(req.query.key);
         res.cookie('key', req.query.key, {maxAge: 9000000});
     }
-    res.cookie('turns', 0,{maxAge: 9000000});
-    res.cookie('lastAttack', "none", {maxAge: 9000000});
+    //res.cookie('turns', 0,{maxAge: 9000000});
     res.cookie('shipsLeft',[20,31,32,40,50],{maxAge: 9000000});
     console.log("Easy and hard are not complete.");
-
+    var yourMap = games[tempKey].player1.getMap();
+    var enemyMap = games[tempKey].player2.getMap();
     res.render('pages/game.ejs', {
         playerName:req.cookies.playerName,
+        enemyName:games[tempKey].player2.playerName(),
         turns:0,
         shipsLeft:[20,31,32,40,50],
-        error:""
+        perror:"",
+        yMap:yourMap,
+        eMap:enemyMap
     });
 });
 app.get('/place',function(req,res) {
@@ -163,7 +167,7 @@ app.get('/place',function(req,res) {
             playerName:req.cookies.playerName,
             turns:0,
             shipsLeft:arr,
-            error:"Invalid Train Length"
+            perror:"Invalid Train Length"
         });
     }else{
         //console.log(index);
@@ -185,7 +189,7 @@ app.get('/place',function(req,res) {
                 playerName:req.cookies.playerName,
                 turns:0,
                 shipsLeft:arr,
-                error:""
+                perror:""
             });
         }else{
             res.cookie('shipsLeft',"",{maxAge: 9000000});
@@ -194,7 +198,7 @@ app.get('/place',function(req,res) {
                 playerName:req.cookies.playerName,
                 turns:1,
                 shipsLeft:"",
-                error:""
+                perror:""
             });
         }
     }
@@ -211,14 +215,14 @@ app.get('/attack',function(req,res){
                     playerName:req.cookies.playerName,
                     turns:req.cookies.turns+1,
                     shipsLeft:"",
-                    error:""
+                    perror:""
             });
         }else if(hitOrMiss == 1){
             res.render('pages/game.ejs', {
                     playerName:req.cookies.playerName,
                     turns:req.cookies.turns,
                     shipsLeft:"",
-                    error:"Location already fired upon. Choose again."
+                    perror:"Location already fired upon. Choose again."
             });
         }else{
             res.cookie('turns',req.cookies.turns+1,{maxAge: 9000000});
@@ -226,7 +230,7 @@ app.get('/attack',function(req,res){
                     playerName:req.cookies.playerName,
                     turns:req.cookies.turns+1,
                     shipsLeft:"",
-                    error:""
+                    perror:""
             });
         }
     });

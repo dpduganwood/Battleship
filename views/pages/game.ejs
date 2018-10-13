@@ -144,10 +144,10 @@ form input {
     <table style="width:800px; float:top;">
         <tr>
             <td align="center">
-               My Board
+               <%=playerName%>'s Board
             </td>
             <td align="center">
-                Enemy's Board
+                <%=enemyName%>'s Board
             </td>
         </tr>
     <tr>
@@ -357,6 +357,9 @@ form input {
         <div class="card bg-light mb-3" style="display: table-cell;">
           <div class="card-header">Game Console!</div>
           <div class="card-body">
+              <%if(perror != ""){%>
+              <h4 class="card-title"><%=perror%></h4>
+              <%}%>
             <h4 class="card-title">Your Move...</h4>
             <p id=xyOutput class="card-text"></p>
 
