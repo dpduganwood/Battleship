@@ -324,7 +324,7 @@ form input {
                       <select class="form-control form-control-lg" name="L">
                           <%
                           for(var i = 0; i < shipsLeft.length; i++){%>
-                          <option value=<%=shipsLeft[i]%>><%=shipsLeft[i]%></option>
+                          <option value=<%=shipsLeft[i]%>><%=Math.floor(shipsLeft[i]/10)%></option>
                           <%}%>
                       </select>
                       <!input class="form-control form-control-lg" type="text" placeholder=<%=shipsLeft%> id="L" name="L" required>

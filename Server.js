@@ -57,7 +57,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
     try {
-        res.render('pages/index', {playerName:req.cookie.playerName});
+        res.render('pages/index', {playerName:req.cookies.playerName});
     } catch(e) {
         res.cookie('playerName','', {maxAge: 9000000});
         res.render('pages/index', {playerName:''});
@@ -135,13 +135,13 @@ app.get('/join', function(req,res){
     }
     res.cookie('turns', 0,{maxAge: 9000000});
     res.cookie('lastAttack', "none", {maxAge: 9000000});
-    res.cookie('shipsLeft',[2,3,3,4,5],{maxAge: 9000000});
+    res.cookie('shipsLeft',[20,31,32,40,50],{maxAge: 9000000});
     console.log("Easy and hard are not complete.");
 
     res.render('pages/game.ejs', {
         playerName:req.cookies.playerName,
         turns:0,
-        shipsLeft:[2,3,3,4,5],
+        shipsLeft:[20,31,32,40,50],
         error:""
     });
 });
@@ -169,15 +169,17 @@ app.get('/place',function(req,res) {
         //console.log(index);
         arr.splice(index, 1);
         res.cookie('shipsLeft',arr,{maxAge: 9000000});
-        var x = req.cookies.X-1;
-        var y = req.cookies.Y.charCodeAt(0)-65;
+        var x = (req.query.X)-1;
+        var y = req.query.Y.toString();
+            y = y.charCodeAt(0)-65;
         var l;
-        if(arr[index]==3){
-            l = 31;
+        if(req.query.L == 20 || req.query.L == 40 ||req.query.L == 50){
+           l = req.query.L/10;
         }else{
-            l = 32;
+            l = req.query.L;
         }
         var d = req.query.D;
+        console.log(x+" "+y+" "+l+" "+d);
         if(arr.length > 0){
             res.render('pages/game.ejs', {
                 playerName:req.cookies.playerName,
