@@ -161,7 +161,7 @@ app.get('/join', function(req,res){
         perror:"",
         yMap:yourMap,
         eMap:enemyMap,
-        rKey:""
+        rKey:"-1"
     });
 });
 
@@ -207,7 +207,7 @@ app.get('/place',function(req,res) {
             perror:"Invalid Train Length",
             yMap:games[req.cookies.key].player1.getMap(),
             eMap:games[req.cookies.key].player2.getMap(),
-            rKey:""
+            rKey:"-1"
         });
     }else{
         //console.log(index);
@@ -233,7 +233,7 @@ app.get('/place',function(req,res) {
                     perror:"Ship Placement Is Invalid",
                     yMap:games[req.cookies.key].player1.getMap(),
                     eMap:games[req.cookies.key].player2.getMap(),
-                    rKey:""
+                    rKey:"-1"
                 });
             }else{
                 arr.splice(index, 1);
@@ -247,7 +247,7 @@ app.get('/place',function(req,res) {
                         perror:"",
                         yMap:games[req.cookies.key].player1.getMap(),
                         eMap:games[req.cookies.key].player2.getMap(),
-                        rKey:""
+                        rKey:"-1"
                     });
                 }else{
                     res.cookie('shipsLeft',"",{maxAge: 9000000});
@@ -260,7 +260,7 @@ app.get('/place',function(req,res) {
                         perror:"",
                         yMap:games[req.cookies.key].player1.getMap(),
                         eMap:games[req.cookies.key].player2.getMap(),
-                        rKey:""
+                        rKey:"-1"
                     });
                 }
             }
@@ -282,7 +282,7 @@ app.get('/attack',function(req,res){
                 perror:"",
                 yMap:games[req.cookies.key].player1.getMap(),
                 eMap:games[req.cookies.key].player2.getMap(),
-                rKey:""
+                rKey:"-1"
             });
         }else if(hitOrMiss == 1){
             res.render('pages/game.ejs', {
@@ -293,7 +293,7 @@ app.get('/attack',function(req,res){
                 perror:"Location already fired upon. Choose again.",
                 yMap:games[req.cookies.key].player1.getMap(),
                 eMap:games[req.cookies.key].player2.getMap(),
-                rKey:""
+                rKey:"-1"
             });
         }else{
             res.cookie('turns',req.cookies.turns+1,{maxAge: 9000000});
@@ -305,7 +305,7 @@ app.get('/attack',function(req,res){
                 perror:"",
                 yMap:games[req.cookies.key].player1.getMap(),
                 eMap:games[req.cookies.key].player2.getMap(),
-                rKey:""
+                rKey:"-1"
             });
         }
     });
