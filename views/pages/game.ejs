@@ -370,153 +370,225 @@ form input {
         <!--<button onclick="shipPlace()">Place Ship</button>-->
                 <!--document.getElementById("43").setAttribute("background", "../../images/train1.png");-->
 
+        /*
+        schema:
+        0: unhit ocean /nothing
+        1: hit ocean /broken tracks
+        2: unhit destroyer /ship1
+        3: hit destroyer /rotisserie chicken
+        4: unhit submarine /ship2
+        5: hit submarine /rotisserie chicken
+        6: unhit cruiser /ship3
+        7: hit cruiser /rotisserie chicken
+        8: unhit battleship /ship4
+        9: hit battleship /rotisserie chicken
+        10: unhit carrier /ship5
+        11: hit carrier /rotisserie chicken
+        */
 
+        //Check through player game board for values matching to images
 <script>
 
     for(var i =0; i<10; i++){
         for(var j =0; j<10; j++){
+            //Nothing
             if(yMap[i][j]==0) {
             }
+            //Miss
             if(yMap[i][j]==1){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
-                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
-
+                document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
             }
+            //Ship 1
             if(yMap[i][j]==2){
                 var x = i+1;
                 var y = j+1;
                 var coord = ""+x+y;
 
-                if(x>0)
+                if(x>0){
                     if(yMap[i-1][j]==2)
-                        if(x<9) {
-                            if (yMap[i + 1][j] == 2) {
-
-                            }
-                            else {
-
-                            }
-                        }
-                        else{
-
+                        document.getElementById(coord).setAttribute("background", "../../images/ship1/part2r.png");
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship1/part1r.png");
                         }
 
-                if(x<9)
-                    if(yMap[i+1][j]==2){
-                        if(x>0){
-                            if(yMap[i-1][j]==2){
-
-                            }
-                            else{
-
-                            }
+                if(j>0) {
+                    if (yMap[i][j - 1] == 2)
+                        document.getElementById(coord).setAttribute("background", "../../images/ship1/part2.png");
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship1/part1.png");
                         }
-                        else{
-
-                        }
-
-                    }
-
-                if(j>0)
-                    if(yMap[i][j-1]==2)
-                        if(j<9) {
-                            if (yMap[i][j+1] == 2) {
-
-                            }
-                            else {
-
-                            }
-                        }
-                        else{
-
-                        }
-                if(j<9)
-                    if(yMap[i][j+1]==2)
-                        if(j>0) {
-                            if (yMap[i][j-1] == 2) {
-
-                            }
-                            else {
-
-                            }
-                        }
-                        else{
-
-                        }
-
-                if(j>0)
-                    if(yMap[i][j-1]==2)
-                        if(j<9) {
-                            if (yMap[i][j+1] == 2) {
-
-                            }
-                            else {
-
-                            }
-                        }
-                        else{
-
-                        }
-
-
-
             }
-            if(yMap[i][j]==3){
-                var x = i+1;
-                var y = j+1;
-                var coord = x+y;
+            //Hit Ship1
+            if(yMap[i][j]==3) {
+                var x = i + 1;
+                var y = j + 1;
+                var coord = x + y;
+                document.getElementById(coord).setAttribute("background", "../../images/rotiseserie_chicken.png");
             }
+            //Ship2
             if(yMap[i][j]==4){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
 
-                document.getElementById(coord).setAttribute("background", "../../images/ship2/train2.png")
+                if(x>0){
+                    if(yMap[i-1][j]==4){
+                        if(x<9) {
+                            if (yMap[i + 1][j] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship2/part2r.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship2/part3r.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship2/part1r.png");
+                }
+
+                if(j>0) {
+                    if (yMap[i][j - 1] == 4) {
+                        if (j < 9) {
+                            if (yMap[i][j + 1] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship2/part2.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship2/part3.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship2/part1.png");
+                }
             }
             if(yMap[i][j]==5){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
-                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
+                document.getElementById(coord).setAttribute("background", "../../images/rotiseserie_chicken.png");
 
             }
+            //Ship3
             if(yMap[i][j]==6){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
-                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
+
+                if(x>0){
+                    if(yMap[i-1][j]==4){
+                        if(x<9) {
+                            if (yMap[i + 1][j] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship3/part2r.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship3/part3r.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship3/part1r.png");
+                }
+
+                if(j>0) {
+                    if (yMap[i][j - 1] == 4) {
+                        if (j < 9) {
+                            if (yMap[i][j + 1] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship3/part2.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship3/part3.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship3/part1.png");
+                }
 
             }
+            //Hit Ship3
             if(yMap[i][j]==7){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
-                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
+                document.getElementById(coord).setAttribute("background", "../../images/rotiseserie_chicken.png");
 
             }
+            //Ship4
             if(yMap[i][j]==8){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
-                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
+                if(x>0){
+                    if(yMap[i-1][j]==4){
+                        if(x<9) {
+                            if (yMap[i + 1][j] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship4/part2r.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship4/part3r.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship4/part1r.png");
+                }
+
+                if(j>0) {
+                    if (yMap[i][j - 1] == 4) {
+                        if (j < 9) {
+                            if (yMap[i][j + 1] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship4/part2.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship4/part3.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
+                }
+
 
             }
+            //Hit Ship4
             if(yMap[i][j]==9){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
-                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
-
+                document.getElementById(coord).setAttribute("background", "../../images/rotiseserie_chicken.png");
             }
+            //Ship5
             if(yMap[i][j]==10){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
                 document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
+                if(x>0){
+                    if(yMap[i-1][j]==4){
+                        if(x<9) {
+                            if (yMap[i + 1][j] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship5/part2r.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship5/part3r.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship5/part1r.png");
+                }
+
+                if(j>0) {
+                    if (yMap[i][j - 1] == 4) {
+                        if (j < 9) {
+                            if (yMap[i][j + 1] == 4)
+                                document.getElementById(coord).setAttribute("background", "../../images/ship5/part2.png");
+                            else
+                                document.getElementById(coord).setAttribute("background", "../../images/ship5/part3.png");
+                        }
+                    }
+                    else
+                        document.getElementById(coord).setAttribute("background", "../../images/ship5/part1.png");
+                }
+            }
+
+            if(yMap[i][j]==11){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/rotiseserie_chicken.png");
 
             }
+
 
         }
     }
