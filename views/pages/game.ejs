@@ -150,6 +150,16 @@ form input {
                 <%=enemyName%>'s Board
             </td>
         </tr>
+        <%if(rKey != ""){%>
+        <tr>
+            <td align="center">
+                Room Key: <%=rKey%>
+            </td>
+            <td align="center">
+                Send an opponent this code to start!
+            </td>
+        </tr>
+        <%}%>
     <tr>
         <td>
     <!-- battleship board -->
