@@ -313,6 +313,18 @@ app.get('/attack',function(req,res){
     });
 });
 
+app.get('/rules',function(req,res) {
+    res.render('pages/rules.ejs', {
+        playerName: req.cookies.playerName
+    });
+});
+
+app.get('/home',function(req,res) {
+    res.render('pages/index.ejs', {
+        playerName: req.cookies.playerName
+    });
+});
+
 //app.listen(6009);
 var serverListener = app.listen(6009);
 console.log('6009 is the open port');
