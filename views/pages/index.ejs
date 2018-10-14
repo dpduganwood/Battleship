@@ -39,13 +39,13 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Leaderboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="/rules">Rules</a>
       </li>
       <%
       if (playerName != ''){
@@ -156,7 +156,7 @@
         <%}else{%>
         <p style="font-size: 20px">Login with Google to get started today!</p>
         <p class="lead">
-            <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
+            <a href="/auth/google" class="w3-button w3-white w3-block w3-hover-green w3-padding-16">Google Login</a>
         </p>
         <%}%>
     </td>
