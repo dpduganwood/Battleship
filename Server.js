@@ -123,6 +123,8 @@ var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
+//import io from 'socket.io-client';
+var io2 = require('socket.io-client');
 app.get('/join', function(req,res){
     console.log("Joining game: "+req.query.key);
     console.log("Easy or hard AI: "+req.query.eOrH);
@@ -163,7 +165,9 @@ app.get('/join', function(req,res){
         perror:"",
         yMap:yourMap,
         eMap:enemyMap,
-        rKey:"-1"
+        rKey:tempKey,
+        isHost:"no",
+        io:io2
     });
 });
 
@@ -182,7 +186,9 @@ app.get('/host',function(req,res){
         perror:"",
         yMap:emptyMap,
         eMap:emptyMap,
-        rKey: tempKey
+        rKey: tempKey,
+        isHost:"yes",
+        io:io2
     });
 
 });
@@ -323,4 +329,10 @@ var io = socket(serverListener);
 io.on('connection', function(socket) {
     //do a thing
     console.log("socket connection established");
+    io.on('joining', function(socket) {
+        //do a thing
+        console.log("User "+socket.name+" attempting to join "+socket.key);
+
+    });
 });
+

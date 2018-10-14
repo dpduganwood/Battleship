@@ -82,20 +82,21 @@
           <br></br>
           <p>Or enter a multiplayer code you have recieved</p>
 
-        <form>
+        <form class="form-group" action="/join">
           <fieldset>
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Multiplayer Code</label>
-                <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                <input type="text" class="form-control" placeholder="Enter Room Key" id="key" name="key">
             </div>
           </fieldset>
+            <input type="submit" class="btn btn-primary">Enter Game!</input>
         </form>
 
 
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Enter Game!</button>
+
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
