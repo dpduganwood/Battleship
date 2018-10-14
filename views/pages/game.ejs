@@ -386,11 +386,12 @@ form input {
         11: hit carrier /rotisserie chicken
         */
 
-        //Check through player game board for values matching to images
+        //Check through player and enemy game board for values matching to images
 <script>
 
     for(var i =0; i<10; i++){
         for(var j =0; j<10; j++){
+            //Player grid
             //Nothing
             if(yMap[i][j]==0) {
             }
@@ -590,8 +591,34 @@ form input {
             }
 
 
+
+            //Looping through enemy map
+            //Nothing
+            if(yMap[i][j]==0) {
+            }
+            //Miss
+            if(yMap[i][j]==1){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y+"0";
+                document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
+            }
+            //Hit
+            if(yMap[i][j]!=0 && yMap[i][j]!=1){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y+"0";
+                document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken");
+            }
+
+
         }
     }
+
+
+
+
+
 
 
 </script>
