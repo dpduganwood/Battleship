@@ -354,42 +354,146 @@ form input {
 
     for(var i =0; i<10; i++){
         for(var j =0; j<10; j++){
-            if(array[i][j]==0) {
+            if(yMap[i][j]==0) {
+            }
+            if(yMap[i][j]==1){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
+
+            }
+            if(yMap[i][j]==2){
+                var x = i+1;
+                var y = j+1;
+                var coord = ""+x+y;
+
+                if(x>0)
+                    if(yMap[i-1][j]==2)
+                        if(x<9) {
+                            if (yMap[i + 1][j] == 2) {
+
+                            }
+                            else {
+
+                            }
+                        }
+                        else{
+
+                        }
+
+                if(x<9)
+                    if(yMap[i+1][j]==2){
+                        if(x>0){
+                            if(yMap[i-1][j]==2){
+
+                            }
+                            else{
+
+                            }
+                        }
+                        else{
+
+                        }
+
+                    }
+
+                if(j>0)
+                    if(yMap[i][j-1]==2)
+                        if(j<9) {
+                            if (yMap[i][j+1] == 2) {
+
+                            }
+                            else {
+
+                            }
+                        }
+                        else{
+
+                        }
+                if(j<9)
+                    if(yMap[i][j+1]==2)
+                        if(j>0) {
+                            if (yMap[i][j-1] == 2) {
+
+                            }
+                            else {
+
+                            }
+                        }
+                        else{
+
+                        }
+
+                if(j>0)
+                    if(yMap[i][j-1]==2)
+                        if(j<9) {
+                            if (yMap[i][j+1] == 2) {
+
+                            }
+                            else {
+
+                            }
+                        }
+                        else{
+
+                        }
+
+
+
+            }
+            if(yMap[i][j]==3){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y;
             }
+            if(yMap[i][j]==4){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
 
-            if(array[i][j]==1){
+                document.getElementById(coord).setAttribute("background", "../../images/ship2/train2.png")
+            }
+            if(yMap[i][j]==5){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
 
             }
-
-            if(array[i][j]==2){
-
-            }
-
-            if(array[i][j]==3){
-
-            }
-            if(array[i][j]==4){
+            if(yMap[i][j]==6){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
 
             }
-            if(array[i][j]==5){
+            if(yMap[i][j]==7){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
 
             }
-            if(array[i][j]==6){
+            if(yMap[i][j]==8){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
 
             }
-            if(array[i][j]==7){
+            if(yMap[i][j]==9){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
 
             }
-            if(array[i][j]==8){
-
-            }
-            if(array[i][j]==9){
-
-            }
-            if(array[i][j]==10){
+            if(yMap[i][j]==10){
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+                document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
 
             }
 

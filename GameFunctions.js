@@ -160,7 +160,7 @@ class GameController {
             boardVal = 4;
         } else if(length == 32) {
             length = 3;
-            baordVal = 6;
+            boardVal = 6;
         } else if(length == 4) {
             boardVal = 8;
         } else if(length == 10) {
