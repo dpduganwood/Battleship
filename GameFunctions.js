@@ -140,7 +140,9 @@ class GameController {
             }
         }
     }
-
+    setPlayer2(player2){
+        this.player2 = player2;
+    }
     addShip(playerName, x, y, length, dir) {
         var player;
         //console.log("given name: "+playerName+", player1.playerName: "+this.player1.playerName);
@@ -253,7 +255,7 @@ class GameController {
                 }
                 break;
         }
-        console.log(playerMap);
+        //console.log(playerMap);
         player.setMap(playerMap);
         return(0);
     }
