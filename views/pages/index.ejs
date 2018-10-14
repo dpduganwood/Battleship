@@ -19,9 +19,15 @@
 
     <title>Boiler Tracks!</title>
 </head>
-<body>
-<!--  <h1>Hello, world!</h1> -->
 
+<style>
+    body {
+        background-image: url("../../images/logo.png");
+    }
+
+</style>
+
+<body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">BoilerTracks</a>
@@ -62,27 +68,6 @@
     </ul>
   </div>
 </nav>
-
-<div class="jumbotron">
-    <h1 class="display-3">Welcome To Boiler Tracks!</h1>
-    <p class="lead">Compete against your fellow boilermakers and rise to be the champion of them all.</p>
-    <hr class="my-4">
-
-<%if (playerName != ''){%>
-  <p>Select a game mode!</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#multiplayer" role="button">Join Multiplayer</a>
-  </p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#singleplayer" role="button">Single Player</a>
-  </p>
-  <%}else{%>
-    <p>Login with Google to get started today!</p>
-    <p class="lead">
-        <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
-    </p>
-  <%}%>
-</div>
 
 
 
@@ -146,6 +131,39 @@
   </div>
 </div>
 
+<table align="center">
+    <tr>
+        <td height="370px" width="200px" style="background-color: transparent"></td>
+    </tr>
+    <tr>
+    <td height="100px" width="400px" style="color: #868e96; align-content: center; background-color: transparent; float: top" height="100px">
+
+        <hr class="my-4">
+
+        <%if (playerName != ''){%>
+        <p>Select a game mode!</p>
+        <table>
+            <tr>
+        <td style="background-color: transparent">
+            <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#multiplayer" role="button">Join Multiplayer</a>
+            </p></td>
+        <td style="background-color: transparent">
+            <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#singleplayer" role="button">Single Player</a>
+            </p>
+        </td>
+            </tr>
+        </table>
+        <%}else{%>
+        <p style="font-size: 20px">Login with Google to get started today!</p>
+        <p class="lead">
+            <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
+        </p>
+        <%}%>
+    </td>
+    </tr>
+</table>
 
 
 <!-- Optional JavaScript -->
@@ -153,5 +171,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 </body>
 </html>
