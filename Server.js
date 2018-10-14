@@ -73,7 +73,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/logout', function (req, res){
-    console.log("Logging out user: "+req.cookie.playerName);
+    //console.log("Logging out user: "+req.cookie.playerName);
     res.cookie('playerName', '', {maxAge: 9000000});
     res.render('pages/index', {playerName:''});
 });
