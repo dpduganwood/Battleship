@@ -56,6 +56,8 @@ app.set('view engine', 'ejs');
 //user res.render to load up an ejs view file
 
 app.get('/', function (req, res) {
+    res.cookie('key','',{maxAge: 0});
+    res.cookie('shipsLeft','',{maxAge: 0});
     if(req.cookies.playerName == undefined){
         res.cookie('playerName','', {maxAge: 9000000});
         res.render('pages/index', {playerName:''});
@@ -188,7 +190,7 @@ app.get('/host',function(req,res){
 app.get('/place',function(req,res) {
     var temp = "("+req.query.X+","+req.query.Y+","+req.query.L+","+req.query.D+")";
     console.log(temp);
-    //console.log(req.cookies.shipsLeft);
+    console.log(req.cookies);
     //console.log(req.query.L);
     var arr = req.cookies.shipsLeft;
     var index = -1;
