@@ -144,10 +144,10 @@ form input {
     <table style="width:800px; float:top;">
         <tr>
             <td align="center">
-               My Board
+               <%=playerName%>'s Board
             </td>
             <td align="center">
-                Enemy's Board
+                <%=enemyName%>'s Board
             </td>
         </tr>
     <tr>
@@ -178,7 +178,7 @@ form input {
         </tr>
         <!-- battleship row 4 -->
         <tr>
-            <td id="4-1"style="background-color: transparent"><td id="40"style="background-color: transparent"></td><td id="41"style="background-color: transparent"></td><td id="42"style="background-color: transparent"></td><td id="43"style="background-color: transparent"></td><td id="44"style="background-color: transparent"></td><td id="45"style="background-color: transparent"></td><td id="46"style="background-color: transparent"></td><td id="47"style="background-color: transparent"></td><td id="48"style="background-color: transparent"></td><td id="49"style="background-color: transparent"></td>
+            <td id="4-1"style="background-color: transparent"></td><td id="40"style="background-color: transparent"></td><td id="41"style="background-color: transparent"></td><td id="42"style="background-color: transparent"></td><td id="43" style="background-color: transparent">Hello</td><td id="44"style="background-color: transparent"></td><td id="45"style="background-color: transparent"></td><td id="46"style="background-color: transparent"></td><td id="47"style="background-color: transparent"></td><td id="48"style="background-color: transparent"></td><td id="49"style="background-color: transparent"></td>
         </tr>
         <!-- battleship row 5 -->
         <tr>
@@ -340,16 +340,64 @@ form input {
                       <!input class="form-control form-control-lg" type="text" placeholder="U, D, L, R" id="D" name="D" required>
                   </div>
                   <div style="float:right;">
-                      <input type="submit" name="place" class="btn btn-primary" value="Place!">
+                      <input type="submit" name="place" class="btn btn-primary" value="Place!" onclick="shipPlace()">
                   </div>
               </form>
               <%}%>
           </div>
         </div>
+        <!--<button onclick="shipPlace()">Place Ship</button>-->
+                <!--document.getElementById("43").setAttribute("background", "../../images/train1.png");-->
 
 
+<script>
+
+    for(var i =0; i<10; i++){
+        for(var j =0; j<10; j++){
+            if(array[i][j]==0) {
+                var x = i+1;
+                var y = j+1;
+                var coord = x+y;
+            }
+
+            if(array[i][j]==1){
+
+            }
+
+            if(array[i][j]==2){
+
+            }
+
+            if(array[i][j]==3){
+
+            }
+            if(array[i][j]==4){
+
+            }
+            if(array[i][j]==5){
+
+            }
+            if(array[i][j]==6){
+
+            }
+            if(array[i][j]==7){
+
+            }
+            if(array[i][j]==8){
+
+            }
+            if(array[i][j]==9){
+
+            }
+            if(array[i][j]==10){
+
+            }
+
+        }
+    }
 
 
+</script>
 
 
         <!-- <div style="display: table-cell;"> Right </div> -->
@@ -357,6 +405,9 @@ form input {
         <div class="card bg-light mb-3" style="display: table-cell;">
           <div class="card-header">Game Console!</div>
           <div class="card-body">
+              <%if(perror != ""){%>
+              <h4 class="card-title"><%=perror%></h4>
+              <%}%>
             <h4 class="card-title">Your Move...</h4>
             <p id=xyOutput class="card-text"></p>
 
@@ -385,5 +436,5 @@ form input {
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</>
+</body>
 </html>
