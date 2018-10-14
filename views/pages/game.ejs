@@ -475,9 +475,9 @@ form input {
                 var coord = x+y;
 
                 if(x>0){
-                    if(yMap[i-1][j]==4){
+                    if(yMap[i-1][j]==6){
                         if(x<9) {
-                            if (yMap[i + 1][j] == 4)
+                            if (yMap[i + 1][j] == 6)
                                 document.getElementById(coord).setAttribute("background", "../../images/ship3/part2r.png");
                             else
                                 document.getElementById(coord).setAttribute("background", "../../images/ship3/part3r.png");
@@ -488,9 +488,9 @@ form input {
                 }
 
                 if(j>0) {
-                    if (yMap[i][j - 1] == 4) {
+                    if (yMap[i][j - 1] == 6) {
                         if (j < 9) {
-                            if (yMap[i][j + 1] == 4)
+                            if (yMap[i][j + 1] == 6)
                                 document.getElementById(coord).setAttribute("background", "../../images/ship3/part2.png");
                             else
                                 document.getElementById(coord).setAttribute("background", "../../images/ship3/part3.png");
@@ -515,9 +515,9 @@ form input {
                 var y = j+1;
                 var coord = x+y;
                 if(x>0){
-                    if(yMap[i-1][j]==4){
+                    if(yMap[i-1][j]==8){
                         if(x<9) {
-                            if (yMap[i + 1][j] == 4)
+                            if (yMap[i + 1][j] == 8)
                                 document.getElementById(coord).setAttribute("background", "../../images/ship4/part2r.png");
                             else
                                 document.getElementById(coord).setAttribute("background", "../../images/ship4/part3r.png");
@@ -528,9 +528,9 @@ form input {
                 }
 
                 if(j>0) {
-                    if (yMap[i][j - 1] == 4) {
+                    if (yMap[i][j - 1] == 8) {
                         if (j < 9) {
-                            if (yMap[i][j + 1] == 4)
+                            if (yMap[i][j + 1] == 8)
                                 document.getElementById(coord).setAttribute("background", "../../images/ship4/part2.png");
                             else
                                 document.getElementById(coord).setAttribute("background", "../../images/ship4/part3.png");
@@ -556,9 +556,9 @@ form input {
                 var coord = x+y;
                 document.getElementById(coord).setAttribute("background", "../../images/ship1/train1.png")
                 if(x>0){
-                    if(yMap[i-1][j]==4){
+                    if(yMap[i-1][j]==10){
                         if(x<9) {
-                            if (yMap[i + 1][j] == 4)
+                            if (yMap[i + 1][j] == 10)
                                 document.getElementById(coord).setAttribute("background", "../../images/ship5/part2r.png");
                             else
                                 document.getElementById(coord).setAttribute("background", "../../images/ship5/part3r.png");
@@ -569,9 +569,9 @@ form input {
                 }
 
                 if(j>0) {
-                    if (yMap[i][j - 1] == 4) {
+                    if (yMap[i][j - 1] == 10) {
                         if (j < 9) {
-                            if (yMap[i][j + 1] == 4)
+                            if (yMap[i][j + 1] == 10)
                                 document.getElementById(coord).setAttribute("background", "../../images/ship5/part2.png");
                             else
                                 document.getElementById(coord).setAttribute("background", "../../images/ship5/part3.png");
@@ -594,17 +594,17 @@ form input {
 
             //Looping through enemy map
             //Nothing
-            if(yMap[i][j]==0) {
+            if(eMap[i][j]==0) {
             }
             //Miss
-            if(yMap[i][j]==1){
+            if(eMap[i][j]==1){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y+"0";
                 document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
             }
             //Hit
-            if(yMap[i][j]!=0 && yMap[i][j]!=1){
+            if(eMap[i][j]!=0 && eMap[i][j]!=1){
                 var x = i+1;
                 var y = j+1;
                 var coord = x+y+"0";
