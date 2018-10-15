@@ -82,20 +82,21 @@
           <br></br>
           <p>Or enter a multiplayer code you have recieved</p>
 
-        <form>
+        <form class="form-group" action="/join">
           <fieldset>
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Multiplayer Code</label>
-                <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                <input type="text" class="form-control" placeholder="Enter Room Key" id="key" name="key">
             </div>
           </fieldset>
+            <input type="submit" class="btn btn-primary">Enter Game!</input>
         </form>
 
 
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Enter Game!</button>
+
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -155,7 +156,7 @@
         <%}else{%>
         <p style="font-size: 20px">Login with Google to get started today!</p>
         <p class="lead">
-            <a href="/auth/google" class="w3-button w3-black w3-block w3-hover-green w3-padding-16">Google Login</a>
+            <a href="/auth/google" class="w3-button w3-white w3-block w3-hover-green w3-padding-16">Google Login</a>
         </p>
         <%}%>
     </td>

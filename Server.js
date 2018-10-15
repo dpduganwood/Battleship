@@ -123,7 +123,11 @@ var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
+//import io from 'socket.io-client';
+var io2 = require('socket.io-client');
 app.get('/join', function(req,res){
+
+    var io3 = io2.connect("http://localhost:6009");
     console.log("Joining game: "+req.query.key);
     console.log("Easy or hard AI: "+req.query.eOrH);
     var game;
@@ -163,7 +167,9 @@ app.get('/join', function(req,res){
         perror:"",
         yMap:yourMap,
         eMap:enemyMap,
-        rKey:"-1"
+        rKey:tempKey,
+        isHost:"no",
+        io:io3
     });
 });
 
@@ -182,7 +188,9 @@ app.get('/host',function(req,res){
         perror:"",
         yMap:emptyMap,
         eMap:emptyMap,
-        rKey: tempKey
+        rKey: tempKey,
+        isHost:"yes",
+        io:io2
     });
 
 });
@@ -341,7 +349,14 @@ console.log('6009 is the open port');
 //THIS MAY NEED TO BE MOVED UP OR DOWN
 var io = socket(serverListener);
 
+
 io.on('connection', function(socket) {
     //do a thing
     console.log("socket connection established");
+    socket.on('joining', function(socket) {
+        //do a thing
+        console.log("User "+socket.name+" attempting to join "+socket.key);
+
+    });
 });
+
