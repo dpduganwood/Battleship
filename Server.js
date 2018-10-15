@@ -325,6 +325,15 @@ app.get('/home',function(req,res) {
     });
 });
 
+app.get('/leaderboard',function(req,res) {
+    Connection.getleaderboard(function (userInfo) {
+        res.render('pages/leaderboard.ejs', {
+            playerName: req.cookies.playerName,
+            userInfo: userInfo
+        });
+    });
+});
+
 //app.listen(6009);
 var serverListener = app.listen(6009);
 console.log('6009 is the open port');
