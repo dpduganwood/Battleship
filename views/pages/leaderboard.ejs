@@ -61,28 +61,47 @@
         align-content: center;
         width: 80%;
     }
+
+    td, th, tr {
+        color: white;
+        wdith: 80%;
+        text-align: center;
+    }
+    th {
+        text-decoration: underline;
+    }
+
+    h1 {
+        color: white;
+    }
+    table {
+
+    }
 </style>
 
 <body>
-<div>
     <h1 align="center">
         <b>Top 100 Players</b><br>
     </h1>
     <table align="center">
         <tr>
-            <th>#    </th>
-            <th>Username</th>
-
+            <th style="background-color: black;">#</th>
+            <th style="background-color: black; padding-left: 30px;">Username</th>
+            <th style="background-color: black; padding-left: 30px;">Wins</th>
+            <th style="background-color: black; padding-left: 30px;">Losses</th>
+            <th style="background-color: black; padding-left: 30px;">Win Rate</th>
         </tr>
         <%for (var i = 0; i < userInfo.length; i++) {%>
-        <tr class="normal-row">
-            <td text-align="left"><%=(i+1)%></td>
-            <td text-align="left"><%=userInfo[i].displayName%></td>
+        <tr>
+            <td style="background-color: black"><%=(i+1)%></td>
+            <td style="background-color: black; padding-left: 30px;"><%=userInfo[i].displayName%></td>
+            <td style="background-color: black; padding-left: 30px;"><%=userInfo[i].mp_wins%></td>
+            <td style="background-color: black; padding-left: 30px;"><%=userInfo[i].mp_losses%></td>
+            <td style="background-color: black; padding-left: 30px;"><%=Math.round((userInfo[i].mp_wins/(userInfo[i].mp_wins+userInfo[i].mp_losses))*100) || 0%>%</td>
         </tr>
         <%
         }%>
     </table>
-</div>
 </body>
 
 </html>
