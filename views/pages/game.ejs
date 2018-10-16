@@ -296,7 +296,12 @@ form input {
     </td>
 </tr>
     </table>
+<script>
+    //Attack and Place functions go here.
+    function attack(x, y){
 
+    }
+</script>
 <div style="width: 805px;  float: left; display: table;">
     <div style="display: table-row">
        <!-- <div style="width: 600px; display: table-cell;"> Left </div> -->
@@ -305,7 +310,7 @@ form input {
           <div class="card-header">Enter Your Move Here  ....  i.e. (1,J) (5,D)</div>
           <div class="card-body">
             <%if(turns != 0){%>
-            <form class="form-group" action="/attack">
+            <form class="form-group" action="/attack"><%//switch to attack()%>
                 <div style="float:left;">
                     <label class="col-form-label col-form-label-lg" for="inputLarge">| X Coordinate |</label>
                     <select class="form-control form-control-lg" name="X">

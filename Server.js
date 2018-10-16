@@ -194,7 +194,7 @@ app.get('/host',function(req,res){
     });
 
 });
-
+/*
 app.get('/place',function(req,res) {
     var temp = "("+req.query.X+","+req.query.Y+","+req.query.L+","+req.query.D+")";
     console.log(temp);
@@ -320,7 +320,7 @@ app.get('/attack',function(req,res){
         }
     });
 });
-
+*/
 app.get('/rules',function(req,res) {
     res.render('pages/rules.ejs', {
         playerName: req.cookies.playerName
