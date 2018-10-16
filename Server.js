@@ -352,11 +352,10 @@ var io = socket(serverListener);
 
 io.on('connection', function(socket) {
     //do a thing
-    console.log("socket connection established");
-    socket.on('joining', function(socket) {
+    console.log("socket connection established " + socket.id);
+    socket.on('joining', function(joinInfo) {
         //do a thing
-        console.log("User "+socket.name+" attempting to join "+socket.key);
-
+        console.log("User "+joinInfo.name+" attempting to join "+joinInfo.key);
     });
 });
 
