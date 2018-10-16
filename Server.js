@@ -355,7 +355,7 @@ io.on('connection', function(socket) {
     console.log("socket connection established " + socket.id);
 
     //setup player stuff
-    io.on('setup', function(sockKey) {
+    socket.on('setup', function(sockKey) {
         games[sockKey.setupKey].p1SocketId = socket.id;
         console.log(socket.id + " setting " + sockKey.setupKey + " to " + games[sockKey.setupKey].p1SocketId);
     });
