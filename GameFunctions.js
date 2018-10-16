@@ -65,9 +65,11 @@ class GameController {
         this.user2_map = user2_map;
         this.gameKey = gameKey;
     }*/
-    constructor(player1, player2, gameKey) {
+    constructor(player1, p1SocketId, player2, p2SocketId, gameKey) {
         this.player1 = player1;
+        this.p1SocketId = p1SocketId;
         this.player2 = player2;
+        this.p2SocketId = p2SocketId;
         this.gameKey = gameKey;
         this.player1Counter = 0;
         this.player2Counter = 0;
