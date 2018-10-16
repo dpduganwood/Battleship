@@ -159,3 +159,14 @@ function getLeaderboard(cb) {
         }
     });
 }
+
+exports.getPlayer(playerName, cb) {
+    con.query("SELECT * FROM users WHERE displayName = '" + palyerName + "'", function(err, result) {
+        if(err) {
+            cb(err);
+        } else {
+            var z = JSON.parse(JSON.stringify(result[0]));
+            cb(z)
+        }
+    });
+}
