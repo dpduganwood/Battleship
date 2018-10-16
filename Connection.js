@@ -160,13 +160,31 @@ function getLeaderboard(cb) {
     });
 }
 
-exports.getPlayer(playerName, cb) {
+exports.getPlayer = getPlayer;
+function getPlayer(playerName, cb) {
     con.query("SELECT * FROM users WHERE displayName = '" + palyerName + "'", function(err, result) {
         if(err) {
             cb(err);
         } else {
             var z = JSON.parse(JSON.stringify(result[0]));
             cb(z)
+        }
+    });
+}
+
+exports.deletePlayer = deletePlayer;
+function deletePlayer(playerName, cb) {
+    con.query("SELECT user_id FROM users WHERE displayName = '" + playerName + "'", function(err, result) {
+        if(err) {
+            cb(err);
+        } else {
+            con.query("DELETE FROM users WHERE user_id = " + reuslt.user_id, function(err) {
+                if(err) {
+                    cb(err);
+                } else {
+                    cb("deleted");
+                }
+            });
         }
     });
 }
