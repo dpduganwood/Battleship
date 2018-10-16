@@ -353,9 +353,19 @@ var io = socket(serverListener);
 io.on('connection', function(socket) {
     //do a thing
     console.log("socket connection established " + socket.id);
+
+    //setup player stuff
+    io.on('setup', function(sockKey) {
+        games[sockKey.setupKey].p1SocketId = socket.id;
+        console.log(socket.id + " setting " + sockKey.setupKey + " to " + games[sockKey.setupKey].p1SocketId);
+    });
+
+    //if joinging a game
     socket.on('joining', function(joinInfo) {
         //do a thing
         console.log("User "+joinInfo.name+" attempting to join "+joinInfo.key);
+        games[joinInfo.key].p2SocketId = scoket.id;
+        console.log(socket.id + " joining " + joinInfo.key + " to " + games[joinInfo.key].p2SocketId);
     });
 });
 

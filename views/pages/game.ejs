@@ -158,7 +158,8 @@ form input {
         <%
         var otherJoined = false;
         if(isHost === "yes" && !(otherJoined)){
-            console.log("Hosting from if other");%>
+            console.log("Hosting from if other");
+            socket.emit('setup', {setupKey: rKey});%>
         <tr>
             <td align="center">
                 Room Key: <%=rKey%>

@@ -67,9 +67,9 @@ class GameController {
     }*/
     constructor(player1, p1SocketId, player2, p2SocketId, gameKey) {
         this.player1 = player1;
-        this.p1SocketId = p1SocketId;
+        this.p1SocketId = null;
         this.player2 = player2;
-        this.p2SocketId = p2SocketId;
+        this.p2SocketId = null;
         this.gameKey = gameKey;
         this.player1Counter = 0;
         this.player2Counter = 0;

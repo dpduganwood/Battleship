@@ -79,4 +79,4 @@ insert into users value (
     427,
     934);
     
-SELECT displayName, mp_wins, mp_losses, hits, misses FROM users ORDER BY (mp_wins-mp_losses) DESC LIMIT 100
+SELECT displayName, mp_wins, mp_losses, hits, misses FROM users ORDER BY (mp_wins-mp_losses) DESC LIMIT 100;
