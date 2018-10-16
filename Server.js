@@ -69,7 +69,6 @@ app.get('/', function (req, res) {
             res.render('pages/index', {playerName:''});
         }
     }
-
 });
 
 app.get('/logout', function (req, res){
@@ -321,6 +320,15 @@ app.get('/attack',function(req,res){
     });
 });
 */
+
+app.get('/deletePlayer',function(req,res){
+    var name = req.cookies.playerName;
+   Connection.deletePlayer(name, function(ret){
+        res.cookie('playerName','', {maxAge: 9000000});
+        res.render('pages/index', {playerName:''});
+    });
+});
+
 app.get('/rules',function(req,res) {
     res.render('pages/rules.ejs', {
         playerName: req.cookies.playerName
