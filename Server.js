@@ -372,7 +372,7 @@ io.on('connection', function(socket) {
     socket.on('joining', function(joinInfo) {
         //do a thing
         console.log("User "+joinInfo.name+" attempting to join "+joinInfo.key);
-        games[joinInfo.key].p2SocketId = scoket.id;
+        games[joinInfo.key].p2SocketId = socket.id;
         console.log(socket.id + " joining " + joinInfo.key + " to " + games[joinInfo.key].p2SocketId);
     });
 });
