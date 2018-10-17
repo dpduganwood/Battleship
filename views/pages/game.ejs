@@ -372,7 +372,7 @@ form input {
           <div class="card-header">Enter Your Move Here  ....  i.e. (1,J) (5,D)</div>
           <div class="card-body">
             <%if(turns != 0){%>
-            <form class="form-group" action="/attack"><%//switch to attack()%>
+            <form class="form-group"><%//switch to attack()%>
                 <div style="float:left;">
                     <label class="col-form-label col-form-label-lg" for="inputLarge">| X Coordinate |</label>
                     <select class="form-control form-control-lg" name="X">
@@ -399,7 +399,7 @@ form input {
                 </div>
             </form>
             <%}else{%>
-              <form class="form-group" action="/place">
+              <form class="form-group">
                   <div style="float:left;">
                       <label class="col-form-label col-form-label-lg" for="inputLarge">| X Coordinate |</label>
                       <select class="form-control form-control-lg" id="X" name="X">
