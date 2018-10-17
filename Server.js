@@ -169,17 +169,20 @@ app.get('/join', function(req,res){
     console.log("Easy and hard are not complete.");
     var yourMap = games[tempKey].player1.getMap();
     var enemyMap = games[tempKey].player2.getMap();
-    res.render('pages/game.ejs', {
-        playerName:req.cookies.playerName,
-        enemyName:games[tempKey].player2.playerName,
-        turns:0,
-        shipsLeft:[20,31,32,40,50],
-        perror:"",
-        yMap:yourMap,
-        eMap:enemyMap,
-        rKey:tempKey,
-        isHost:"no",
-        io:io2
+    Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+        res.render('pages/game.ejs', {
+            playerInfo: playerInfo,
+            playerName: req.cookies.playerName,
+            enemyName: games[tempKey].player2.playerName,
+            turns: 0,
+            shipsLeft: [20, 31, 32, 40, 50],
+            perror: "",
+            yMap: yourMap,
+            eMap: enemyMap,
+            rKey: tempKey,
+            isHost: "no",
+            io: io2
+        });
     });
 });
 
