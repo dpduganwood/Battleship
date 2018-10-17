@@ -63,13 +63,19 @@ app.get('/', function (req, res) {
         res.render('pages/index', {playerName:''});
     }else{
         try {
-            res.render('pages/index', {playerName:req.cookies.playerName});
+            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                res.render('pages/index', {
+                    playerName: req.cookies.playerName,
+                    playerInfo: playerInfo,
+                });
+            });
         } catch(e) {
             res.cookie('playerName','', {maxAge: 9000000});
             res.render('pages/index', {playerName:''});
         }
     }
 });
+
 
 app.get('/logout', function (req, res){
     //console.log("Logging out user: "+req.cookie.playerName);
@@ -92,7 +98,12 @@ function register(profile, user) {
 app.get('/login2', function(req, res) {
     console.log("Status from passport/register: "+req.query.profileName);
     res.cookie('playerName', req.query.profileName, {maxAge: 9000000});
-    res.render('pages/index', {playerName:req.query.profileName});
+    Connection.getPlayer(req.query.profileName, function (playerInfo) {
+        res.render('pages/index', {
+            playerName: req.query.profileName,
+            playerInfo: playerInfo,
+        });
+    });
 });
 
 var games = new Array(100000).fill(null);
@@ -330,22 +341,22 @@ app.get('/deletePlayer',function(req,res){
 });
 
 app.get('/rules',function(req,res) {
-    res.render('pages/rules.ejs', {
-        playerName: req.cookies.playerName
-    });
-});
-
-app.get('/home',function(req,res) {
-    res.render('pages/index.ejs', {
-        playerName: req.cookies.playerName
+    Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+        res.render('pages/rules', {
+            playerName: req.cookies.playerName,
+            playerInfo: playerInfo,
+        });
     });
 });
 
 app.get('/leaderboard',function(req,res) {
     Connection.getleaderboard(function (userInfo) {
-        res.render('pages/leaderboard.ejs', {
-            playerName: req.cookies.playerName,
-            userInfo: userInfo
+        Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+            res.render('pages/leaderboard', {
+                playerName: req.cookies.playerName,
+                userInfo: userInfo,
+                playerInfo: playerInfo,
+            });
         });
     });
 });

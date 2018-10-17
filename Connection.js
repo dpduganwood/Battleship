@@ -162,11 +162,12 @@ function getLeaderboard(cb) {
 
 exports.getPlayer = getPlayer;
 function getPlayer(playerName, cb) {
-    con.query("SELECT * FROM users WHERE displayName = '" + palyerName + "'", function(err, result) {
+    con.query("SELECT * FROM users WHERE displayName = '" + playerName + "'", function(err, result) {
         if(err) {
             cb(err);
         } else {
-            var z = JSON.parse(JSON.stringify(result[0]));
+            var z = JSON.parse(JSON.stringify(result));
+            console.log("HERE!");
             cb(z)
         }
     });

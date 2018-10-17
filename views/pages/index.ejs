@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,58 +11,108 @@
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap-4/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>Boiler Tracks!</title>
+    <title>Battletracks</title>
 </head>
 
 <style>
     body {
         background-image: url("../../images/logo.png");
     }
-
 </style>
 
 <body>
+<header>
+    <style>
+        td, th, tr {
+            text-align: center;
+        }
+        th {
+            text-decoration: underline;
+        }
+    </style>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">BoilerTracks</a>
-    <%
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">BoilerTracks</a>
+        <%
         console.log("playerName: "+playerName);
-    if (playerName != ''){
+        if (playerName != ''){
         %>
-    <a class="navbar-brand" href="#"><%=playerName%></a>
+        <a class="navbar-brand" href="#" data-toggle="modal" data-target="#playerstats" role="button"><%=playerName%></a>
+        <%
+        }
+        %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/leaderboard">Leaderboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rules">Rules</a>
+                </li>
+                <%
+                if (playerName != ''){
+                %>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout">Sign Out</a>
+                    </li>
+
+                <%
+                }
+                %>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- //////////////////////////////////// Player Stats MODAL ////////////////////////// -->
+    <%
+    if (playerName != ''){
+    %>
+    <div class="modal" id="playerstats" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Player Statistics</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <th style="padding-left: 10px">Wins</th>
+                        <th style="padding-left: 10px">Losses</th>
+                        <th style="padding-left: 10px">Hits</th>
+                        <th style="padding-left: 10px">Misses</th>
+                        <th style="padding-left: 10px">Win Rate</th>
+                        <th style="padding-left: 10px">Hit Rate</th>
+                        <tr>
+                            <td style="padding-left: 10px"><%=playerInfo[0].mp_wins%></td>
+                            <td style="padding-left: 10px"><%=playerInfo[0].mp_losses%></td>
+                            <td style="padding-left: 10px"><%=playerInfo[0].hits%></td>
+                            <td style="padding-left: 10px"><%=playerInfo[0].misses%></td>
+                            <td style="padding-left: 10px"><%=Math.round((playerInfo[0].mp_wins/(playerInfo[0].mp_wins+playerInfo[0].mp_losses))*100) || 0%>%</td>
+                            <td style="padding-left: 10px"><%=Math.round((playerInfo[0].hits/(playerInfo[0].hits+playerInfo[0].misses))*100) || 0%>%</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <%
     }
     %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/leaderboard">Leaderboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/rules">Rules</a>
-      </li>
-      <%
-      if (playerName != ''){
-      %>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/logout">Sign Out</a>
-        </li>
-
-      <%
-      }
-      %>
-    </ul>
-  </div>
-</nav>
-
+</header>
 
 
 <!-- //////////////////////////////////// Multiplayer MODAL ////////////////////////// -->
