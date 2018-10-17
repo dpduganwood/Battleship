@@ -150,7 +150,7 @@ function addPlayerMPLoss(playerName, cb) {
 
 exports.getleaderboard = getLeaderboard;
 function getLeaderboard(cb) {
-    con.query("SELECT displayName, mp_wins, mp_losses, hits, misses FROM users ORDER BY (mp_wins-mp_losses) DESC LIMIT 100", function(err, result){
+    con.query("SELECT displayName, mp_wins, mp_losses, hits, misses FROM users WHERE (mp_wins + mp_losses) > 0 ORDER BY (mp_wins-mp_losses) DESC LIMIT 100", function(err, result){
         if(err) {
             cb(err);
         } else {
@@ -179,7 +179,7 @@ function deletePlayer(playerName, cb) {
         if(err) {
             cb(err);
         } else {
-            con.query("DELETE FROM users WHERE user_id = " + reuslt.user_id, function(err) {
+            con.query("DELETE FROM users WHERE user_id = " + result.user_id, function(err) {
                 if(err) {
                     cb(err);
                 } else {
