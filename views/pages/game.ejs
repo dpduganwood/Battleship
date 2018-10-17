@@ -132,6 +132,18 @@
 <%
 var socket = io.connect("http://localhost:6009");
 //var socket = io;
+
+socket.on('place_ok', function(placementParams) {
+    //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
+    //get grid element and change it, remove length option
+    console.log("placement success received");
+
+});
+
+socket.on('place_fail', function() {
+    //show invalid placement message
+    cosnole.log("placement fail received");
+});
 %>
 
 <style type="text/css">
@@ -671,7 +683,7 @@ var socket = io.connect("http://localhost:6009");
                     <label for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
-                        <button name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"></button>
+                        <button name="place" id = "place" class="btn btn-primary" value="Place" onclick="shipPlace()"></button>
                     </div>
                 </div>
                 <% } %>
@@ -682,11 +694,12 @@ var socket = io.connect("http://localhost:6009");
 
         <script>
             function shipPlace() {
+                console.log("sending placement click");
                 var X = document.getElementById("X");
                 var Y = document.getElementById("Y");
                 var L = document.getElementById("L");
                 var D = document.getElementById("D");
-                socket.emit('place', {X, Y, L, D});
+                socket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
             }
         </script>
 
@@ -965,6 +978,12 @@ var socket = io.connect("http://localhost:6009");
           }
         </script> -->
 
+<!--set up button listeners-->
+<script>
+    console.log("getting here listener");
+    var placeBtn = document.getElementById("place");
+    placeBtn.addEventListener("click", shipPlace());
+</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

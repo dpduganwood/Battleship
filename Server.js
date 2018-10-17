@@ -389,5 +389,28 @@ io.on('connection', function(socket) {
         games[joinInfo.key].p2SocketId = socket.id;
         console.log(socket.id + " joining " + joinInfo.key + " to " + games[joinInfo.key].p2SocketId);
     });
+
+    socket.on('place', function(placementParams) {
+        /*var placePlayer;
+        var paramKey = placementParams.key;
+        if(games[paramKey].playerName == placementParams.playerName) {
+            placePlayer = games[paramKey].player1.playerName;
+        } else {
+            placePlayer = games[paramKey].player2.playerName;
+        }*/
+        console.log("placing");
+
+        var result = games[paramKey].addShip(placementParams.playerName, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
+        if(result == 0) {
+            //success
+            console.log("place success");
+            //io.clients[socket.id].send();
+            socket.emit('place_ok', {xLoc: placementParams.xLoc, yLoc: placementParams.yLoc, leng: placementParams.leng, dir : placementParams.dir});
+        } else {
+            //failure
+            console.log("place fail");
+            socket.emit('place_fail');
+        }
+    });
 });
 

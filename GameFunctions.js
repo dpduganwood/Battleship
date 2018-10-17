@@ -75,6 +75,14 @@ class GameController {
         this.player2Counter = 0;
     }
 
+    getPlayer1Socket(){
+        return this.p1SocketId;
+    }
+
+    getPlayer2Socket(){
+        return this.p2SocketId;
+    }
+
     checkHit(attackingPlayerName, x, y, cb) {
         var attackingPlayer;
         var checkPlayer;
