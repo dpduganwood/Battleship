@@ -160,12 +160,15 @@ function getLeaderboard(cb) {
     });
 }
 
-exports.getPlayer(playerName, cb) {
-    con.query("SELECT * FROM users WHERE displayName = '" + palyerName + "'", function(err, result) {
+exports.getPlayer = getPlayer;
+function getPlayer(playerName, cb) {
+    con.query("SELECT * FROM users WHERE displayName = '" + playerName + "'", function(err, result) {
+        console.log("I am here: " + playerName);
         if(err) {
             cb(err);
         } else {
-            var z = JSON.parse(JSON.stringify(result[0]));
+            var z = JSON.parse(JSON.stringify(result));
+            console.log("HERE!");
             cb(z)
         }
     });
