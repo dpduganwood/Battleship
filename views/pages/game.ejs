@@ -26,6 +26,14 @@
         th {
             text-decoration: underline;
         }
+        th#wid {
+            width: 100px;
+        }
+        table#crap {
+            height: 75px;
+            width: 400px;
+
+        }
     </style>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -34,7 +42,7 @@
         console.log("playerName: "+playerName);
         if (playerName != ''){
         %>
-        <a class="navbar-brand" href="#" data-toggle="modal" data-target="#hello" role="button"><%=playerName%></a>
+        <a class="navbar-brand" href="#" data-toggle="modal" data-target="#playerstat" role="button"><%=playerName%></a>
         <%
         }
         %>
@@ -82,13 +90,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table style="color: black">
-                        <th style="padding-left: 10px; color: black;">Wins</th>
-                        <th style="padding-left: 10px; color: black;">Losses</th>
-                        <th style="padding-left: 10px; color: black;">Hits</th>
-                        <th style="padding-left: 10px; color: black;">Misses</th>
-                        <th style="padding-left: 10px; color: black;">Win Rate</th>
-                        <th style="padding-left: 10px; color: black;">Hit Rate</th>
+                    <table id="crap" style="color: black">
+                        <th id="wid" style="padding-left: 10px; color: black;">Wins</th>
+                        <th id="wid" style="padding-left: 10px; color: black;">Losses</th>
+                        <th id="wid" style="padding-left: 10px; color: black;">Hits</th>
+                        <th id="wid" style="padding-left: 10px; color: black;">Misses</th>
+                        <th id="wid" style="padding-left: 10px; color: black;">Win Rate</th>
+                        <th id="wid" style="padding-left: 10px; color: black;">Hit Rate</th>
                         <tr>
                             <td style="padding-left: 10px; color: black;"><%=playerInfo[0].mp_wins%></td>
                             <td style="padding-left: 10px; color: black;"><%=playerInfo[0].mp_losses%></td>
