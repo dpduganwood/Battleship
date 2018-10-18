@@ -169,6 +169,7 @@ app.get('/join', function(req,res){
     console.log("Easy and hard are not complete.");
     var yourMap = games[tempKey].player1.getMap();
     var enemyMap = games[tempKey].player2.getMap();
+    //console.log(yourMap);
     Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
         res.render('pages/game.ejs', {
             playerInfo: playerInfo,
