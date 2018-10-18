@@ -188,6 +188,7 @@ app.get('/join', function(req,res){
 });
 
 app.get('/host',function(req,res){
+    var io3 = io2.connect("http://localhost:6009");
     var tempKey = genKey();
     res.cookie('key', tempKey, {maxAge: 9000000});
     console.log("Generated M Key: "+tempKey);
