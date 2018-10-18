@@ -31,8 +31,8 @@
             width: 100px;
         }
 
-        table#crap {
-            height: 75px;
+        table#plyrstats {
+            height: 10px;
             width: 400px;
 
         }
@@ -94,7 +94,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table id="crap" style="color: black">
+                    <table id="plyrstats" style="color: black">
                         <th id="wid" style="padding-left: 10px; color: black;">Wins</th>
                         <th id="wid" style="padding-left: 10px; color: black;">Losses</th>
                         <th id="wid" style="padding-left: 10px; color: black;">Hits</th>
@@ -116,7 +116,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <form action="/deletePlayer">
+                    <form  action="/deletePlayer">
                         <input type="submit" class="btn btn-danger" value="Delete Account">
                     </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -189,28 +189,6 @@ socket.on('place_fail', function () {
         width: 31px;
         height: 29px;
 
-    }
-
-    /*battleship form*/
-    form {
-        position: absolute;
-        top: 25px;
-        right: 0;
-        padding: 10px;
-        /*background-color: rgb(83, 175, 19);*/
-        z-index: 100;
-    }
-
-    /*battleship form input*/
-    form input {
-        /*background-color: rgb(152, 207, 113);*/
-        /*border-color: rgb(83, 175, 19);*/
-        font-size: 1em;
-    }
-
-    .form-control {
-        width: 100% !important;
-        margin-right: 5%;
     }
 
     /*hit or miss*/

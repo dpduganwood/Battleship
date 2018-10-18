@@ -194,17 +194,20 @@ app.get('/host',function(req,res){
     var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
     games[tempKey] = new GameFunction.GameController(player, player, tempKey);
     console.log(tempKey);
-    res.render('pages/game.ejs', {
-        playerName:req.cookies.playerName,
-        enemyName:"Missing opponent",
-        turns:0,
-        shipsLeft:[20,31,32,40,50],
-        perror:"",
-        yMap:emptyMap,
-        eMap:emptyMap,
-        rKey: tempKey,
-        isHost:"yes",
-        io:io2
+    Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+        res.render('pages/game.ejs', {
+            playerInfo: playerInfo,
+            playerName: req.cookies.playerName,
+            enemyName: "Missing opponent",
+            turns: 0,
+            shipsLeft: [20, 31, 32, 40, 50],
+            perror: "",
+            yMap: emptyMap,
+            eMap: emptyMap,
+            rKey: tempKey,
+            isHost: "yes",
+            io: io2
+        });
     });
 
 });
