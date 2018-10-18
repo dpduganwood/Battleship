@@ -129,7 +129,7 @@
     %>
 </header>
 
-<%
+<!--<%
 var socket = io.connect("http://localhost:6009");
 //var socket = io;
 
@@ -142,9 +142,25 @@ socket.on('place_ok', function(placementParams) {
 
 socket.on('place_fail', function() {
     //show invalid placement message
-    cosnole.log("placement fail received");
+    console.log("placement fail received");
 });
-%>
+%>-->
+
+<script>
+    var socket = <%- io.connect("http://localhost:6009") %>;
+
+    socket.on('place_ok', function(placementParams) {
+    //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
+    //get grid element and change it, remove length option
+    console.log("placement success received");
+
+});
+
+socket.on('place_fail', function() {
+    //show invalid placement message
+    console.log("placement fail received");
+});
+</script>
 
 <style type="text/css">
     body {
