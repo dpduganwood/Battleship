@@ -137,7 +137,7 @@ var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 var io2 = require('socket.io-client');
 app.get('/join', function(req,res){
 
-    //var io3 = io2.connect("http://localhost:6009");
+    var io3 = io2.connect("http://localhost:6009");
     console.log("Joining game: "+req.query.key);
     console.log("Easy or hard AI: "+req.query.eOrH);
     var game;
@@ -182,7 +182,7 @@ app.get('/join', function(req,res){
             eMap: enemyMap,
             rKey: tempKey,
             isHost: "no",
-            io: io2
+            io: io3
         });
     });
 });
@@ -204,7 +204,7 @@ app.get('/host',function(req,res){
         eMap:emptyMap,
         rKey: tempKey,
         isHost:"yes",
-        io:io2
+        io:io3
     });
 
 });
