@@ -16,7 +16,10 @@
     <title>Boiler Tracks!</title>
 </head>
 <body>
-
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io('http://localhost:6009')
+</script>
 <header>
     <style>
         td, th, tr {
@@ -116,7 +119,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <form  action="/deletePlayer">
+                    <form action="/deletePlayer">
                         <input type="submit" class="btn btn-danger" value="Delete Account">
                     </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -129,7 +132,7 @@
     %>
 </header>
 
-<!--<%
+<!--
 /*//var socket = io.connect("http://localhost:6009");
 var socket = io;
 
@@ -145,38 +148,36 @@ socket.on('place_fail', function () {
     console.log("placement fail received");
 });*/
 
-%>-->
+-->
 
-<%var socket = io%>
-
-<!--<script>
+<!--script>
     //var socket = io.connect("http://localhost:6009") ;
-    var scriptSocket = <%= socket %>;
 
-    socket.on('place_ok', function(placementParams) {
-    //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
-    //get grid element and change it, remove length option
-    console.log("placement success received");
+    socket.on('place_ok', function (placementParams) {
+        //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
+        //get grid element and change it, remove length option
+        console.log("placement success received");
 
     });
 
-    socket.on('place_fail', function() {
-    //show invalid placement message
-    console.log("placement fail received");
+    socket.on('place_fail', function () {
+        //show invalid placement message
+        console.log("placement fail received");
     });
 
     console.log("getting here listener");
     var placeBtn = document.getElementById("place");
-    placeBtn.addEventListener("click", function() {
+    placeBtn.addEventListener("click", function () {
         console.log("sending placement click");
-            var scriptSocket =  io;
-                var X = document.getElementById("X");
-                var Y = document.getElementById("Y");
-                var L = document.getElementById("L");
-                var D = document.getElementById("D");
-                scriptSocket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
+        //var scriptSocket =  io;
+        var X = document.getElementById("X");
+        var Y = document.getElementById("Y");
+        var L = document.getElementById("L");
+        var D = document.getElementById("D");
+        var rKey = document.getElementById("rKey");
+        socket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
     });
-</script>-->
+</script-->
 
 <style type="text/css">
     body {
@@ -253,7 +254,8 @@ socket.on('place_fail', function () {
     var otherJoined = false;
     if(isHost === "yes" && !(otherJoined)){
         console.log("Hosting from if other");
-        socket.emit('setup', {setupKey: rKey}); %>
+        /*socket.emit('setup', {setupKey: rKey});*/ %>
+    <div hidden id="rKey" style="display: none;"><%= rKey %></div>
     <tr>
         <td align="center">
             Room Key: <%= rKey %>
@@ -264,11 +266,11 @@ socket.on('place_fail', function () {
     </tr>
     <% }else if (isHost === "no" && !(otherJoined)) {
         console.log("Joining from if other");
-        var joiningName = playerName;
-        var joiningKey = rKey;
+        //var joiningName = playerName;
+        //var joiningKey = rKey;
         otherJoined = true;
         //console.log("Will this show");
-        socket.emit('joining', {name: joiningName, key: joiningKey});
+        //socket.emit('joining', {name: joiningName, key: joiningKey});
     } else {
         console.log("Started game.");
     }
@@ -646,7 +648,8 @@ socket.on('place_fail', function () {
                     <label for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="fire" class="btn btn-primary" value="Fire!"-->
-                        <button name="fire" id="fire" class="btn btn-primary" value="Fire" onclick="Fire()">Fire</button>
+                        <button name="fire" id="fire" class="btn btn-primary" value="Fire" onclick="Fire()">Fire
+                        </button>
                     </div>
                 </div>
                 <% }else{ %>
@@ -693,14 +696,15 @@ socket.on('place_fail', function () {
                     <label for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
-                        <button name="place" id="place" class="btn btn-primary" value="Place"
-                                >Place</button>
+                        <button name="place" id="place" class="btn btn-primary" value="Place" onclick="shipPlace()">
+                            Place
+                        </button>
                     </div>
                 </div>
                 <% } %>
             </div>
         </div>
-        <!--<button onclick="shipPlace()">Place Ship</button>-->
+        <!--button onclick="shipPlace()">Place Ship</button-->
         <!--document.getElementById("43").setAttribute("background", "../../images/train1.png");-->
 
         <script>
@@ -963,8 +967,6 @@ socket.on('place_fail', function () {
             }
         </script>
 
-        
-
 
         <!-- <div style="display: table-cell;"> Right </div> -->
         <!-- RIGHT SIDE COMPONENT -->
@@ -1000,7 +1002,7 @@ socket.on('place_fail', function () {
     var placeBtn = document.getElementById("place");
     placeBtn.addEventListener("click", function() {
         console.log("sending placement click");
-            var scriptSocket =  <%=io%>;
+            var scriptSocket =  <%= io %>;
                 var X = document.getElementById("X");
                 var Y = document.getElementById("Y");
                 var L = document.getElementById("L");
@@ -1010,31 +1012,29 @@ socket.on('place_fail', function () {
 </script>-->
 
 <script>
-    //var socket = io.connect("http://localhost:6009") ;
-    var scriptSocket = <%= socket %>;
 
-    socket.on('place_ok', function(placementParams) {
-    //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
-    //get grid element and change it, remove length option
-    console.log("placement success received");
+    socket.on('place_ok', function (placementParams) {
+        //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
+        //get grid element and change it, remove length option
+        console.log("placement success received");
 
     });
 
-    socket.on('place_fail', function() {
-    //show invalid placement message
-    console.log("placement fail received");
+    socket.on('place_fail', function () {
+        //show invalid placement message
+        console.log("placement fail received");
     });
 
     console.log("getting here listener");
     var placeBtn = document.getElementById("place");
-    placeBtn.addEventListener("click", function() {
+    placeBtn.addEventListener("click", function () {
         console.log("sending placement click");
-            var scriptSocket =  io;
-                var X = document.getElementById("X");
-                var Y = document.getElementById("Y");
-                var L = document.getElementById("L");
-                var D = document.getElementById("D");
-                scriptSocket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
+        var X = document.getElementById("X");
+        var Y = document.getElementById("Y");
+        var L = document.getElementById("L");
+        var D = document.getElementById("D");
+        var rKey = document.getElementById("rKey");
+        socket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
     });
 </script>
 
