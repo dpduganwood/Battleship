@@ -532,6 +532,14 @@ io.on('connection', function (socket) {
                         //fail
                     }
                 });
+            } else {
+                Connection.addPlayerMPLoss(socket.user_name, function(result) {
+                    if(result == 0) {
+                        //success
+                    } else {
+                        //fail
+                    }
+                });
             }
         }
     });
