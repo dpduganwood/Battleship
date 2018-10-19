@@ -434,23 +434,35 @@ console.log('6009 is the open port');
 var io = socket(serverListener);
 
 
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
+
+    socket.on('basics', function(properties) {
+        socket.user_name = properties.playerName;
+        socket.game_key = properties.game_key;
+
+        console.log("socket properties " + socket.user_name + " " + socket.game_key);
+    });
+
+    var gameOver = false;
     //do a thing
     console.log("socket connection established " + socket.id);
 
     //setup player stuff
-    socket.on('setup', function (sockKey) {
+
+    /*socket.on('setup', function(sockKey) {
         games[sockKey.setupKey].p1SocketId = socket.id;
         console.log(socket.id + " setting " + sockKey.setupKey + " to " + games[sockKey.setupKey].p1SocketId);
-    });
+    });*/
 
     //if joinging a game
-    socket.on('joining', function (joinInfo) {
+
+    /*socket.on('joining', function(joinInfo) {
+
         //do a thing
         console.log("User " + joinInfo.name + " attempting to join " + joinInfo.key);
         games[joinInfo.key].p2SocketId = socket.id;
         console.log(socket.id + " joining " + joinInfo.key + " to " + games[joinInfo.key].p2SocketId);
-    });
+    });*/
 
     socket.on('place', function (placementParams) {
         /*var placePlayer;
@@ -461,11 +473,12 @@ io.on('connection', function (socket) {
             placePlayer = games[paramKey].player2.playerName;
         }*/
         console.log("placing");
-        console.log(placementParams);
-        var paramKey = placementParams.paramKey;
-        console.log(paramKey);
-        var result = games[paramKey].addShip(placementParams.playerName, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
-        if (result == 0) {
+        //console.log(placementParams);
+        //var paramKey = placementParams.paramKey;
+        //console.log(paramKey);
+        //var result = games[paramKey].addShip(placementParams.playerName, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
+        var result = games[socket.game_key].addShip(socket.user_name, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
+        if(result == 0) {
             //success
             console.log("place success");
             //io.clients[socket.id].send();
@@ -485,8 +498,9 @@ io.on('connection', function (socket) {
     //fire button clicked
     socket.on('fire', function (fireParams) {
         //output needs to be sent to both clients
-        games[fireParams.paramKey].checkHit(fireParams.playerName, fireParams.xLoc, fireParams.yLoc, function (result) {
-            if (result == 0) {
+        //games[fireParams.paramKey].checkHit(fireParams.playerName, fireParams.xLoc, fireParams.yLoc, function(result){
+        games[socket.game_key].checkHit(socket.user_name, fireParams.xLoc, fireParams.yLoc, function(result) {
+            if(result == 0) {
                 //miss
                 //signal both players
             } else if (result == 2) {
@@ -497,6 +511,14 @@ io.on('connection', function (socket) {
                 //signal only attacking player
             }
         });
+    });
+
+    socket.on('disconnect', function() {
+        if(gameOver) {
+            //do nothing
+        } else {
+            //increment player loss count
+        }
     });
 });
 
