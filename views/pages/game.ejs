@@ -1041,14 +1041,24 @@ socket.on('place_fail', function () {
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
-        console.log("placement success received");
-        //var leng = placementParams.leng;
-        var lengChoice = document.getElementById("L");
-        lengChoice.remove(lengChoice.selectedIndex);
-        console.log(lengChoice.length);
-        if(lengChoice.length == 0) {
-            //list is empty and all ships are placed
-            document.getElementById("place").innerHTML="Fire";
+        var btnText = document.getElementById("place");
+
+        if(btnText == "Place") {
+            console.log("placement success received");
+            //var leng = placementParams.leng;
+            var lengChoice = document.getElementById("L");
+            lengChoice.remove(lengChoice.selectedIndex);
+            console.log(lengChoice.length);
+            if(lengChoice.length == 0) {
+                //list is empty and all ships are placed
+                document.getElementById("place").innerHTML="Fire";
+                var remover = document.getElementById("L");
+                remover.parentNode.removeChild(remover);
+                remover = document.getElementById("D");
+                remover.parentNode.removeChild(remover);
+            }
+        } else if(btnTxt == "Fire") {
+            //do a differnet thing
         }
 
     });
@@ -1108,12 +1118,16 @@ socket.on('place_fail', function () {
                 break;
         }
 
-        var L = document.getElementById("L");
-        L = parseInt(L.options[L.selectedIndex].text);
-        var D = document.getElementById("D");
-        D = D.options[D.selectedIndex].text;
-        //var rKey = document.getElementById("rKey");
-        socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
+        if(placeBtn.innerHTML == "Place"){
+            var L = document.getElementById("L");
+            L = parseInt(L.options[L.selectedIndex].text);
+            var D = document.getElementById("D");
+            D = D.options[D.selectedIndex].text;
+            //var rKey = document.getElementById("rKey");
+            socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
+        } else if(placeBtn.innerHTML == "Fire") {
+            socket.emit('fire', {playerName: pName, xLoc: X, yLoc: Y, paramKey: paramKey});
+        }
     });
 
     //click listener for fire button
