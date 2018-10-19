@@ -421,7 +421,7 @@ io.on('connection', function(socket) {
     });
 
     //fire button clicked
-    socket.on('fire', fucntion(fireParams) {
+    socket.on('fire', function(fireParams) {
         //output needs to be sent to both clients
     });
 });
