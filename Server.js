@@ -133,13 +133,10 @@ var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
-//import io from 'socket.io-client';
-var io2 = require('socket.io-client');
-app.get('/join', function(req,res){
 
-    //var io3 = io2.connect("http://localhost:6009");
+app.get('/join', function(req,res){
     console.log("Joining game: "+req.query.key);
-    console.log("Easy or hard AI: "+req.query.eOrH);
+    //console.log("Easy or hard AI: "+req.query.eOrH);
     var game;
     var tempKey;
     if(req.query.key == "single"){
@@ -181,14 +178,12 @@ app.get('/join', function(req,res){
             yMap: yourMap,
             eMap: enemyMap,
             rKey: tempKey,
-            isHost: "no",
-            io: io2
+            isHost: "no"
         });
     });
 });
 
 app.get('/host',function(req,res){
-    var io3 = io2.connect("http://localhost:6009");
     var tempKey = genKey();
     res.cookie('key', tempKey, {maxAge: 9000000});
     console.log("Generated M Key: "+tempKey);
@@ -206,8 +201,7 @@ app.get('/host',function(req,res){
             yMap: emptyMap,
             eMap: emptyMap,
             rKey: tempKey,
-            isHost: "yes",
-            io: io2
+            isHost: "yes"
         });
     });
 
