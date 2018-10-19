@@ -443,8 +443,22 @@ io.on('connection', function(socket) {
     socket.on('disconnect', function() {
         if(gameOver) {
             //do nothing
+            console.log("normal exit");
         } else {
             //increment player loss count
+            console.log("sudden disconnection");
+            var type1 = games[socket.game_key].player1.type;
+            var type2 = games[socket.game_key].player2.type;
+            if(type1 != 0 || type2 != 0) {
+                //is AI game
+                Connection.addPlayerSPLoss(socket.user_name, function(result){
+                    if(result == 0) {
+                        //success
+                    } else {
+                        //fail
+                    }
+                });
+            }
         }
     });
 });
