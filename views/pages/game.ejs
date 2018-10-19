@@ -964,9 +964,8 @@ socket.on('place_fail', function () {
         <div class="card bg-light mb-3" style="display: table-cell;">
             <div class="card-header">Game Console!</div>
             <div class="card-body">
-                <% if(perror != ""){ %>
-                <h4 class="card-title"><%= perror %></h4>
-                <% } %>
+                <h3 id="errorID" class="card-title">Place Your Ships.</h3>
+                <h4 id="turn" class="card-title">Your Turn.</h4>
                 <p id=xyOutput class="card-text"></p>
 
             </div>
@@ -1021,15 +1020,16 @@ socket.on('place_fail', function () {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
         var btnText = document.getElementById("place").innerText;
-
         if(btnText == "Place") {
             console.log("placement success received");
             //var leng = placementParams.leng;
             var lengChoice = document.getElementById("L");
             lengChoice.remove(lengChoice.selectedIndex);
             console.log(lengChoice.length);
+            document.getElementById("errorID").innerText="Place your ships.";
             if(lengChoice.length == 0) {
                 //list is empty and all ships are placed
+                document.getElementById("errorID").innerText="Fire on the enemy!";
                 document.getElementById("place").innerText="Fire";
                 document.getElementById("place").value = "Fire";
                 var remover = document.getElementById("L");
@@ -1050,6 +1050,7 @@ socket.on('place_fail', function () {
 
     socket.on('place_fail', function () {
         //show invalid placement message
+        document.getElementById("errorID").innerText="Invalid Placement.";
         console.log("placement fail received");
     });
 
