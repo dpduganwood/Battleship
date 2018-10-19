@@ -372,6 +372,8 @@ var io = socket(serverListener);
 
 
 io.on('connection', function(socket) {
+
+    var gameOver = false;
     //do a thing
     console.log("socket connection established " + socket.id);
 
@@ -429,6 +431,14 @@ io.on('connection', function(socket) {
                 //signal only attacking player
             }
         });
+    });
+
+    socket.on('disconnect', function() {
+        if(gameOver) {
+            //do nothing
+        } else {
+            //increment player loss count
+        }
     });
 });
 
