@@ -1110,55 +1110,6 @@ socket.on('place_fail', function () {
             socket.emit('fire', {playerName: pName, xLoc: X, yLoc: Y, paramKey: paramKey});
         }
     });
-
-    //click listener for fire button
-    var fireBtn = document.getElementById("fire");
-    fireBtn.addEventListener("click", function() {
-        //send signal to server with attack coordinates and player name and key
-        var X = document.getElementById("X");
-        X = parseInt(X.options[X.selecetdIndex].text);
-
-        var Y = document.getElementById("Y");
-        Y = Y.options[Y.selectedIndex].text;
-
-        switch(Y) {
-            case 'A':
-                Y = 0;
-                break;
-            case 'B':
-                Y = 1;
-                break;
-            case 'C':
-                Y = 2;
-                break;
-            case 'D':
-                Y = 3;
-                break;
-            case 'E':
-                Y = 4;
-                break;
-            case 'F':
-                Y = 5;
-                break;
-            case 'G':
-                Y = 6;
-                break;
-            case 'H':
-                Y = 7;
-                break;
-            case 'I':
-                Y = 8;
-                break;
-            case 'J':
-                Y = 9;
-                break;
-        }
-        var pName = getElementFromCookie(playerName);
-        var paramKey = getElementFromCookie(key);
-
-        //emit socket signal
-        socket.emit("fire", {playerName: pName, paramKey: paramKey, xLoc: X, yLoc: y});
-    });
 </script>
 
 <!-- Optional JavaScript -->

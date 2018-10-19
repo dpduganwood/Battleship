@@ -137,18 +137,26 @@ class GameController {
 
         cb(result);
 
-        
-        if(checkPlayer.type != 0) {
-            //checkPlayer is an AI
-            //var loc = this.player2.easyAISelectLocation(this.player1.getMap());
-            if(checkPlayer.type == 1) {
-                //easy ai
-                var loc = checkPlayer.easyAISelectLocation(attackingPlayer.getMap());
-                this.checkHit(checkPlayer.displayName, loc[0], loc[1]);
-            } else {
-                //hard ai
+        if(result != 1) {
+            //advance turn, AI
+            if(checkPlayer.type != 0) {
+                //checkPlayer is an AI
+                //var loc = this.player2.easyAISelectLocation(this.player1.getMap());
+                if(checkPlayer.type == 1) {
+                    //easy ai
+                    var loc = checkPlayer.easyAISelectLocation(attackingPlayer.getMap());
+                    this.checkHit(checkPlayer.displayName, loc[0], loc[1], function(result) {
+                        //do nothing for now
+                    });
+                } else {
+                    //hard ai
+                }
             }
         }
+        //else do not advance turn
+
+        console.log(this.player1.getMap());
+        console.log(this.player2.getMap());
     }
     setPlayer2(player2){
         this.player2 = player2;

@@ -34,16 +34,19 @@ class AIOpponent {
         this.map = map;
     }
 
-    checkHit(x,y, cb) {
+    checkHit(x,y/*, cb*/) {
         if(this.map[y][x] % 2 == 0) {
-            if(this.map[y][x] == 0) {
-                cb(0); //target id zero. MISS
-            } else {
-                cb(2); //target id even. HIT
-            }
             this.map[y][x] += 1;
+            if(this.map[y][x] == 0) {
+                //cb(0); //target id zero. MISS
+                return 0;
+            } else {
+                //cb(2); //target id even. HIT
+                return 0;
+            }
         } else {
-            cb(1); //target id odd. INVALID TARGET
+            //cb(1); //target id odd. INVALID TARGET
+            return 1;
         }
     }
 

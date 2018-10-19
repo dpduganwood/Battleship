@@ -417,6 +417,18 @@ io.on('connection', function(socket) {
     //fire button clicked
     socket.on('fire', function(fireParams) {
         //output needs to be sent to both clients
+        games[fireParams.paramKey].checkHit(fireParams.playerName, fireParams.xLoc, fireParams.yLoc, function(result){
+            if(result == 0) {
+                //miss
+                //signal both players
+            } else if(result == 2) {
+                //hit
+                //signal both players
+            } else if(result == 1) {
+                //invalid target, try again
+                //signal only attacking player
+            }
+        });
     });
 });
 
