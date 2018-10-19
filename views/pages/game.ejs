@@ -696,7 +696,10 @@ socket.on('place_fail', function () {
                     <label for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
-                        <button name="place" id="place" class="btn btn-primary" value="Place" onclick="shipPlace()">
+                        <!--<button name="place" id="place" class="btn btn-primary" value="Place" onclick="shipPlace()">
+                            Place
+                        </button>-->
+                        <button name="place" id="place" class="btn btn-primary" value="Place">
                             Place
                         </button>
                     </div>
@@ -714,7 +717,7 @@ socket.on('place_fail', function () {
                 var Y = document.getElementById("Y");
                 var L = document.getElementById("L");
                 var D = document.getElementById("D");
-                socket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
+                socket.emit('place', {playerName: <%=playerName%>, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
 
                 //updateMap();
             }
@@ -1029,12 +1032,18 @@ socket.on('place_fail', function () {
     var placeBtn = document.getElementById("place");
     placeBtn.addEventListener("click", function () {
         console.log("sending placement click");
+        var decodedCookie = decodeURIComponent(document.cookie);
+        console.log("decoded: " + decodedCookie);
+        var pName = document.cookie.playerName;
+        var paramKey = document.cookie.key;
+        console.log("cookie: "+document.cookie);
+        console.log("selected: "+pName + paramKey);
         var X = document.getElementById("X");
         var Y = document.getElementById("Y");
         var L = document.getElementById("L");
         var D = document.getElementById("D");
-        var rKey = document.getElementById("rKey");
-        socket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
+        //var rKey = document.getElementById("rKey");
+        socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
     });
 </script>
 
