@@ -987,20 +987,6 @@ socket.on('place_fail', function () {
 
 <!--set up button listeners-->
 
-<!--<script>
-    console.log("getting here listener");
-    var placeBtn = document.getElementById("place");
-    placeBtn.addEventListener("click", function() {
-        console.log("sending placement click");
-            var scriptSocket =  <%= io %>;
-                var X = document.getElementById("X");
-                var Y = document.getElementById("Y");
-                var L = document.getElementById("L");
-                var D = document.getElementById("D");
-                scriptSocket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
-    });
-</script>-->
-
 <script>
 
     function getElementFromCookie(elementKey) {
