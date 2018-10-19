@@ -266,10 +266,10 @@ socket.on('place_fail', function () {
 
 <table style="width:800px; float:top;">
     <tr>
-        <td align="center">
+        <td id="myName" align="center">
             <%= playerName %>'s Board
         </td>
-        <td align="center">
+        <td id="enemyName" align="center">
             <%= enemyName %>'s Board
         </td>
     </tr>
@@ -1026,6 +1026,14 @@ socket.on('place_fail', function () {
 
 <script>
 
+    socket.on('p2Info', function(info) {
+        //do a thing
+        var enName = document.getElementById("enemyName");
+        enName.innerText = info.pName;
+    });
+
+    var firstThree = 0;
+
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
@@ -1069,7 +1077,7 @@ socket.on('place_fail', function () {
                     document.getElementById(coord).setAttribute("background", "../../images/ship1/part1.png");
                 }
             }
-            if(placementParams.leng == 3) {
+            if(placementParams.leng == 3 && firstThree == 0) {
                 console.log("At length check: " + placementParams.leng);
                 if (placementParams.dir == "D") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part3r.png");
@@ -1096,7 +1104,36 @@ socket.on('place_fail', function () {
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part3.png");
                 }
-
+                firstThree = 1;
+            }
+            if(placementParams.leng == 3 && firstThree == 1) {
+                console.log("At length check: " + placementParams.leng);
+                if (placementParams.dir == "D") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part3r.png");
+                    x = x + 1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part2r.png");
+                    x = x + 1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part1r.png");
+                }
+                if (placementParams.dir == "L") {
+                    y--;
+                    yS = y.toString();
+                    coord = xS + yS;
+                    document.getElementById(parseInt(coord)).setAttribute("background", "../../images/ship3/part1.png");
+                    y = y + 1;
+                    yS = y.toString();
+                    coord = xS + yS;
+                    document.getElementById(parseInt(coord)).setAttribute("background", "../../images/ship3/part2.png");
+                    y = y + 1;
+                    yS = y.toString();
+                    coord = xS + yS;
+                    document.getElementById(parseInt(coord)).setAttribute("background", "../../images/ship3/part3.png");
+                }
+                firstThree = 2;
             }
             if(placementParams.leng == 4) {
                 console.log("At length check: " + placementParams.leng);
