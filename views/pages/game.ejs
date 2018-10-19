@@ -1054,6 +1054,9 @@ socket.on('place_fail', function () {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
         console.log("placement success received");
+        var leng = placementParams.leng;
+        var lengChoice = document.getElementById("L");
+        lengChoice.remove(lengChoice.selectedIndex);
 
     });
 
