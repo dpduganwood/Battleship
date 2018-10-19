@@ -173,7 +173,7 @@ app.get('/join', function (req, res) {
         res.render('pages/game.ejs', {
             playerInfo: playerInfo,
             playerName: req.cookies.playerName,
-            enemyName: games[tempKey].player2.playerName,
+            enemyName: games[tempKey].player1.playerName,
             turns: 0,
             shipsLeft: [20, 31, 32, 40, 50],
             yMap: yourMap,
