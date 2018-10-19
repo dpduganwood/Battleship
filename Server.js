@@ -419,5 +419,10 @@ io.on('connection', function(socket) {
             socket.emit('place_fail');
         }
     });
+
+    //fire button clicked
+    socket.on('fire', fucntion(fireParams) {
+        //output needs to be sent to both clients
+    });
 });
 

@@ -648,8 +648,9 @@ socket.on('place_fail', function () {
                     <label for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="fire" class="btn btn-primary" value="Fire!"-->
-                        <button name="fire" id="fire" class="btn btn-primary" value="Fire" onclick="Fire()">Fire
-                        </button>
+                        <!--<button name="fire" id="fire" class="btn btn-primary" value="Fire" onclick="Fire()">Fire
+                        </button>-->
+                        <button name="fire" id="fire" class="btn btn-primary" value="Fire">Fire</button>
                     </div>
                 </div>
                 <% }else{ %>
@@ -711,7 +712,7 @@ socket.on('place_fail', function () {
         <!--document.getElementById("43").setAttribute("background", "../../images/train1.png");-->
 
         <script>
-            function shipPlace() {
+            /*function shipPlace() {
                 //console.log("sending placement click");
                 var X = document.getElementById("X");
                 var Y = document.getElementById("Y");
@@ -720,7 +721,7 @@ socket.on('place_fail', function () {
                 socket.emit('place', {playerName: <%=playerName%>, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
 
                 //updateMap();
-            }
+            }*/
         </script>
 
         <!--/*-->
@@ -1015,23 +1016,9 @@ socket.on('place_fail', function () {
 </script>-->
 
 <script>
-    function getCookie(elementKey) {
-    var name = elementKey + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var element = decodedCookie.split(';');
-    for(var i = 0; i <element.length; i++) {
-        var c = element[i];
-        /*while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }*/
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-    }
 
     function getElementFromCookie(elementKey) {
+        //Always returns a string
         var name = elementKey + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         console.log("getting element from " + decodedCookie);
@@ -1039,6 +1026,7 @@ socket.on('place_fail', function () {
         for(var i = 0; i <element.length; i++) {
             var c = element[i];
             while (c.charAt(0) == ' ') {
+                //ignore leading white spaces
                 c = c.substring(1);
             }
             if (c.indexOf(name) == 0) {
@@ -1069,12 +1057,12 @@ socket.on('place_fail', function () {
     var placeBtn = document.getElementById("place");
     placeBtn.addEventListener("click", function () {
         console.log("sending placement click");
-        var decodedCookie = decodeURIComponent(document.cookie);
+        /*var decodedCookie = decodeURIComponent(document.cookie);
         console.log("decoded: " + decodedCookie);
         var pName = document.cookie.playerName;
-        var paramKey = document.cookie.key;
-        pName = getElementFromCookie("playerName");
-        paramKey = getElementFromCookie("key");
+        var paramKey = document.cookie.key;*/
+        var pName = getElementFromCookie("playerName");
+        var paramKey = getElementFromCookie("key");
         console.log("cookie: "+document.cookie);
         console.log("selected: "+pName + " for key " +paramKey);
         var X = document.getElementById("X");
@@ -1121,6 +1109,55 @@ socket.on('place_fail', function () {
         D = D.options[D.selectedIndex].text;
         //var rKey = document.getElementById("rKey");
         socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
+    });
+
+    //click listener for fire button
+    var fireBtn = document.getElementById("fire");
+    fireBtn.addEventListener("click", function() {
+        //send signal to server with attack coordinates and player name and key
+        var X = document.getElementById("X");
+        X = parseInt(X.options[X.selecetdIndex].text);
+
+        var Y = document.getElementById("Y");
+        Y = Y.options[Y.selectedIndex].text;
+
+        switch(Y) {
+            case 'A':
+                Y = 0;
+                break;
+            case 'B':
+                Y = 1;
+                break;
+            case 'C':
+                Y = 2;
+                break;
+            case 'D':
+                Y = 3;
+                break;
+            case 'E':
+                Y = 4;
+                break;
+            case 'F':
+                Y = 5;
+                break;
+            case 'G':
+                Y = 6;
+                break;
+            case 'H':
+                Y = 7;
+                break;
+            case 'I':
+                Y = 8;
+                break;
+            case 'J':
+                Y = 9;
+                break;
+        }
+        var pName = getElementFromCookie(playerName);
+        var paramKey = getElementFromCookie(key);
+
+        //emit socket signal
+        socket.emit("fire", {playerName: pName, paramKey: paramKey, xLoc: X, yLoc: y});
     });
 </script>
 
