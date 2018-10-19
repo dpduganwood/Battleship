@@ -404,6 +404,7 @@ io.on('connection', function(socket) {
             placePlayer = games[paramKey].player2.playerName;
         }*/
         console.log("placing");
+        console.log(placementParams);
         var paramKey = placementParams.paramKey;
         console.log(paramKey);
         var result = games[paramKey].addShip(placementParams.playerName, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);

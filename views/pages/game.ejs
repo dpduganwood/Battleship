@@ -1015,6 +1015,40 @@ socket.on('place_fail', function () {
 </script>-->
 
 <script>
+    function getCookie(elementKey) {
+    var name = elementKey + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var element = decodedCookie.split(';');
+    for(var i = 0; i <element.length; i++) {
+        var c = element[i];
+        /*while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }*/
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+    }
+
+    function getElementFromCookie(elementKey) {
+        var name = elementKey + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        console.log("getting element from " + decodedCookie);
+        var element = decodedCookie.split(';');
+        for(var i = 0; i <element.length; i++) {
+            var c = element[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                console.log("found " + name + " of " + c);
+                return c.substring(name.length, c.length);
+            }
+        }
+        console.log("not found");
+        return "";
+    }
 
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
@@ -1036,12 +1070,52 @@ socket.on('place_fail', function () {
         console.log("decoded: " + decodedCookie);
         var pName = document.cookie.playerName;
         var paramKey = document.cookie.key;
+        pName = getElementFromCookie("playerName");
+        paramKey = getElementFromCookie("key");
         console.log("cookie: "+document.cookie);
-        console.log("selected: "+pName + paramKey);
+        console.log("selected: "+pName + " for key " +paramKey);
         var X = document.getElementById("X");
+        X = parseInt(X.options[X.selectedIndex].text)-1;
         var Y = document.getElementById("Y");
+        Y = Y.options[Y.selectedIndex].text;
+
+        switch(Y) {
+            case 'A':
+                Y = 0;
+                break;
+            case 'B':
+                Y = 1;
+                break;
+            case 'C':
+                Y = 2;
+                break;
+            case 'D':
+                Y = 3;
+                break;
+            case 'E':
+                Y = 4;
+                break;
+            case 'F':
+                Y = 5;
+                break;
+            case 'G':
+                Y = 6;
+                break;
+            case 'H':
+                Y = 7;
+                break;
+            case 'I':
+                Y = 8;
+                break;
+            case 'J':
+                Y = 9;
+                break;
+        }
+
         var L = document.getElementById("L");
+        L = parseInt(L.options[L.selectedIndex].text);
         var D = document.getElementById("D");
+        D = D.options[D.selectedIndex].text;
         //var rKey = document.getElementById("rKey");
         socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
     });
