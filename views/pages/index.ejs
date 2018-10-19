@@ -124,17 +124,17 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Enter Multiplayer Code</h5>
+        <h5 class="modal-title">Multiplayer Game</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <p>Generate a code to host a game</p>
+          <p style="font-size: 18px">Generate a code to host a game</p>
 
           <a class="btn btn-primary" role="button" href="/host">Host Game</a>
-          <br></br>
-          <p>Or enter a multiplayer code you have recieved</p>
+          <br><br><br>
+          <p style="font-size: 18px">Or enter a multiplayer code you have recieved</p>
 
         <form class="form-group" action="/join">
           <fieldset>
@@ -143,7 +143,7 @@
                 <input type="text" class="form-control" placeholder="Enter Room Key" id="key" name="key">
             </div>
           </fieldset>
-            <input type="submit" class="btn btn-primary">Enter Game!</input>
+            <input type="submit" class="btn btn-primary" value="Enter Game">
         </form>
 
 
@@ -163,13 +163,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Good Luck BoilerMaker</h5>
+        <h5 class="modal-title">Game Mode</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Please choose a level of difficulty!</p>
+        <p style="font-size: 18px">Choose a level of difficulty</p>
 
         <a class="btn btn-success" role="button" href="/join?key=single&eOrH=easy">Easy</a>
         <a class="btn btn-danger" role="button" href="/join?key=single&eOrH=hard">Hard</a>
@@ -193,8 +193,8 @@
         <hr class="my-4">
 
         <%if (playerName != ''){%>
-        <p>Select a game mode!</p>
-        <table>
+        <p>Select a game mode</p>
+        <table align="center">
             <tr>
         <td style="background-color: transparent">
             <p class="lead">
