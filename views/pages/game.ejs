@@ -1024,10 +1024,14 @@ socket.on('place_fail', function () {
             if(lengChoice.length == 0) {
                 //list is empty and all ships are placed
                 document.getElementById("place").innerText="Fire";
-                docuemtn.getElementById("place").value = "Fire";
+                document.getElementById("place").value = "Fire";
                 var remover = document.getElementById("L");
                 remover.parentNode.removeChild(remover);
                 remover = document.getElementById("D");
+                remover.parentNode.removeChild(remover);
+                remover = document.getElementById("lenLabel");
+                remover.parentNode.removeChild(remover);
+                remover = document.getElementById("dirLabel");
                 remover.parentNode.removeChild(remover);
             }
             //place ships
