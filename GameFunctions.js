@@ -170,13 +170,21 @@ class GameController {
 
         if(length == 2) {
             boardVal = 2;
-        } else if(length == 31) {
+        } else if(length == 3) {
             length = 3;
             boardVal = 4;
-        } else if(length == 32) {
+            for(var j = 0; j < 10; j++) {
+                for(var k = 0; k < 10; k++) {
+                    if(playerMap[k][j] == 4) {
+                        boardVal = 6;
+                        break;
+                    }
+                }
+            }
+        } /*else if(length == 32) {
             length = 3;
             boardVal = 6;
-        } else if(length == 4) {
+        }*/ else if(length == 4) {
             boardVal = 8;
         } else if(length == 5) {
             boardVal = 10;
@@ -265,7 +273,7 @@ class GameController {
                 }
                 break;
         }
-        //console.log(playerMap);
+        console.log(playerMap);
         player.setMap(playerMap);
         return(0);
     }
