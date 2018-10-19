@@ -18,7 +18,30 @@
 <body onbeforeunload="return exit()">
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    var socket = io('http://localhost:6009')
+    function getElementFromCookie(elementKey) {
+        //Always returns a string
+        var name = elementKey + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        console.log("getting element from " + decodedCookie);
+        var element = decodedCookie.split(';');
+        for(var i = 0; i <element.length; i++) {
+            var c = element[i];
+            while (c.charAt(0) == ' ') {
+                //ignore leading white spaces
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                console.log("found " + name + " of " + c);
+                return c.substring(name.length, c.length);
+            }
+        }
+        console.log("cookie element not found");
+        return "";
+    }
+    socket = io('http://localhost:6009');
+    var pName = getElementFromCookie("playerName");
+    var gKey = getElementFromCookie("key");
+    socket.emit('basics', {playerName: pName, game_key: gKey});
 </script>
 <header>
     <style>
@@ -134,7 +157,7 @@
 </header>
 
 <!--
-/*//var socket = io.connect("http://localhost:6009");
+/*//socket = io.connect("http://localhost:6009");
 var socket = io;
 
 socket.on('place_ok', function (placementParams) {
@@ -995,27 +1018,6 @@ socket.on('place_fail', function () {
 
 <script>
 
-    function getElementFromCookie(elementKey) {
-        //Always returns a string
-        var name = elementKey + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        console.log("getting element from " + decodedCookie);
-        var element = decodedCookie.split(';');
-        for(var i = 0; i <element.length; i++) {
-            var c = element[i];
-            while (c.charAt(0) == ' ') {
-                //ignore leading white spaces
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                console.log("found " + name + " of " + c);
-                return c.substring(name.length, c.length);
-            }
-        }
-        console.log("not found");
-        return "";
-    }
-
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
@@ -1058,10 +1060,6 @@ socket.on('place_fail', function () {
     var placeBtn = document.getElementById("place");
     placeBtn.addEventListener("click", function () {
         console.log("sending placement click");
-        /*var decodedCookie = decodeURIComponent(document.cookie);
-        console.log("decoded: " + decodedCookie);
-        var pName = document.cookie.playerName;
-        var paramKey = document.cookie.key;*/
         var pName = getElementFromCookie("playerName");
         var paramKey = getElementFromCookie("key");
         console.log("cookie: "+document.cookie);
@@ -1103,19 +1101,19 @@ socket.on('place_fail', function () {
                 Y = 9;
                 break;
         }
-        console.log("getting here");
         console.log(placeBtn);
         if(placeBtn.innerText == "Place"){
-            console.log("getting here also");
             var L = document.getElementById("L");
             L = parseInt(L.options[L.selectedIndex].text);
             var D = document.getElementById("D");
             D = D.options[D.selectedIndex].text;
             //var rKey = document.getElementById("rKey");
-            socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
+            //socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
+            socket.emit('place', {xLoc: X, yLoc: Y, leng: L, dir: D});
         } else if(placeBtn.innerText == "Fire") {
             //console.log(placeBtn);
-            socket.emit('fire', {playerName: pName, xLoc: X, yLoc: Y, paramKey: paramKey});
+            //socket.emit('fire', {playerName: pName, xLoc: X, yLoc: Y, paramKey: paramKey});
+            socket.emit('fire', {xLoc: X, yLoc: Y});
         }
     });
 </script>
