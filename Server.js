@@ -442,6 +442,18 @@ io.on('connection', function (socket) {
         socket.game_key = properties.game_key;
 
         console.log("socket properties " + socket.user_name + " " + socket.game_key);
+
+        if(games[socket.game_key].player1.playerName == socket.user_name) {
+            //is player 1
+            games[socket.game_key].p1SocketId = socket.id;
+            console.log("readout " + games[socket.game_key].p1SocketId);
+        } else {
+            //is player 2
+            games[socket.game_key].p2SocketId = socket.id;
+            console.log("readout " + games[socket.game_key].p1SocketId);
+            //io.sockets.socket(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
+            io.to(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
+        }
     });
 
     var gameOver = false;

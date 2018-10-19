@@ -266,10 +266,10 @@ socket.on('place_fail', function () {
 
 <table style="width:800px; float:top;">
     <tr>
-        <td align="center">
+        <td id="myName" align="center">
             <%= playerName %>'s Board
         </td>
-        <td align="center">
+        <td id="enemyName" align="center">
             <%= enemyName %>'s Board
         </td>
     </tr>
@@ -1017,6 +1017,12 @@ socket.on('place_fail', function () {
 <!--set up button listeners-->
 
 <script>
+
+    socket.on('p2Info', function(info) {
+        //do a thing
+        var enName = document.getElementById("enemyName");
+        enName.innerText = info.pName;
+    });
 
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
