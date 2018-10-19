@@ -674,7 +674,7 @@ socket.on('place_fail', function () {
                     <!--input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="Y" name="Y" required-->
                 </div>
                 <div style="float:left;">
-                    <label for="inputLarge">| Train Length |</label>
+                    <label id="lenLabel" for="inputLarge">| Train Length |</label>
                     <select id="L" name="L">
                         <%
                         for(var i = 0; i < shipsLeft.length; i++){ %>
@@ -684,7 +684,7 @@ socket.on('place_fail', function () {
                     <!--input class="form-control form-control-lg" type="text" placeholder=shipsLeft id="L" name="L" required-->
                 </div>
                 <div style="float:left;">
-                    <label for="inputLarge">| Direction |</label>
+                    <label id="dirLabel" for="inputLarge">| Direction |</label>
                     <select id="D" name="D">
                         <% var dir = ['U', 'D', 'L', 'R'];
                         for(var i = 0; i < 4; i++){ %>
@@ -1013,7 +1013,7 @@ socket.on('place_fail', function () {
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
-        var btnText = document.getElementById("place");
+        var btnText = document.getElementById("place").innerText;
 
         if(btnText == "Place") {
             console.log("placement success received");
@@ -1023,7 +1023,8 @@ socket.on('place_fail', function () {
             console.log(lengChoice.length);
             if(lengChoice.length == 0) {
                 //list is empty and all ships are placed
-                document.getElementById("place").innerHTML="Fire";
+                document.getElementById("place").innerText="Fire";
+                docuemtn.getElementById("place").value = "Fire";
                 var remover = document.getElementById("L");
                 remover.parentNode.removeChild(remover);
                 remover = document.getElementById("D");
@@ -1090,15 +1091,18 @@ socket.on('place_fail', function () {
                 Y = 9;
                 break;
         }
-
-        if(placeBtn.innerHTML == "Place"){
+        console.log("getting here");
+        console.log(placeBtn);
+        if(placeBtn.innerText == "Place"){
+            console.log("getting here also");
             var L = document.getElementById("L");
             L = parseInt(L.options[L.selectedIndex].text);
             var D = document.getElementById("D");
             D = D.options[D.selectedIndex].text;
             //var rKey = document.getElementById("rKey");
             socket.emit('place', {playerName: pName, xLoc: X, yLoc: Y, leng: L, dir: D, paramKey: paramKey});
-        } else if(placeBtn.innerHTML == "Fire") {
+        } else if(placeBtn.innerText == "Fire") {
+            //console.log(placeBtn);
             socket.emit('fire', {playerName: pName, xLoc: X, yLoc: Y, paramKey: paramKey});
         }
     });
