@@ -15,7 +15,7 @@
 
     <title>Boiler Tracks!</title>
 </head>
-<body>
+<body onbeforeunload="return exit()">
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io('http://localhost:6009')
@@ -984,6 +984,12 @@ socket.on('place_fail', function () {
 
           }
         </script> -->
+<!--warning before leaving page-->
+<script>
+    function exit() {
+        return "Leaving this game will count as a forfeit. Are you sure you want to leave?";
+    };
+</script>
 
 <!--set up button listeners-->
 
