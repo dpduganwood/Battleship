@@ -207,14 +207,15 @@ app.get('/host', function (req, res) {
 });
 
 var randomLobby = new Array(3).fill(-1);
-function addRandom(ins){
-    console.log("random lobby gen: "+ins);
+
+function addRandom(ins) {
+    console.log("random lobby gen: " + ins);
     console.log(randomLobby);
-    if (randomLobby[0] == -1){
+    if (randomLobby[0] == -1) {
         randomLobby[0] = ins;
         console.log("first random");
         return -1;
-    }else{
+    } else {
         var temp = randomLobby[0];
         randomLobby[0] = -1;
         console.log("joining random");
@@ -222,11 +223,11 @@ function addRandom(ins){
     }
 }
 
-app.get('/random', function (req, res){
+app.get('/random', function (req, res) {
     var tempKey = genKey();
     var ret = addRandom(tempKey)
-    console.log("ret: "+ret);
-    if(ret != -1){
+    console.log("ret: " + ret);
+    if (ret != -1) {
         exitGame(tempKey);
         var player = new GameFunction.Player(req.cookies.playerName, emptyMap, ret);
         games[ret].setPlayer2(player);
@@ -248,7 +249,7 @@ app.get('/random', function (req, res){
                 isHost: "no"
             });
         });
-    }else{
+    } else {
         res.cookie('key', tempKey, {maxAge: 9000000});
         console.log("Generated Random Lobby Key: " + tempKey);
         var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
@@ -434,9 +435,9 @@ console.log('6009 is the open port');
 var io = socket(serverListener);
 
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
 
-    socket.on('basics', function(properties) {
+    socket.on('basics', function (properties) {
         socket.user_name = properties.playerName;
         socket.game_key = properties.game_key;
 
@@ -478,7 +479,7 @@ io.on('connection', function(socket) {
         //console.log(paramKey);
         //var result = games[paramKey].addShip(placementParams.playerName, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
         var result = games[socket.game_key].addShip(socket.user_name, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
-        if(result == 0) {
+        if (result == 0) {
             //success
             console.log("place success");
             //io.clients[socket.id].send();
@@ -499,8 +500,8 @@ io.on('connection', function(socket) {
     socket.on('fire', function (fireParams) {
         //output needs to be sent to both clients
         //games[fireParams.paramKey].checkHit(fireParams.playerName, fireParams.xLoc, fireParams.yLoc, function(result){
-        games[socket.game_key].checkHit(socket.user_name, fireParams.xLoc, fireParams.yLoc, function(result) {
-            if(result == 0) {
+        games[socket.game_key].checkHit(socket.user_name, fireParams.xLoc, fireParams.yLoc, function (result) {
+            if (result == 0) {
                 //miss
                 //signal both players
             } else if (result == 2) {
@@ -513,8 +514,8 @@ io.on('connection', function(socket) {
         });
     });
 
-    socket.on('disconnect', function() {
-        if(gameOver) {
+    socket.on('disconnect', function () {
+        if (gameOver) {
             //do nothing
         } else {
             //increment player loss count
