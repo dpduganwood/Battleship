@@ -1053,8 +1053,7 @@ socket.on('place_fail', function () {
             var coord = xS+yS;
             console.log("Length: " + placementParams.leng);
             console.log("Coordinates: " + coord);
-            if(coord=="00")
-                coord="01"
+
 
 
             if(placementParams.leng == 2) {
@@ -1066,15 +1065,27 @@ socket.on('place_fail', function () {
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship1/part2r.png");
                 }
-                if (placementParams.dir == "L") {
-                    y--;
-                    yS=y.toString();
+                if (placementParams.dir == "U") {
+
+                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part2r.png");
+                    x = x -1;
+                    xS = x.toString();
                     coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part1r.png");
+                }
+                if (placementParams.dir == "R") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship1/part2.png");
                     y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship1/part1.png");
+                }
+                if (placementParams.dir == "L") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part1.png");
+                    y--;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part2.png");
                 }
             }
             if(placementParams.leng == 3 && firstThree == 0) {
@@ -1090,48 +1101,91 @@ socket.on('place_fail', function () {
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part1r.png");
                 }
-                if (placementParams.dir == "L") {
-                    y--;
-                    yS=y.toString();
+                if (placementParams.dir == "U") {
+
+                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part1r.png");
+                    x = x-1;
+                    xS = x.toString();
                     coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part1.png");
-                    y = y+1;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part2r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part3r.png");
+                }
+                if (placementParams.dir == "L") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part3.png");
+                    y = y-1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part2.png");
-                    y = y+1;
+                    y = y-1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part1.png");
+                }
+                if (placementParams.dir == "R") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part1.png");
+                    y = y++;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship2/part2.png");
+                    y = y++;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part3.png");
                 }
+
+
+
                 firstThree = 1;
             }
             if(placementParams.leng == 3 && firstThree == 1) {
                 console.log("At length check: " + placementParams.leng);
                 if (placementParams.dir == "D") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part3r.png");
-                    x = x + 1;
+                    x = x +1;
                     xS = x.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part2r.png");
-                    x = x + 1;
+                    x = x +1;
                     xS = x.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part1r.png");
                 }
+                if (placementParams.dir == "U") {
+
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part1r.png");
+                    x = x-1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part2r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part3r.png");
+                }
                 if (placementParams.dir == "L") {
-                    y--;
-                    yS = y.toString();
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part3.png");
+                    y = y-1;
+                    yS=y.toString();
                     coord = xS + yS;
-                    document.getElementById(parseInt(coord)).setAttribute("background", "../../images/ship3/part1.png");
-                    y = y + 1;
-                    yS = y.toString();
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part2.png");
+                    y = y-1;
+                    yS=y.toString();
                     coord = xS + yS;
-                    document.getElementById(parseInt(coord)).setAttribute("background", "../../images/ship3/part2.png");
-                    y = y + 1;
-                    yS = y.toString();
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part1.png");
+                }
+                if (placementParams.dir == "R") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part1.png");
+                    y = y++;
+                    yS=y.toString();
                     coord = xS + yS;
-                    document.getElementById(parseInt(coord)).setAttribute("background", "../../images/ship3/part3.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part2.png");
+                    y = y++;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship3/part3.png");
                 }
                 firstThree = 2;
             }
@@ -1152,15 +1206,38 @@ socket.on('place_fail', function () {
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship4/part1r.png");
                 }
-                if (placementParams.dir == "L") {
-                    y--;
-                    yS=y.toString();
+                if (placementParams.dir == "U") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part1r.png");
+                    x = x -1;
+                    xS = x.toString();
                     coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part2r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part3r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4r.png");
+                }
+                if (placementParams.dir == "L") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
-                    y = y+1;
+                    y = y-1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship4/part2.png");
+                    y = y-1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part3.png");
+                    y = y-1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4.png");
+                }
+                if (placementParams.dir == "R") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4.png");
                     y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
@@ -1168,7 +1245,11 @@ socket.on('place_fail', function () {
                     y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part2.png");
+                    y = y+1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
                 }
 
             }
@@ -1193,10 +1274,45 @@ socket.on('place_fail', function () {
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship5/part1r.png");
                 }
+                if (placementParams.dir == "U") {
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part1r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part2r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part3r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part4r.png");
+                    x = x -1;
+                    xS = x.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part5r.png");
+                }
                 if (placementParams.dir == "L") {
-                    y--;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part5.png");
+                    y = y-1;
                     yS=y.toString();
                     coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part4.png");
+                    y = y-1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part3.png");
+                    y = y-1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part2.png");
+                    y = y-1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part1.png");
+                }
+                if (placementParams.dir == "R") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship5/part1.png");
                     y = y+1;
                     yS=y.toString();
@@ -1215,8 +1331,6 @@ socket.on('place_fail', function () {
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship5/part5.png");
                 }
-
-
             }
 
             if(lengChoice.length == 0) {
