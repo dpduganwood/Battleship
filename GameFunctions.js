@@ -176,6 +176,7 @@ class GameController {
         var player;
         //console.log("given name: "+playerName+", player1.playerName: "+this.player1.playerName);
         if(playerName === this.player1.playerName) {
+            console.log("adding player 1");
             player = this.player1;
             //console.log("p1");
         } else {
@@ -292,6 +293,8 @@ class GameController {
                 }
                 break;
         }
+        console.log(this.player1.getMap());
+        console.log(this.player2.getMap());
         console.log(playerMap);
         player.setMap(playerMap);
         return(0);

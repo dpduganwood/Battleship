@@ -146,7 +146,18 @@ app.get('/join', function (req, res) {
         res.cookie('key', tempKey, {maxAge: 9000000});
         console.log("Generated S Key: " + tempKey);
 
-        var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+        var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+        //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+        var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
         var ai;
         var genMap = GameFunction.genRandomMap();
         if (req.query.eOrH == "easy") {
@@ -159,7 +170,18 @@ app.get('/join', function (req, res) {
     } else {
         //game = new GameFunction.GameController(req.query.key);
         tempKey = req.query.key;
-        var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+        var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+        //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+        var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
         games[tempKey].setPlayer2(player);
         res.cookie('key', req.query.key, {maxAge: 9000000});
     }
@@ -205,7 +227,19 @@ app.get('/host', function (req, res) {
     var tempKey = genKey();
     res.cookie('key', tempKey, {maxAge: 9000000});
     console.log("Generated M Key: " + tempKey);
-    var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+
+    var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+    //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+    var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
     games[tempKey] = new GameFunction.GameController(player, player, tempKey);
     console.log(tempKey);
     Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
@@ -246,7 +280,19 @@ app.get('/random', function (req, res) {
     console.log("ret: " + ret);
     if (ret != -1) {
         exitGame(tempKey);
-        var player = new GameFunction.Player(req.cookies.playerName, emptyMap, ret);
+
+        var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+        //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, ret);
+        var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, ret);
         games[ret].setPlayer2(player);
         res.cookie('key', ret, {maxAge: 9000000});
         var yourMap = games[ret].player2.getMap();
@@ -269,7 +315,19 @@ app.get('/random', function (req, res) {
     } else {
         res.cookie('key', tempKey, {maxAge: 9000000});
         console.log("Generated Random Lobby Key: " + tempKey);
-        var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+
+        var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+        //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+        var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
         games[tempKey] = new GameFunction.GameController(player, player, tempKey);
         console.log(tempKey);
         Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
@@ -497,7 +555,7 @@ io.on('connection', function (socket) {
 
     socket.on('place', function (placementParams) {
         console.log("placing");
-        
+        console.log(socket.user_name);
         var result = games[socket.game_key].addShip(socket.user_name, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
         if (result == 0) {
             //success
