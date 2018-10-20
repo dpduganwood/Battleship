@@ -43,7 +43,7 @@ class Player {
     checkHit(x,y/*, cb*/) {
         if(this.map[y][x] % 2 == 0) {
             this.map[y][x] += 1;
-            if(this.map[y][x] == 0) {
+            if((this.map[y][x]-1) == 0) {
                 //cb(0); //target id zero. MISS
                 return 0;
             } else {

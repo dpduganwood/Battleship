@@ -537,7 +537,7 @@ socket.on('place_fail', function () {
                             <td id="135" style="background-color: transparent"></td>
                             <td id="136" style="background-color: transparent"></td>
                             <td id="137" style="background-color: transparent"></td>
-                            <td id="38" style="background-color: transparent"></td>
+                            <td id="138" style="background-color: transparent"></td>
                             <td id="139" style="background-color: transparent"></td>
                         </tr>
                         <!-- battleship row 4 -->
@@ -551,15 +551,15 @@ socket.on('place_fail', function () {
                             <td id="145" style="background-color: transparent"></td>
                             <td id="146" style="background-color: transparent"></td>
                             <td id="147" style="background-color: transparent"></td>
-                            <td id="48" style="background-color: transparent"></td>
+                            <td id="148" style="background-color: transparent"></td>
                             <td id="149" style="background-color: transparent"></td>
                         </tr>
                         <!-- battleship row 5 -->
                         <tr>
                             <td id="15-1" style="background-color: transparent">
                             <td id="150" style="background-color: transparent"></td>
-                            <td id="51" style="background-color: transparent"></td>
-                            <td id="52" style="background-color: transparent"></td>
+                            <td id="151" style="background-color: transparent"></td>
+                            <td id="152" style="background-color: transparent"></td>
                             <td id="153" style="background-color: transparent"></td>
                             <td id="154" style="background-color: transparent"></td>
                             <td id="155" style="background-color: transparent"></td>
@@ -571,9 +571,9 @@ socket.on('place_fail', function () {
                         <!-- battleship row 6 -->
                         <tr>
                             <td id="16-1" style="background-color: transparent">
-                            <td id="60" style="background-color: transparent"></td>
-                            <td id="61" style="background-color: transparent"></td>
-                            <td id="62" style="background-color: transparent"></td>
+                            <td id="160" style="background-color: transparent"></td>
+                            <td id="161" style="background-color: transparent"></td>
+                            <td id="162" style="background-color: transparent"></td>
                             <td id="163" style="background-color: transparent"></td>
                             <td id="164" style="background-color: transparent"></td>
                             <td id="165" style="background-color: transparent"></td>
@@ -585,8 +585,8 @@ socket.on('place_fail', function () {
                         <!-- battleship row 7 -->
                         <tr>
                             <td id="17-1" style="background-color: transparent">
-                            <td id="70" style="background-color: transparent"></td>
-                            <td id="71" style="background-color: transparent"></td>
+                            <td id="170" style="background-color: transparent"></td>
+                            <td id="171" style="background-color: transparent"></td>
                             <td id="172" style="background-color: transparent"></td>
                             <td id="173" style="background-color: transparent"></td>
                             <td id="174" style="background-color: transparent"></td>
@@ -1033,15 +1033,51 @@ socket.on('place_fail', function () {
     });
 
     var firstThree = 0;
+    // xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result 0: miss 2: hit
 
     socket.on('enemyFire', function(fireResults) {
         //update own board based on firing results
         console.log("received enemyFire");
+
+        var x = fireResults.yLoc;
+        var y = fireResults.xLoc;
+
+        var xS = x.toString();
+        var yS = y.toString();
+        var coord = xS+yS;
+
+        console.log("Enemy Fire Coordinates: " + coord);
+        console.log("Enemy Fire Results: " + fireResults.result);
+        if(fireResults.result == 0)
+        document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
+
+        if(fireResults.result == 2)
+            document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+
+
+
     });
 
     socket.on('myFire', function(fireResults) {
         //update enemyBoard based on firing results
         console.log("respond to own shot");
+
+        var x = fireResults.yLoc;
+        var y = fireResults.xLoc;
+
+        var xS = x.toString();
+        var yS = y.toString();
+        var coord = "1"+xS+yS;
+
+        console.log("My Fire Coordinates: " + coord);
+        console.log("My Fire Results: " + fireResults.result);
+
+        if(fireResults.result == 0)
+            document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
+
+        if(fireResults.result == 2)
+            document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+
     });
 
     socket.on('place_ok', function (placementParams) {
@@ -1371,6 +1407,7 @@ socket.on('place_fail', function () {
             }*/
             //place ships
         } else if(btnTxt == "Fire") {
+
             //do a differnet thing
         }
 
