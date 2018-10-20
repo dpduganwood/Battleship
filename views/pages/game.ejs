@@ -1048,6 +1048,7 @@ socket.on('place_fail', function () {
 
             var x = placementParams.yLoc;
             var y = placementParams.xLoc;
+
             var xS = x.toString();
             var yS = y.toString();
             var coord = xS+yS;
@@ -1087,8 +1088,7 @@ socket.on('place_fail', function () {
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship1/part2.png");
                 }
-            }
-            if(placementParams.leng == 3 && firstThree == 0) {
+            }else if(placementParams.leng == 3 && firstThree == 0) {
                 console.log("At length check: " + placementParams.leng);
                 if (placementParams.dir == "D") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part3r.png");
@@ -1139,8 +1139,7 @@ socket.on('place_fail', function () {
 
 
                 firstThree = 1;
-            }
-            if(placementParams.leng == 3 && firstThree == 1) {
+            }else if(placementParams.leng == 3 && firstThree == 1) {
                 console.log("At length check: " + placementParams.leng);
                 if (placementParams.dir == "D") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part3r.png");
@@ -1188,8 +1187,7 @@ socket.on('place_fail', function () {
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part3.png");
                 }
                 firstThree = 2;
-            }
-            if(placementParams.leng == 4) {
+            }else if(placementParams.leng == 4) {
                 console.log("At length check: " + placementParams.leng);
                 if (placementParams.dir == "D") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship4/part4r.png");
@@ -1252,8 +1250,7 @@ socket.on('place_fail', function () {
                     document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
                 }
 
-            }
-            if(placementParams.leng == 5) {
+            }else if(placementParams.leng == 5) {
                 console.log("At length check: " + placementParams.leng);
                 if (placementParams.dir == "D") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship5/part5r.png");
