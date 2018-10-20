@@ -1038,6 +1038,8 @@ socket.on('place_fail', function () {
     socket.on('enemyFire', function(fireResults) {
         //update own board based on firing results
         console.log("received enemyFire");
+        document.getElementById("errorID").innerText="Fire on the enemy!";
+        document.getElementById("place").disabled = false;
 
         var x = fireResults.yLoc;
         var y = fireResults.xLoc;
@@ -1054,13 +1056,13 @@ socket.on('place_fail', function () {
         if(fireResults.result == 2)
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
 
-
-
     });
 
     socket.on('myFire', function(fireResults) {
         //update enemyBoard based on firing results
         console.log("respond to own shot");
+        document.getElementById("errorID").innerText="Waiting for Enemy to finish firing.";
+        document.getElementById("place").disabled = true;
 
         var x = fireResults.yLoc;
         var y = fireResults.xLoc;
@@ -1077,6 +1079,11 @@ socket.on('place_fail', function () {
 
         if(fireResults.result == 2)
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+    });
+
+    socket.on('placeDone', function(){
+        document.getElementById("errorID").innerText="Fire on the enemy!";
+        document.getElementById("place").disabled = false;
 
     });
 
@@ -1094,9 +1101,10 @@ socket.on('place_fail', function () {
 
             if(lengChoice.length == 0) {
                 //list is empty and all ships are placed
-                document.getElementById("errorID").innerText="Fire on the enemy!";
                 document.getElementById("place").innerText="Fire";
                 document.getElementById("place").value = "Fire";
+                document.getElementById("place").disabled = true;
+                document.getElementById("errorID").innerText="Waiting for Enemy to finish placing."
                 var remover = document.getElementById("L");
                 remover.parentNode.removeChild(remover);
                 remover = document.getElementById("D");
@@ -1115,8 +1123,6 @@ socket.on('place_fail', function () {
             var coord = xS+yS;
             console.log("Length: " + placementParams.leng);
             console.log("Coordinates: " + coord);
-
-
 
             if(placementParams.leng == 2) {
                 console.log("At length check: " + placementParams.leng);
@@ -1391,20 +1397,10 @@ socket.on('place_fail', function () {
                 }
             }
 
-            /*if(lengChoice.length == 0) {
-                //list is empty and all ships are placed
-                document.getElementById("errorID").innerText="Fire on the enemy!";
-                document.getElementById("place").innerText="Fire";
-                document.getElementById("place").value = "Fire";
-                var remover = document.getElementById("L");
-                remover.parentNode.removeChild(remover);
-                remover = document.getElementById("D");
-                remover.parentNode.removeChild(remover);
-                remover = document.getElementById("lenLabel");
-                remover.parentNode.removeChild(remover);
-                remover = document.getElementById("dirLabel");
-                remover.parentNode.removeChild(remover);
-            }*/
+            if(lengChoice.length == 0) {
+                console.log("placeDone");
+                socket.emit('placeDone');
+            }
             //place ships
         } else if(btnTxt == "Fire") {
 
