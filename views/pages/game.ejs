@@ -1034,6 +1034,16 @@ socket.on('place_fail', function () {
 
     var firstThree = 0;
 
+    socket.on('enemyFire', function(fireResults) {
+        //update own board based on firing results
+        console.log("received enemyFire");
+    });
+
+    socket.on('myFire', function(fireResults) {
+        //update enemyBoard based on firing results
+        console.log("respond to own shot");
+    });
+
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
@@ -1045,6 +1055,21 @@ socket.on('place_fail', function () {
             var lengChoice = document.getElementById("L");
             lengChoice.remove(lengChoice.selectedIndex);
             console.log(lengChoice.length);
+
+            if(lengChoice.length == 0) {
+                //list is empty and all ships are placed
+                document.getElementById("errorID").innerText="Fire on the enemy!";
+                document.getElementById("place").innerText="Fire";
+                document.getElementById("place").value = "Fire";
+                var remover = document.getElementById("L");
+                remover.parentNode.removeChild(remover);
+                remover = document.getElementById("D");
+                remover.parentNode.removeChild(remover);
+                remover = document.getElementById("lenLabel");
+                remover.parentNode.removeChild(remover);
+                remover = document.getElementById("dirLabel");
+                remover.parentNode.removeChild(remover);
+            }
 
             var x = placementParams.yLoc;
             var y = placementParams.xLoc;
@@ -1219,7 +1244,7 @@ socket.on('place_fail', function () {
 
             }
 
-            if(lengChoice.length == 0) {
+            /*if(lengChoice.length == 0) {
                 //list is empty and all ships are placed
                 document.getElementById("errorID").innerText="Fire on the enemy!";
                 document.getElementById("place").innerText="Fire";
@@ -1232,7 +1257,7 @@ socket.on('place_fail', function () {
                 remover.parentNode.removeChild(remover);
                 remover = document.getElementById("dirLabel");
                 remover.parentNode.removeChild(remover);
-            }
+            }*/
             //place ships
         } else if(btnTxt == "Fire") {
             //do a differnet thing

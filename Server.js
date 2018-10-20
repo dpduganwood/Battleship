@@ -450,6 +450,7 @@ console.log('6009 is the open port');
 
 //THIS MAY NEED TO BE MOVED UP OR DOWN
 var io = socket(serverListener);
+exports.ServerIO = io;
 
 
 io.on('connection', function (socket) {
@@ -495,18 +496,8 @@ io.on('connection', function (socket) {
     });*/
 
     socket.on('place', function (placementParams) {
-        /*var placePlayer;
-        var paramKey = placementParams.key;
-        if(games[paramKey].playerName == placementParams.playerName) {
-            placePlayer = games[paramKey].player1.playerName;
-        } else {
-            placePlayer = games[paramKey].player2.playerName;
-        }*/
         console.log("placing");
-        //console.log(placementParams);
-        //var paramKey = placementParams.paramKey;
-        //console.log(paramKey);
-        //var result = games[paramKey].addShip(placementParams.playerName, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
+        
         var result = games[socket.game_key].addShip(socket.user_name, placementParams.xLoc, placementParams.yLoc, placementParams.leng, placementParams.dir);
         if (result == 0) {
             //success
@@ -530,15 +521,18 @@ io.on('connection', function (socket) {
         //output needs to be sent to both clients
         //games[fireParams.paramKey].checkHit(fireParams.playerName, fireParams.xLoc, fireParams.yLoc, function(result){
         games[socket.game_key].checkHit(socket.user_name, fireParams.xLoc, fireParams.yLoc, function (result) {
-            if (result == 0) {
-                //miss
-                //signal both players
-            } else if (result == 2) {
-                //hit
-                //signal both players
+            if (result == 0 || result == 2) {
+                //valid target. miss / hit
+                if(games[socket.game_key.player2.type != 0]) {
+                    //AI game
+                    socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                } else {
+                    //multiplayer game
+                }
             } else if (result == 1) {
                 //invalid target, try again
                 //signal only attacking player
+                socket.emit("invalidTarget");
             }
         });
     });

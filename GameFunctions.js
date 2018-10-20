@@ -1,4 +1,5 @@
 var Connection = require(__dirname + "/Connection.js");
+var Server = require(__dirname + "/Server.js");
 //var Server = require(__dirname + "Server.js");
 var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -147,6 +148,13 @@ class GameController {
                     var loc = checkPlayer.easyAISelectLocation(attackingPlayer.getMap());
                     this.checkHit(checkPlayer.displayName, loc[0], loc[1], function(result) {
                         //do nothing for now
+                        if(result == 0 || result == 2) {
+                            //valid hit or miss
+                            console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
+                            Server.io.to(this.p1SocketId).emit('enemyFire', {xLoc: loc[0], yLoc: loc[1], result: result});
+                        } else {
+                            console.log("AI serious problem");
+                        }
                     });
                 } else {
                     //hard ai
@@ -157,6 +165,7 @@ class GameController {
 
         console.log(this.player1.getMap());
         console.log(this.player2.getMap());
+        //return result
     }
     setPlayer2(player2){
         this.player2 = player2;
