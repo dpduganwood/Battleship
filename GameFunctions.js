@@ -151,7 +151,9 @@ class GameController {
                         if(result == 0 || result == 2) {
                             //valid hit or miss
                             console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
-                            Server.io.to(this.p1SocketId).emit('enemyFire', {xLoc: loc[0], yLoc: loc[1], result: result});
+                            console.log(checkPlayer.gamekey);
+                            var id = Server.games[checkPlayer.gamekey].p1SocketId;
+                            Server.ServerIO.to(id).emit('enemyFire', {xLoc: loc[0], yLoc: loc[1], result: result});
                         } else {
                             console.log("AI serious problem");
                         }

@@ -523,7 +523,7 @@ io.on('connection', function (socket) {
         games[socket.game_key].checkHit(socket.user_name, fireParams.xLoc, fireParams.yLoc, function (result) {
             if (result == 0 || result == 2) {
                 //valid target. miss / hit
-                if(games[socket.game_key.player2.type != 0]) {
+                if(games[socket.game_key].player2.type != 0) {
                     //AI game
                     socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
                 } else {
