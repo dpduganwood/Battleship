@@ -574,6 +574,32 @@ io.on('connection', function (socket) {
         }
     });
 
+    socket.on('placeDone', function(){
+        if(games[socket.game_key].player1.playerName == socket.user_name){
+            games[socket.game_key].player1Counter = 1;
+        }else{
+            games[socket.game_key].player2Counter = 1;
+        }
+
+        if(games[socket.game_key].player1Counter + games[socket.game_key].player2Counter == 2){
+            console.log("Placing Complete.");
+            if(games[socket.game_key].player2.type != 0) {
+                //AI game
+                socket.emit("placeDone");
+            } else {
+                //multiplayer game
+
+                if(games[socket.game_key].player1.playerName == socket.user_name) {
+                    //is player 1
+                    socket.emit("placeDone");
+                } else {
+                    //is player 2
+                    var id = games[socket.game_key].p1SocketId;
+                    io.to(id).emit('placeDone');
+                }
+            }
+        }
+    });
     //fire button clicked
     socket.on('fire', function (fireParams) {
         //output needs to be sent to both clients
