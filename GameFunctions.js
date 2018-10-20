@@ -147,8 +147,8 @@ class GameController {
         }
 
         var foundEven = false;
-        for(var j = 0; j < 9; j++) {
-            for(var k = 0; k < 9; k++) {
+        for(var j = 0; j < 10; j++) {
+            for(var k = 0; k < 10; k++) {
                 if(checkPlayer.getMap()[k][j]%2 == 0 && checkPlayer.getMap()[k][j] != 0) {
                     foundEven = true;
                     break;
@@ -184,8 +184,8 @@ class GameController {
                             //chekc if game win
                             var foundAIEven = false;
                             var AIAttackingPlayer = Server.games[checkPlayer.gamekey].player1;
-                            for(var j = 0; j < 9; j++) {
-                                for(var k = 0; k < 9; k++) {
+                            for(var j = 0; j < 10; j++) {
+                                for(var k = 0; k < 10; k++) {
                                     if(AIAttackingPlayer.getMap()[k][j]%2 == 0 && AIAttackingPlayer.getMap()[k][j] != 0) {
                                         foundAIEven = true;
                                         break;
@@ -696,3 +696,45 @@ function genRandomMap() {
     }
     return(genMap);
 }
+
+function testMapGen() {
+    var overallCount = 0;
+    var worked = false;
+    for(var i = 0; i < 1000; i++) {
+        var count = [0,0,0,0,0,0]
+        var testmap = genRandomMap();
+        for(var j = 0; j < 10; j++) {
+            for(var k = 0; k < 10; k++) {
+                if(testmap[k][j] != 0) {
+                    count[testmap[k][j]/2]++;
+                }
+            }
+        }
+        var finalCount = 0;
+        if(count[1] == 2) {
+            finalCount ++;
+        }
+        if(count[2] == 3) {
+            finalCount ++;
+        }
+        if(count[3] == 3) {
+            finalCount ++;
+        }
+        if(count[4] == 4) {
+            finalCount ++;
+        }
+        if(count[5] == 5) {
+            finalCount ++;
+        }
+        console.log(finalCount);
+        if(finalCount == 5) {
+            overallCount++;
+        }
+    }
+    if(overallCount == 1000) {
+        worked = true;
+    }
+    console.log(worked);
+}
+
+//testMapGen();
