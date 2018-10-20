@@ -19,3 +19,6 @@ _Sprint 2_
 
 Design Inspection, Code Inspection, and Unit Testing
 https://docs.google.com/document/d/1abFJubwE21DKXb2R3MCvkCNSUldjkNoWidY7Q2SwP1Y/edit?usp=sharing
+
+Incremental and Regression Testing
+https://docs.google.com/document/d/1OzJkChk7z3XVACs0-0jgAcjV5eqdVaUt6MoJViMo9Gg/edit?usp=sharing
