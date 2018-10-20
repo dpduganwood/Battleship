@@ -14,22 +14,28 @@ var emptyMap = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 class Player {
     //player object containing the player name, map, hit and miss count
-    constructor(playerName, map, gameKey) {
+    constructor(playerName, map, gameKey, cb) {
         this.playerName = playerName;
         this.map = map;
         this.gameKey = gameKey;
         this.type = 0;
+        this.hits = 0;
+        this.misses = 0;
         exports.map = map;
 
         //get hits and misses from the database
-        Connection.con.query("SELECT hits, misses FROM users WHERE displayName = '" + playerName + "'", function(err, result) {
+        /*Connection.con.query("SELECT hits, misses FROM users WHERE displayName = '" + playerName + "'", function(err, result) {
             if(err) {
                 throw err;
             } else {
-                this.hits = result[0].hits;
-                this.misses = result[0].misses;
+                console.log(result);
+                var z = JSON.parse(JSON.stringify(result[0]));
+                this.hits = z.hits;
+                this.misses = z.misses;
+                console.log(this.hits + " " + this.misses);
+                cb(z);
             }
-        });
+        });*/
     }
 
     getMap() {
@@ -133,6 +139,9 @@ class GameController {
             attackingPlayer.hits += 1;
             //advance turn
         }
+        console.log("player hits: " + attackingPlayer.hits);
+        console.log("PLayer misses: " + attackingPlayer.misses);
+        console.log(attackingPlayer);
         if(result != 1) {
             if(p == 1) {
                 this.player1Counter++;

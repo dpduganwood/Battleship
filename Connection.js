@@ -58,6 +58,32 @@ function procUser(profile, cb) {
 
 //module.exports = con;
 
+exports.setPlayerHits = setPlayerHits;
+function setPlayerHits(playerName, setHit) {
+    con.query("UPDATE users SET hits = " + setHit + " WHERE displayName ='" + playerName + "'", function(err, result) {
+        if(err) {
+            console.log(playerName);
+            console.log(err);
+            //cb(1);
+        } else {
+            //cb(0);
+        }
+    });
+}
+
+exports.setPlayerMisses = setPlayerMisses;
+function setPlayerMisses(playerName, setMiss) {
+    con.query("UPDATE users SET misses = " + setMiss + " WHERE displayName ='" + playerName + "'", function(err, result) {
+        if(err) {
+            console.log(playerName);
+            console.log(err);
+            //cb(1);
+        } else {
+            //cb(0);
+        }
+    });
+}
+
 exports.addPlayerHit = addPlayerHit;
 function addPlayerHit(playerName, cb){
     con.query("UPDATE users SET hits = hits + 1 WHERE displayName = '" + playerName + "'", function(err, result){
@@ -84,7 +110,7 @@ function addPlayerMiss(playerName, cb) {
 
 exports.addPlayerHitsBySum = addPlayerHitsBySum;
 function addPlayerHitsBySum(playerName, sum, cb) {
-    con.query("UPDATE users SET hits = hits + " + sum + "WHERE displayName = '" + playerName + "'", function(err, result){
+    con.query("UPDATE users SET hits = hits + " + sum + " WHERE displayName = '" + playerName + "'", function(err, result){
         if(err) {
             cb(1);
         } else {
@@ -95,7 +121,7 @@ function addPlayerHitsBySum(playerName, sum, cb) {
 
 exports.addPlayerMissesBySum = addPlayerMissesBySum;
 function addPlayerMissesBySum(playerName, sum, cb) {
-    con.query("UPDATE users SET misses = misses + " + sum + "WHERE displayName = '" + playerName + "'", function(err, result){
+    con.query("UPDATE users SET misses = misses + " + sum + " WHERE displayName = '" + playerName + "'", function(err, result){
         if(err) {
             cb(1);
         } else {

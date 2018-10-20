@@ -513,7 +513,10 @@ exports.ServerIO = io;
 
 io.on('connection', function (socket) {
 
+    socket.gameOver = false;
+
     socket.on('basics', function (properties) {
+        //console.log("check game over: " + socket.gameOver);
         socket.user_name = properties.playerName;
         socket.game_key = properties.game_key;
 
@@ -531,8 +534,6 @@ io.on('connection', function (socket) {
             io.to(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
         }
     });
-
-    var gameOver = false;
     //do a thing
     console.log("socket connection established " + socket.id);
 
@@ -552,6 +553,92 @@ io.on('connection', function (socket) {
         games[joinInfo.key].p2SocketId = socket.id;
         console.log(socket.id + " joining " + joinInfo.key + " to " + games[joinInfo.key].p2SocketId);
     });*/
+
+    socket.on('playerWin', function(){
+        socket.gameOver = true;
+        var checkType = games[socket.game_key].player2.type;
+        if(checkType != 0) {
+            //AI game
+            Connection.addPlayerSPWin(socket.user_name, function(result) {
+                if(result == 1) {
+                    //error
+                } else {
+                    //success
+                }
+            });
+        } else {
+            Connection.addPlayerMPWin(socket.user_name, function(result) {
+                if(result == 1) {
+                    //error
+                } else {
+                    //success
+                }
+            });
+        }
+        //add player hits and misses to db
+        var hits;
+        var misses;
+        if(games[socket.game_key].player1.playerName == socket.user_name) {
+            //is player 1
+            hits = games[socket.game_key].player1.hits;
+            misses = games[socket.game_key].player1.misses;
+        } else {
+            //is player 2
+            hits = games[socket.game_key].player2.hits;
+            misses = games[socket.game_key].player2.misses;
+        }
+        /*Connection.setPlayerHits(socket.user_name, hits);
+            Connection.setPlayerMisses(socket.user_name, misses);*/
+            Connection.addPlayerHitsBySum(socket.user_name, hits, function(result) {
+                //do nothing
+            });
+            Connection.addPlayerMissesBySum(socket.user_name, misses, function(result) {
+                //do nothing
+            });
+    });
+
+    socket.on('playerLoss', function() {
+        socket.gameOver = true;
+        var checkType = games[socket.game_key].player2.type;
+        if(checkType != 0) {
+            //AI game
+            Connection.addPlayerSPLoss(socket.user_name, function(result) {
+                if(result == 1) {
+                    //error
+                } else {
+                    //success
+                }
+            });
+        } else {
+            Connection.addPlayerMPLoss(socket.user_name, function(result) {
+                if(result == 1) {
+                    //error
+                } else {
+                    //success
+                }
+            });
+        }
+        //add player hits and misses to db
+        var hits;
+        var misses;
+        if(games[socket.game_key].player1.playerName == socket.user_name) {
+            //is player 1
+            hits = games[socket.game_key].player1.hits;
+            misses = games[socket.game_key].player1.misses;
+        } else {
+            //is player 2
+            hits = games[socket.game_key].player2.hits;
+            misses = games[socket.game_key].player2.misses;
+        }
+        /*Connection.setPlayerHits(socket.user_name, hits);
+            Connection.setPlayerMisses(socket.user_name, misses);*/
+            Connection.addPlayerHitsBySum(socket.user_name, hits, function(result) {
+                //do nothing
+            });
+            Connection.addPlayerMissesBySum(socket.user_name, misses, function(result) {
+                //do nothing
+            });
+    });
 
     socket.on('place', function (placementParams) {
         console.log("placing");
@@ -633,7 +720,9 @@ io.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function () {
-        if (gameOver) {
+        var sockName = socket.user_name;
+        var sockKey = socket.game_key;
+        if (socket.gameOver) {
             //do nothing
             console.log("normal exit");
         } else {
@@ -659,7 +748,32 @@ io.on('connection', function (socket) {
                     }
                 });
             }
+
+            var hits;
+            var misses;
+            
+            if(games[socket.game_key].player1.playerName == socket.user_name) {
+                //is player 1
+                hits = games[socket.game_key].player1.hits;
+                misses = games[socket.game_key].player1.misses;
+            } else {
+                //is player 2
+                hits = games[socket.game_key].player2.hits;
+                misses = games[socket.game_key].player2.misses;
+            }
+            console.log(socket.user_name + " " + socket.game_key + " " + socket.gameOver + " " + hits + " " + misses);
+            /*Connection.setPlayerHits(socket.user_name, hits);
+            Connection.setPlayerMisses(socket.user_name, misses);*/
+            console.log("at hit and miss adding point");
+            Connection.addPlayerHitsBySum(socket.user_name, hits, function(result) {
+                //do nothing
+            });
+            Connection.addPlayerMissesBySum(socket.user_name, misses, function(result) {
+                //do nothing
+            });
         }
     });
 });
+
+
 

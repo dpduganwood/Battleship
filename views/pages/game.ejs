@@ -1062,6 +1062,7 @@ socket.on('place_fail', function () {
         if(fireResults.result == 5) {
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
             document.getElementById("errorID").innerText = "You Lose.";
+            socket.emit('playerLoss');
         }
 
     });
@@ -1095,6 +1096,7 @@ socket.on('place_fail', function () {
             if(fireResults.result == 5) {
                 document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
                 document.getElementById("errorID").innerText="YOU WIN!!!!";
+                socket.emit('playerWin');
             }
         } else {
             //invalid target
