@@ -169,19 +169,36 @@ app.get('/join', function (req, res) {
     var yourMap = games[tempKey].player1.getMap();
     var enemyMap = games[tempKey].player2.getMap();
     //console.log(yourMap);
-    Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-        res.render('pages/game.ejs', {
-            playerInfo: playerInfo,
-            playerName: req.cookies.playerName,
-            enemyName: games[tempKey].player1.playerName,
-            turns: 0,
-            shipsLeft: [20, 31, 32, 40, 50],
-            yMap: yourMap,
-            eMap: enemyMap,
-            rKey: tempKey,
-            isHost: "no"
+    if(req.query.key == "single"){
+        Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+            res.render('pages/game.ejs', {
+                playerInfo: playerInfo,
+                playerName: req.cookies.playerName,
+                enemyName: games[tempKey].player2.playerName,
+                turns: 0,
+                shipsLeft: [20, 31, 32, 40, 50],
+                yMap: yourMap,
+                eMap: enemyMap,
+                rKey: tempKey,
+                isHost: "no"
+            });
         });
-    });
+    }else{
+        Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+            res.render('pages/game.ejs', {
+                playerInfo: playerInfo,
+                playerName: req.cookies.playerName,
+                enemyName: games[tempKey].player1.playerName,
+                turns: 0,
+                shipsLeft: [20, 31, 32, 40, 50],
+                yMap: yourMap,
+                eMap: enemyMap,
+                rKey: tempKey,
+                isHost: "no"
+            });
+        });
+    }
+
 });
 
 app.get('/host', function (req, res) {
