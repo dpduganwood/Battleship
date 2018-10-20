@@ -293,9 +293,9 @@ class GameController {
                 }
                 break;
         }
-        console.log(this.player1.getMap());
+        /*console.log(this.player1.getMap());
         console.log(this.player2.getMap());
-        console.log(playerMap);
+        console.log(playerMap);*/
         player.setMap(playerMap);
         return(0);
     }
