@@ -586,6 +586,16 @@ io.on('connection', function (socket) {
                     socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
                 } else {
                     //multiplayer game
+                    socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                    if(games[socket.game_key].player1.playerName == socket.user_name) {
+                        //is player 1
+                        var id = games[socket.game_key].p2SocketId;
+                        io.to(id).emit('enemyFire', {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                    } else {
+                        //is player 2
+                        var id = games[socket.game_key].p1SocketId;
+                        io.to(id).emit('enemyFire', {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                    }
                 }
             } else if (result == 1) {
                 //invalid target, try again
