@@ -166,8 +166,8 @@ app.get('/join', function (req, res) {
     //res.cookie('turns', 0,{maxAge: 9000000});
     //res.cookie('shipsLeft', [20, 31, 32, 40, 50], {maxAge: 9000000});
     //console.log("Easy and hard are not complete.");
-    var yourMap = games[tempKey].player1.getMap();
-    var enemyMap = games[tempKey].player2.getMap();
+    var yourMap = games[tempKey].player2.getMap();
+    var enemyMap = games[tempKey].player1.getMap();
     //console.log(yourMap);
     if(req.query.key == "single"){
         Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
@@ -249,8 +249,8 @@ app.get('/random', function (req, res) {
         var player = new GameFunction.Player(req.cookies.playerName, emptyMap, ret);
         games[ret].setPlayer2(player);
         res.cookie('key', ret, {maxAge: 9000000});
-        var yourMap = games[ret].player1.getMap();
-        var enemyMap = games[ret].player2.getMap();
+        var yourMap = games[ret].player2.getMap();
+        var enemyMap = games[ret].player1.getMap();
         console.log(randomLobby);
         console.log(games[ret]);
         Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
