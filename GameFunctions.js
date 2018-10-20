@@ -73,7 +73,12 @@ class GameController {
         this.p2SocketId = null;
         this.gameKey = gameKey;
         this.player1Counter = 0;
-        this.player2Counter = 0;
+        if(this.player2.type != 0) {
+            //is AI game
+            this.player2Counter = 1;
+        } else {
+            this.player2Counter = 0;
+        }
         this.gameOver = false;
     }
 
@@ -178,9 +183,10 @@ class GameController {
 
                             //chekc if game win
                             var foundAIEven = false;
+                            var AIAttackingPlayer = Server.games[checkPlayer.gamekey].player1;
                             for(var j = 0; j < 9; j++) {
                                 for(var k = 0; k < 9; k++) {
-                                    if(attackingPlayer.getMap()[k][j]%2 == 0 && attatckingPlayer.getMap()[k][j] != 0) {
+                                    if(AIAttackingPlayer.getMap()[k][j]%2 == 0 && AIAttackingPlayer.getMap()[k][j] != 0) {
                                         foundAIEven = true;
                                         break;
                                     }
@@ -210,8 +216,8 @@ class GameController {
         }
         //else do not advance turn
 
-        //console.log(this.player1.getMap());
-        //console.log(this.player2.getMap());
+        console.log(this.player1.getMap());
+        console.log(this.player2.getMap());
         //return result
     }
     setPlayer2(player2){

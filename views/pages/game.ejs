@@ -1215,11 +1215,13 @@ socket.on('place_fail', function () {
                 }
                 if (placementParams.dir == "R") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part1.png");
-                    y = y++;
+                    //y = y++;
+                    y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part2.png");
-                    y = y++;
+                    //y = y++;
+                    y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship2/part3.png");
@@ -1266,11 +1268,13 @@ socket.on('place_fail', function () {
                 }
                 if (placementParams.dir == "R") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part1.png");
-                    y = y++;
+                    //y = y++;
+                    y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part2.png");
-                    y = y++;
+                    //y = y++;
+                    y= y+1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship3/part3.png");
