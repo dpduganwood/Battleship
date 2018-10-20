@@ -74,6 +74,7 @@ class GameController {
         this.gameKey = gameKey;
         this.player1Counter = 0;
         this.player2Counter = 0;
+        this.gameOver = false;
     }
 
     getPlayer1Socket(){
@@ -133,12 +134,34 @@ class GameController {
             } else {
                 this.player2Counter++;
             }
+        } else {
+            //invalid target
+            //send invalid signal
+            cb(result);
+            return;
         }
-        //else invalid
+
+        var foundEven = false;
+        for(var j = 0; j < 9; j++) {
+            for(var k = 0; k < 9; k++) {
+                if(checkPlayer.getMap()[k][j]%2 == 0 && checkPlayer.getMap()[k][j] != 0) {
+                    foundEven = true;
+                    break;
+                }
+            }
+            if(foundEven) {
+                break;
+            }
+        }
+
+        if(!foundEven) {
+            this.gameOver = true;
+            result = 5;
+        }
 
         cb(result);
 
-        if(result != 1) {
+        if(result != 1 && !this.gameOver) {
             //advance turn, AI
             if(checkPlayer.type != 0) {
                 //checkPlayer is an AI
@@ -152,9 +175,31 @@ class GameController {
                             //valid hit or miss
                             console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
                             console.log(checkPlayer.gamekey);
+
+                            //chekc if game win
+                            var foundAIEven = false;
+                            for(var j = 0; j < 9; j++) {
+                                for(var k = 0; k < 9; k++) {
+                                    if(attackingPlayer.getMap()[k][j]%2 == 0 && attatckingPlayer.getMap()[k][j] != 0) {
+                                        foundAIEven = true;
+                                        break;
+                                    }
+                                }
+                                if(foundAIEven) {
+                                    break;
+                                }
+                            }
+
+                            if(!foundAIEven) {
+                                //AI wins game
+                                Server.games[checkPlayer.gamekey].gameOver = true;
+                                result = 5;
+                            }
+
                             var id = Server.games[checkPlayer.gamekey].p1SocketId;
                             Server.ServerIO.to(id).emit('enemyFire', {xLoc: loc[0], yLoc: loc[1], result: result});
                         } else {
+                            //invalid target
                             console.log("AI serious problem");
                         }
                     });
@@ -165,8 +210,8 @@ class GameController {
         }
         //else do not advance turn
 
-        console.log(this.player1.getMap());
-        console.log(this.player2.getMap());
+        //console.log(this.player1.getMap());
+        //console.log(this.player2.getMap());
         //return result
     }
     setPlayer2(player2){

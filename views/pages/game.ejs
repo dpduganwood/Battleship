@@ -1038,8 +1038,11 @@ socket.on('place_fail', function () {
     socket.on('enemyFire', function(fireResults) {
         //update own board based on firing results
         console.log("received enemyFire");
-        document.getElementById("errorID").innerText="Fire on the enemy!";
-        document.getElementById("place").disabled = false;
+        if(fireResults.result != 5) {
+            //remain disabled if you lose
+            document.getElementById("errorID").innerText="Fire on the enemy!";
+            document.getElementById("place").disabled = false;
+        }
 
         var x = fireResults.yLoc;
         var y = fireResults.xLoc;
@@ -1056,29 +1059,48 @@ socket.on('place_fail', function () {
         if(fireResults.result == 2)
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
 
+        if(fireResults.result == 5) {
+            document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+            document.getElementById("errorID").innerText = "You Lose.";
+        }
+
     });
 
     socket.on('myFire', function(fireResults) {
         //update enemyBoard based on firing results
         console.log("respond to own shot");
-        document.getElementById("errorID").innerText="Waiting for Enemy to finish firing.";
-        document.getElementById("place").disabled = true;
+        if(fireResults.result != 1) {
+            //0 = miss
+            //2 = hit
+            //5 = hit and game win
+            document.getElementById("errorID").innerText="Waiting for Enemy to finish firing.";
+            document.getElementById("place").disabled = true;
 
-        var x = fireResults.yLoc;
-        var y = fireResults.xLoc;
+            var x = fireResults.yLoc;
+           var y = fireResults.xLoc;
 
-        var xS = x.toString();
-        var yS = y.toString();
-        var coord = "1"+xS+yS;
+            var xS = x.toString();
+            var yS = y.toString();
+            var coord = "1"+xS+yS;
 
-        console.log("My Fire Coordinates: " + coord);
-        console.log("My Fire Results: " + fireResults.result);
+            console.log("My Fire Coordinates: " + coord);
+            console.log("My Fire Results: " + fireResults.result);
 
-        if(fireResults.result == 0)
-            document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
+            if(fireResults.result == 0)
+                document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
 
-        if(fireResults.result == 2)
-            document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+            if(fireResults.result == 2)
+                document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+
+            if(fireResults.result == 5) {
+                document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+                document.getElementById("errorID").innerText="YOU WIN!!!!";
+            }
+        } else {
+            //invalid target
+            console.log("invalid target location");
+            document.getElementById("errorID").innerText = "Invalid target. Pick a valid location."
+        }
     });
 
     socket.on('placeDone', function(){
