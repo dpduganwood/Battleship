@@ -1112,9 +1112,11 @@ socket.on('place_fail', function () {
     });
 
     socket.on('enemyDisconnect', function() {
+        console.log("ENEMY DISCONNECTED");
         document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
         document.getElementById("place".disabled = true);
         socket.gameOver = true;
+        console.log(socket.gameOver);
     });
 
     socket.on('place_ok', function (placementParams) {

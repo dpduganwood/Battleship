@@ -720,14 +720,16 @@ io.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function () {
-        var sockName = socket.user_name;
-        var sockKey = socket.game_key;
-        if (socket.gameOver) {
+        //var sockName = socket.user_name;
+        //var sockKey = socket.game_key;
+        console.log(socket.gameOver);
+        if (games[socket.game_key].gameOver) {
             //do nothing
             console.log("normal exit");
         } else {
             //increment player loss count
             console.log("sudden disconnection");
+            games[socket.game_key].gameOver = true;
             var type1 = games[socket.game_key].player1.type;
             var type2 = games[socket.game_key].player2.type;
             if(type1 != 0 || type2 != 0) {
@@ -750,7 +752,9 @@ io.on('connection', function (socket) {
                 
                 if(games[socket.game_key].player1.playerName == socket.user_name) {
                     //is player 1
-                    var id = games[socket.game_key].p1SocketId;
+                    var id = games[socket.game_key].p2SocketId;
+                    console.log(id);
+                    io.to(id).gameOver = true;
                     io.to(id).emit('enemyDisconnect');
 
                     //set player2 stats
@@ -770,6 +774,8 @@ io.on('connection', function (socket) {
                 } else {
                     //is player 2
                     var id = games[socket.game_key].p1SocketId;
+                    console.log(id);
+                    io.to(id).gameOver
                     io.to(id).emit('enemyDisconnect');
 
                     //set player1 starts
