@@ -747,6 +747,46 @@ io.on('connection', function (socket) {
                         //fail
                     }
                 });
+                
+                if(games[socket.game_key].player1.playerName == socket.user_name) {
+                    //is player 1
+                    var id = games[socket.game_key].p1SocketId;
+                    io.to(id).emit('enemyDisconnect');
+
+                    //set player2 stats
+                    Connection.addPlayerMPWin(games[socket.game_key].player2.playerName, function(result) {
+                        //do nothing
+                    });
+                    var hits;
+                    var misses;
+                    hits = games[socket.game_key].player2.hits;
+                    misses = games[socket.game_key].player2.misses;
+                    Connection.addPlayerHitsBySum(games[socket.game_key].player2.playerName, hits, function(result) {
+                        //do nothing
+                    });
+                    Connection.addPlayerMissesBySum(games[socket.game_key].player2.playerName, misses, function(result) {
+                        //do nothing
+                    });
+                } else {
+                    //is player 2
+                    var id = games[socket.game_key].p1SocketId;
+                    io.to(id).emit('enemyDisconnect');
+
+                    //set player1 starts
+                    Connection.addPlayerMPWin(games[socket.game_key].player1.playerName, function(result) {
+                        //do nothing
+                    });
+                    var hits;
+                    var misses;
+                    hits = games[socket.game_key].player1.hits;
+                    misses = games[socket.game_key].player1.misses;
+                    Connection.addPlayerHitsBySum(games[socket.game_key].player1.playerName, hits, function(result) {
+                        //do nothing
+                    });
+                    Connection.addPlayerMissesBySum(games[socket.game_key].player1.playerName, misses, function(result) {
+                        //do nothing
+                    });
+                }
             }
 
             var hits;

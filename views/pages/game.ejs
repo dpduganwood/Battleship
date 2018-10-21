@@ -1111,6 +1111,12 @@ socket.on('place_fail', function () {
 
     });
 
+    socket.on('enemyDisconnect', function() {
+        document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
+        document.getElementById("place".disabled = true);
+        socket.gameOver = true;
+    });
+
     socket.on('place_ok', function (placementParams) {
         //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
         //get grid element and change it, remove length option
