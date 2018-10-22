@@ -1323,11 +1323,7 @@ socket.on('place_fail', function () {
                     document.getElementById(coord).setAttribute("background", "../../images/ship4/part4r.png");
                 }
                 if (placementParams.dir == "L") {
-                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
-                    y = y-1;
-                    yS=y.toString();
-                    coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part2.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4.png");
                     y = y-1;
                     yS=y.toString();
                     coord = xS + yS;
@@ -1335,14 +1331,14 @@ socket.on('place_fail', function () {
                     y = y-1;
                     yS=y.toString();
                     coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part2.png");
+                    y = y-1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
                 }
                 if (placementParams.dir == "R") {
-                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4.png");
-                    y = y+1;
-                    yS=y.toString();
-                    coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part3.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
                     y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
@@ -1350,7 +1346,11 @@ socket.on('place_fail', function () {
                     y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part1.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part3.png");
+                    y = y+1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship4/part4.png");
                 }
 
             }else if(placementParams.leng == 5) {
