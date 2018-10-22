@@ -645,12 +645,7 @@ socket.on('place_fail', function () {
         </td>
     </tr>
 </table>
-<script>
-    //Attack and Place functions go here.
-    function attack(x, y) {
 
-    }
-</script>
 <div style="width: 805px;  float: left; display: table;">
     <div style="display: table-row">
         <!-- <div style="width: 600px; display: table-cell;"> Left </div> -->
@@ -729,9 +724,6 @@ socket.on('place_fail', function () {
                     <label for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
-                        <!--<button name="place" id="place" class="btn btn-primary" value="Place" onclick="shipPlace()">
-                            Place
-                        </button>-->
                         <button name="place" id="place" class="btn btn-primary" value="Place">
                             Place
                         </button>
@@ -996,7 +988,7 @@ socket.on('place_fail', function () {
             <div class="card-header">Game Console!</div>
             <div class="card-body">
                 <h3 id="errorID" class="card-title">Place Your Ships.</h3>
-                <h4 id="turn" class="card-title">Your Turn.</h4>
+                <h4 id="turn" class="card-title"></h4>
                 <p id=xyOutput class="card-text"></p>
 
             </div>
@@ -1029,7 +1021,7 @@ socket.on('place_fail', function () {
     socket.on('p2Info', function(info) {
         //do a thing
         var enName = document.getElementById("enemyName");
-        enName.innerText = info.pName;
+        enName.innerText = (info.pName+"'s Board");
     });
 
     var firstThree = 0;
@@ -1041,6 +1033,7 @@ socket.on('place_fail', function () {
         if(fireResults.result != 5) {
             //remain disabled if you lose
             document.getElementById("errorID").innerText="Fire on the enemy!";
+            document.getElementById("turn").innerText="Your Turn.";
             document.getElementById("place").disabled = false;
         }
 
@@ -1074,7 +1067,8 @@ socket.on('place_fail', function () {
             //0 = miss
             //2 = hit
             //5 = hit and game win
-            document.getElementById("errorID").innerText="Waiting for Enemy to finish firing.";
+            document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
+            document.getElementById("turn").innerText="Enemy Turn.";
             document.getElementById("place").disabled = true;
 
             var x = fireResults.yLoc;
@@ -1107,14 +1101,20 @@ socket.on('place_fail', function () {
 
     socket.on('placeDone', function(){
         document.getElementById("errorID").innerText="Fire on the enemy!";
+        document.getElementById("turn").innerText="Your Turn.";
         document.getElementById("place").disabled = false;
 
     });
 
+    socket.on('waitPlace', function(){
+        document.getElementById("turn").innerText="Enemy Turn.";
+        document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
+        document.getElementById("place").disabled = true;
+    });
     socket.on('enemyDisconnect', function() {
         console.log("ENEMY DISCONNECTED");
         document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
-        document.getElementById("place".disabled = true);
+        document.getElementById("place").disabled = true;
         socket.gameOver = true;
         console.log(socket.gameOver);
     });
