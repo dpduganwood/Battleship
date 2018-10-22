@@ -679,10 +679,13 @@ io.on('connection', function (socket) {
                 if(games[socket.game_key].player1.playerName == socket.user_name) {
                     //is player 1
                     socket.emit("placeDone");
+                    var id = games[socket.game_key].p2SocketId;
+                    io.to(id).emit("waitPlace");
                 } else {
                     //is player 2
                     var id = games[socket.game_key].p1SocketId;
                     io.to(id).emit('placeDone');
+                    socket.emit("waitPlace");
                 }
             }
         }
