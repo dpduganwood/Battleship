@@ -156,52 +156,7 @@
     %>
 </header>
 
-<!--
-/*//socket = io.connect("http://localhost:6009");
-var socket = io;
 
-socket.on('place_ok', function (placementParams) {
-    //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
-    //get grid element and change it, remove length option
-    console.log("placement success received");
-
-});
-
-socket.on('place_fail', function () {
-    //show invalid placement message
-    console.log("placement fail received");
-});*/
-
--->
-
-<!--script>
-    //var socket = io.connect("http://localhost:6009") ;
-
-    socket.on('place_ok', function (placementParams) {
-        //placementParams {xLoc: x, yLoc: y, leng: length, dir: direction}
-        //get grid element and change it, remove length option
-        console.log("placement success received");
-
-    });
-
-    socket.on('place_fail', function () {
-        //show invalid placement message
-        console.log("placement fail received");
-    });
-
-    console.log("getting here listener");
-    var placeBtn = document.getElementById("place");
-    placeBtn.addEventListener("click", function () {
-        console.log("sending placement click");
-        //var scriptSocket =  io;
-        var X = document.getElementById("X");
-        var Y = document.getElementById("Y");
-        var L = document.getElementById("L");
-        var D = document.getElementById("D");
-        var rKey = document.getElementById("rKey");
-        socket.emit('place', {playerName: playerName, xLoc: X, yLoc: Y, leng: L, dir: D, key: rKey});
-    });
-</script-->
 
 <style type="text/css">
     body {
@@ -487,44 +442,44 @@ socket.on('place_fail', function () {
                         <!-- battleship row 0 -->
                         <tr>
                             <td id="10-1" style="background-color: transparent"></td>
-                            <td id="100" style="background-color: transparent"></td>
-                            <td id="101" style="background-color: transparent"></td>
-                            <td id="102" style="background-color: transparent"></td>
-                            <td id="103" style="background-color: transparent"></td>
-                            <td id="104" style="background-color: transparent"></td>
-                            <td id="105" style="background-color: transparent"></td>
-                            <td id="106" style="background-color: transparent"></td>
-                            <td id="107" style="background-color: transparent"></td>
-                            <td id="108" style="background-color: transparent"></td>
-                            <td id="109" style="background-color: transparent"></td>
+                            <td id="100" value="0:0" style="background-color: transparent"></td>
+                            <td id="101" value="0:1" style="background-color: transparent"></td>
+                            <td id="102" value="0:2" style="background-color: transparent"></td>
+                            <td id="103" value="0:3" style="background-color: transparent"></td>
+                            <td id="104" value="0:4" style="background-color: transparent"></td>
+                            <td id="105" value="0:5" style="background-color: transparent"></td>
+                            <td id="106" value="0:6" style="background-color: transparent"></td>
+                            <td id="107" value="0:7" style="background-color: transparent"></td>
+                            <td id="108" value="0:8"  style="background-color: transparent"></td>
+                            <td id="109" value="0:9" style="background-color: transparent"></td>
                         </tr>
                         <!-- battleship row 1 -->
                         <tr>
                             <td id="11-1" style="background-color: transparent">
-                            <td id="110" style="background-color: transparent"></td>
-                            <td id="111" style="background-color: transparent"></td>
-                            <td id="112" style="background-color: transparent"></td>
-                            <td id="113" style="background-color: transparent"></td>
-                            <td id="114" style="background-color: transparent"></td>
-                            <td id="115" style="background-color: transparent"></td>
-                            <td id="116" style="background-color: transparent"></td>
-                            <td id="117" style="background-color: transparent"></td>
-                            <td id="118" style="background-color: transparent"></td>
-                            <td id="119" style="background-color: transparent"></td>
+                            <td id="110" value="1:0" style="background-color: transparent"></td>
+                            <td id="111" value="1:1" style="background-color: transparent"></td>
+                            <td id="112" value="1:2" style="background-color: transparent"></td>
+                            <td id="113" value="1:3" style="background-color: transparent"></td>
+                            <td id="114" value="1:4" style="background-color: transparent"></td>
+                            <td id="115" value="1:5" style="background-color: transparent"></td>
+                            <td id="116" value="1:6" style="background-color: transparent"></td>
+                            <td id="117" value="1:7" style="background-color: transparent"></td>
+                            <td id="118" value="1:8" style="background-color: transparent"></td>
+                            <td id="119" value="1:9" style="background-color: transparent"></td>
                         </tr>
                         <!-- battleship row 2 -->
                         <tr>
                             <td id="12-1" style="background-color: transparent">
-                            <td id="120" style="background-color: transparent"></td>
-                            <td id="121" style="background-color: transparent"></td>
-                            <td id="122" style="background-color: transparent"></td>
-                            <td id="123" style="background-color: transparent"></td>
-                            <td id="124" style="background-color: transparent"></td>
-                            <td id="125" style="background-color: transparent"></td>
-                            <td id="126" style="background-color: transparent"></td>
-                            <td id="127" style="background-color: transparent"></td>
-                            <td id="128" style="background-color: transparent"></td>
-                            <td id="129" style="background-color: transparent"></td>
+                            <td id="120" value="2:0" style="background-color: transparent"></td>
+                            <td id="121" value="2:1" style="background-color: transparent"></td>
+                            <td id="122" value="2:2" style="background-color: transparent"></td>
+                            <td id="123" value="2:3" style="background-color: transparent"></td>
+                            <td id="124" value="2:4" style="background-color: transparent"></td>
+                            <td id="125" value="2:5" style="background-color: transparent"></td>
+                            <td id="126" value="2:6" style="background-color: transparent"></td>
+                            <td id="127" value="2:7" style="background-color: transparent"></td>
+                            <td id="128" value="2:8" style="background-color: transparent"></td>
+                            <td id="129" value="2:9" style="background-color: transparent"></td>
                         </tr>
                         <!-- battleship row 3 -->
                         <tr>
