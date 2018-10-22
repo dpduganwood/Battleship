@@ -1253,6 +1253,16 @@ socket.on('place_fail', function () {
             socket.emit('fire', {xLoc: X, yLoc: Y});
         }
     });
+
+    for(var k = 0; k < 100; k++) {
+        var grid = document.getElementById((k+100).toString());
+        grid.addEventListener('click', function() {
+            var value = grid.value.split(':');
+            var X = value[0];
+            var Y = value[1];
+            socket.emit('fire', {xLoc: X, yLoc: Y});
+        });
+    }
 </script>
 
 <!-- Optional JavaScript -->
