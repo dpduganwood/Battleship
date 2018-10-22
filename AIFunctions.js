@@ -133,7 +133,7 @@ class AIOpponent {
         }
 
         //if all visible ships are sunk or no successful hits yet, then guess randomly in valid location like easy AI
-        return this.easyAISelectLocation(/*map*/);
+        return this.easyAISelectLocation(map);
     }
 }
 exports.AIOpponent = AIOpponent;
