@@ -1234,15 +1234,31 @@
         }
     });
 
-    for(var k = 0; k < 100; k++) {
-        var grid = document.getElementById((k+100).toString());
-        grid.addEventListener('click', function() {
-            var value = grid.value.split(':');
-            var X = value[0];
-            var Y = value[1];
-            socket.emit('fire', {xLoc: X, yLoc: Y});
-        });
-    }
+    var datacell = document.getElementById((105)).value;
+    var grid = document.getElementById(105);
+    console.log("Data Cell Value: " + datacell);
+    grid.addEventListener('click', function(datacell) {
+        var value = datacell
+        var X = value[0];
+        var Y = value[1];
+        socket.emit('fire', {xLoc: X, yLoc: Y});
+    });
+
+    // for(var k = 0; k < 100; k++) {
+    //     (function(){
+    //         var grid = document.getElementById((k+100).toString());
+    //         console.log(grid);
+    //         grid.addEventListener('click', function(grid) {
+    //             console.log("Grid Value" + grid.value);
+    //             var value = grid.value.split(':');
+    //
+    //             var X = value[0];
+    //             var Y = value[1];
+    //             socket.emit('fire', {xLoc: X, yLoc: Y});
+    //         });
+    //     }());
+    //
+    // }
 </script>
 
 <!-- Optional JavaScript -->
