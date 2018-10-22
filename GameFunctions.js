@@ -219,6 +219,45 @@ class GameController {
                         }
                     });
                 } else {
+
+                    var loc = checkPlayer.hardAISelectLocation(attackingPlayer.getMap());
+                    this.checkHit(checkPlayer.displayName, loc[0], loc[1], function(result) {
+                        //do nothing for now
+                        if(result == 0 || result == 2) {
+                            //valid hit or miss
+                            console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
+                            console.log(checkPlayer.gamekey);
+
+                            //chekc if game win
+                            var foundAIEven = false;
+                            var AIAttackingPlayer = Server.games[checkPlayer.gamekey].player1;
+                            for(var j = 0; j < 10; j++) {
+                                for(var k = 0; k < 10; k++) {
+                                    if(AIAttackingPlayer.getMap()[k][j]%2 == 0 && AIAttackingPlayer.getMap()[k][j] != 0) {
+                                        foundAIEven = true;
+                                        break;
+                                    }
+                                }
+                                if(foundAIEven) {
+                                    break;
+                                }
+                            }
+
+                            if(!foundAIEven) {
+                                //AI wins game
+                                Server.games[checkPlayer.gamekey].gameOver = true;
+                                result = 5;
+                            }
+
+                            var id = Server.games[checkPlayer.gamekey].p1SocketId;
+                            Server.ServerIO.to(id).emit('enemyFire', {xLoc: loc[0], yLoc: loc[1], result: result});
+                        } else {
+                            //invalid target
+                            console.log("AI serious problem");
+                        }
+                    });
+
+
                     //hard ai
                 }
             }
