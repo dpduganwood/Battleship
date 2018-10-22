@@ -601,6 +601,23 @@
     </tr>
 </table>
 
+<style>
+    .disp {
+        line-height: 30px;
+    }
+    .selector {
+        text-align: center;
+    }
+    .centered {
+        float: right;
+        margin-right: 40px;
+    }
+    .centeredFire {
+        float: right;
+        margin-right: 100px;
+    }
+</style>
+
 <div style="width: 805px;  float: left; display: table;">
     <div style="display: table-row">
         <!-- <div style="width: 600px; display: table-cell;"> Left </div> -->
@@ -610,15 +627,15 @@
             <div class="card-body">
                 <% if(turns != 0){ %>
                 <div style="float:left;">
-                    <label for="inputLarge">| X Coordinate |</label>
-                    <select name="X">
+                    <label for="inputLarge">| X Coordinate |</label> <br>
+                    <selectx name="X">
                         <% for(var i = 1; i <= 10; i++){ %>
                         <option value=<%= i %>><%= i %></option>
                         <% } %>
-                    </select>
+                    </selectx>
                 </div>
                 <div style="float:left;">
-                    <label for="inputLarge">| Y Coordinate |</label>
+                    <label class="disp" for="inputLarge">| Y Coordinate |</label> <br>
                     <select name="Y">
                         <% var let = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
                         for(var i = 0; i < 10; i++){ %>
@@ -627,7 +644,7 @@
                     </select>
                 </div>
                 <div style="float:left;">
-                    <label for="inputLarge">|</label>
+                    <label class="centeredFire" for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="fire" class="btn btn-primary" value="Fire!"-->
                         <!--<button name="fire" id="fire" class="btn btn-primary" value="Fire" onclick="Fire()">Fire
@@ -636,17 +653,17 @@
                     </div>
                 </div>
                 <% }else{ %>
-                <div style="float:left;">
-                    <label for="inputLarge">| X Coordinate |</label>
-                    <select id="X" name="X">
+                <div class="selector" style="float:left;">
+                    <label class="disp" for="inputLarge">| X Coordinate |</label> <br>
+                    <select  id="X" name="X">
                         <% for(var i = 1; i <= 10; i++){ %>
                         <option value=<%= i %>><%= i %></option>
                         <% } %>
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="X" name="X" required-->
                 </div>
-                <div style="float:left;">
-                    <label for="inputLarge">| Y Coordinate |</label>
+                <div class="selector" style="float:left;">
+                    <label class="disp" for="inputLarge">| Y Coordinate |</label> <br>
                     <select id="Y" name="Y">
                         <% var let = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
                         for(var i = 0; i < 10; i++){ %>
@@ -655,8 +672,8 @@
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="Y" name="Y" required-->
                 </div>
-                <div style="float:left;">
-                    <label id="lenLabel" for="inputLarge">| Train Length |</label>
+                <div class="selector" style="float:left;">
+                    <label class="disp" for="inputLarge">| Train Length |</label> <br>
                     <select id="L" name="L">
                         <%
                         for(var i = 0; i < shipsLeft.length; i++){ %>
@@ -665,8 +682,8 @@
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder=shipsLeft id="L" name="L" required-->
                 </div>
-                <div style="float:left;">
-                    <label id="dirLabel" for="inputLarge">| Direction |</label>
+                <div class="selector" style="float:left;">
+                    <label class="disp" for="inputLarge">| Direction |</label> <br>
                     <select id="D" name="D">
                         <% var dir = ['U', 'D', 'L', 'R'];
                         for(var i = 0; i < 4; i++){ %>
@@ -675,17 +692,16 @@
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder="U, D, L, R" id="D" name="D" required-->
                 </div>
-                <div style="float:left;">
-                    <label for="inputLarge">|</label>
-                    <div>
-                        <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
-                        <button name="place" id="place" class="btn btn-primary" value="Place">
-                            Place
-                        </button>
-                    </div>
-                </div>
-                <% } %>
             </div>
+            <div class="centered">
+                <div>
+                    <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
+                    <button name="place" id="place" class="btn btn-primary" value="Place">
+                        Place
+                    </button>
+                </div>
+            </div>
+            <% } %>
         </div>
         <!--document.getElementById("43").setAttribute("background", "../../images/train1.png");-->
 
@@ -1233,6 +1249,16 @@
             socket.emit('fire', {xLoc: X, yLoc: Y});
         }
     });
+
+    for(var k = 0; k < 100; k++) {
+        var grid = document.getElementById((k+100).toString());
+        grid.addEventListener('click', function() {
+            var value = grid.value.split(':');
+            var X = value[0];
+            var Y = value[1];
+            socket.emit('fire', {xLoc: X, yLoc: Y});
+        });
+    }
 </script>
 
 <!-- Optional JavaScript -->
