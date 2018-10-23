@@ -752,7 +752,7 @@
             //remain disabled if you lose
             document.getElementById("errorID").innerText="Fire on the enemy!";
             document.getElementById("turn").innerText="Your Turn.";
-            canShoot = true;
+            //canShoot = true;
             document.getElementById("place").disabled = false;
         }
 
@@ -829,6 +829,7 @@
     socket.on('placeDone', function(){
         document.getElementById("errorID").innerText="Fire on the enemy!";
         document.getElementById("turn").innerText="Your Turn.";
+        canShoot = true;
         document.getElementById("place").disabled = false;
 
     });
@@ -836,6 +837,7 @@
     socket.on('waitPlace', function(){
         document.getElementById("turn").innerText="Enemy Turn.";
         document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
+        canShoot = false;
         document.getElementById("place").disabled = true;
     });
     socket.on('enemyDisconnect', function() {
