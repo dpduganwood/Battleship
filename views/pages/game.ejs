@@ -13,7 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap-4/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>Battle Tracks!</title>
+    <title>Battletracks</title>
 </head>
 <body onbeforeunload="return exit()">
 <script src="/socket.io/socket.io.js"></script>
@@ -610,7 +610,7 @@
             <div class="card-body">
                 <% if(turns != 0){ %>
                 <div style="float:left;">
-                    <label for="inputLarge">| X Coordinate |</label>
+                    <label for="inputLarge"> X Coordinate |</label> <br>
                     <select name="X">
                         <% for(var i = 1; i <= 10; i++){ %>
                         <option value=<%= i %>><%= i %></option>
@@ -618,7 +618,7 @@
                     </select>
                 </div>
                 <div style="float:left;">
-                    <label for="inputLarge">| Y Coordinate |</label>
+                    <label for="inputLarge">| Y Coordinate </label> <br>
                     <select name="Y">
                         <% var let = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
                         for(var i = 0; i < 10; i++){ %>
@@ -626,8 +626,8 @@
                         <% } %>
                     </select>
                 </div>
-                <div style="float:left;">
-                    <label for="inputLarge">|</label>
+                <div style="float:left; margin-left: 30px;">
+                    <label for="inputLarge"></label> <br>
                     <div>
                         <!--input type="submit" name="fire" class="btn btn-primary" value="Fire!"-->
                         <!--<button name="fire" id="fire" class="btn btn-primary" value="Fire" onclick="Fire()">Fire
@@ -636,8 +636,8 @@
                     </div>
                 </div>
                 <% }else{ %>
-                <div style="float:left;">
-                    <label for="inputLarge">| X Coordinate |</label>
+                <div style="float:left; text-align: center;">
+                    <label for="inputLarge"> X Coordinate |</label> <br>
                     <select id="X" name="X">
                         <% for(var i = 1; i <= 10; i++){ %>
                         <option value=<%= i %>><%= i %></option>
@@ -645,8 +645,8 @@
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder="Enter X Coordinate" id="X" name="X" required-->
                 </div>
-                <div style="float:left;">
-                    <label for="inputLarge">| Y Coordinate |</label>
+                <div style="float:left;text-align: center;">
+                    <label for="inputLarge">| Y Coordinate </label> <br>
                     <select id="Y" name="Y">
                         <% var let = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
                         for(var i = 0; i < 10; i++){ %>
@@ -655,8 +655,8 @@
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder="Enter Y Coordinate" id="Y" name="Y" required-->
                 </div>
-                <div style="float:left;">
-                    <label id="lenLabel" for="inputLarge">| Train Length |</label>
+                <div style="float:left; text-align: center;">
+                    <label id="lenLabel" for="inputLarge">| | Train Length |</label> <br>
                     <select id="L" name="L">
                         <%
                         for(var i = 0; i < shipsLeft.length; i++){ %>
@@ -665,8 +665,8 @@
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder=shipsLeft id="L" name="L" required-->
                 </div>
-                <div style="float:left;">
-                    <label id="dirLabel" for="inputLarge">| Direction |</label>
+                <div style="float:left; text-align: center;">
+                    <label id="dirLabel" for="inputLarge">| Direction </label> <br>
                     <select id="D" name="D">
                         <% var dir = ['U', 'D', 'L', 'R'];
                         for(var i = 0; i < 4; i++){ %>
@@ -675,8 +675,8 @@
                     </select>
                     <!--input class="form-control form-control-lg" type="text" placeholder="U, D, L, R" id="D" name="D" required-->
                 </div>
-                <div style="float:left;">
-                    <label for="inputLarge">|</label>
+                <div style="float:left; margin-left: 30px; text-align: center;">
+                    <label for="inputLarge"></label>
                     <div>
                         <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
                         <button name="place" id="place" class="btn btn-primary" value="Place">
