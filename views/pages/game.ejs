@@ -759,7 +759,8 @@
             //remain disabled if you lose
             document.getElementById("errorID").innerText="Fire on the enemy!";
             document.getElementById("turn").innerText="Your Turn.";
-            //canShoot = true;
+            console.log('set can shoot true enemyfire recieve');
+            canShoot = true;
             document.getElementById("place").disabled = false;
         }
 
@@ -796,6 +797,7 @@
             //5 = hit and game win
             document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
             document.getElementById("turn").innerText="Enemy Turn.";
+            console.log("set shoot false myFire recieve");
             canShoot = false;
             document.getElementById("place").disabled = true;
 
@@ -836,6 +838,7 @@
     socket.on('placeDone', function(){
         document.getElementById("errorID").innerText="Fire on the enemy!";
         document.getElementById("turn").innerText="Your Turn.";
+        console.log("set can shoot true placedone recieve");
         canShoot = true;
         document.getElementById("place").disabled = false;
     });
@@ -843,12 +846,14 @@
     socket.on('waitPlace', function(){
         document.getElementById("turn").innerText="Enemy Turn.";
         document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
+        console.log("set can shoot false waitplace recieve");
         canShoot = false;
         document.getElementById("place").disabled = true;
     });
     socket.on('enemyDisconnect', function() {
         console.log("ENEMY DISCONNECTED");
         document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
+        console.log("set can shoot false enemy disconnect revieve");
         canShoot = false;
         document.getElementById("place").disabled = true;
         window.onbeforeunload = null;
@@ -872,7 +877,8 @@
                 //list is empty and all ships are placed
                 document.getElementById("place").innerText="Fire";
                 document.getElementById("place").value = "Fire";
-                canShoot = true;
+                //console.log("set can shoot true place ok recieve");
+                //canShoot = true;
                 document.getElementById("place").disabled = true;
                 document.getElementById("errorID").innerText="Waiting for Enemy to finish placing."
                 var remover = document.getElementById("L");
@@ -1286,6 +1292,7 @@
 
 
     function myFire(event) {
+        console.log("canShoot: " + canShoot);
         if(canShoot) {
             console.log("Data Value: " + event.target.id);
             var idValue = event.target.id;
