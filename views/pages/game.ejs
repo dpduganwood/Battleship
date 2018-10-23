@@ -785,6 +785,10 @@
             window.onbeforeunload = null;
             socket.emit('playerLoss');
         }
+        if(fireResults.result == 4) {
+            document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+            //document.getElementById("errorID").innerText = "You Destroyed an Enemy Train!";
+        }
 
     });
 
@@ -827,6 +831,10 @@
                 window.onbeforeunload = null;
 
 
+            }
+            if(fireResults.result == 4) {
+                document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
+                document.getElementById("errorID").innerText="You Destroyed an Enemy Train!!!!";
             }
         } else {
             //invalid target

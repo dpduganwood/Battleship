@@ -696,7 +696,7 @@ io.on('connection', function (socket) {
         //output needs to be sent to both clients
         //games[fireParams.paramKey].checkHit(fireParams.playerName, fireParams.xLoc, fireParams.yLoc, function(result){
         games[socket.game_key].checkHit(socket.user_name, fireParams.xLoc, fireParams.yLoc, function (result) {
-            if (result == 0 || result == 2 || result == 5) {
+            if (result == 0 || result == 2 || result == 5 || result == 4) {
                 //valid target. miss / hit, win
                 if(games[socket.game_key].player2.type != 0) {
                     //AI game

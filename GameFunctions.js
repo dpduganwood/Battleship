@@ -160,6 +160,12 @@ class GameController {
             console.log('setting game over');
             this.gameOver = true;
             result = 5;
+        } else {
+            if(checkSunk(x, y, checkPlayer.getMap()) && checkPlayer.type == 0) {
+                //make sure check player is a player
+                console.log("sink confirmed");
+                result = 4;
+            }
         }
 
         cb(result);
@@ -503,6 +509,22 @@ function AIcheckSunk(x, y, checkMap) { //returns true if this hit will result in
         }
     }
     checkMap[y][x] -= 1;
+    return true;
+}
+
+function checkSunk(x, y, checkMap) {
+    var loc = checkMap[y][x]-1;
+    if(loc == 0) {
+        return false;
+    }
+    //checkMap[y][x] += 1;
+    for(i = 0; i < 10; i++){
+        if(checkMap[i].includes(loc)){
+            //checkMap[y][x] -= 1;
+            return false;
+        }
+    }
+    //checkMap[y][x] -= 1;
     return true;
 }
 
