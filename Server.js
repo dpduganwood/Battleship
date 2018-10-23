@@ -532,6 +532,7 @@ io.on('connection', function (socket) {
             console.log("readout " + games[socket.game_key].p1SocketId);
             //io.sockets.socket(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
             io.to(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
+            socket.emit('joined');
         }
     });
     //do a thing
