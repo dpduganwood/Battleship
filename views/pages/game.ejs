@@ -867,6 +867,9 @@
                 remover.parentNode.removeChild(remover);
                 remover = document.getElementById("dirLabel");
                 remover.parentNode.removeChild(remover);
+                for(var i =0; i<100; i++) {
+                    document.getElementById(i+100).addEventListener("click", myFunction);
+                }
             }
 
             var x = placementParams.yLoc;
@@ -1233,10 +1236,6 @@
             socket.emit('fire', {xLoc: X, yLoc: Y});
         }
     });
-
-    for(var i =0; i<100; i++) {
-        document.getElementById(i+100).addEventListener("click", myFunction);
-    }
 
     function myFunction(event) {
         console.log("Data Value: " + event.target.id);
