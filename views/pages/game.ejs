@@ -704,7 +704,7 @@
                         You Win!!!!
                                             </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" href="/">Go Home</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location='/';">Go Home</button>
                     </div>
                 </div>
             </div>
@@ -734,6 +734,7 @@
 <!--set up button listeners-->
 
 <script>
+    var canShoot = false;
 
     socket.on('p2Info', function(info) {
         //do a thing
@@ -751,6 +752,7 @@
             //remain disabled if you lose
             document.getElementById("errorID").innerText="Fire on the enemy!";
             document.getElementById("turn").innerText="Your Turn.";
+            //canShoot = true;
             document.getElementById("place").disabled = false;
         }
 
@@ -772,6 +774,7 @@
         if(fireResults.result == 5) {
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
             document.getElementById("errorID").innerText = "You Lose.";
+            window.onbeforeunload = null;
             socket.emit('playerLoss');
         }
 
@@ -786,6 +789,7 @@
             //5 = hit and game win
             document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
             document.getElementById("turn").innerText="Enemy Turn.";
+            canShoot = false;
             document.getElementById("place").disabled = true;
 
             var x = fireResults.yLoc;
@@ -811,6 +815,7 @@
 
 
                 socket.emit('playerWin');
+                window.onbeforeunload = null;
 
 
             }
@@ -824,6 +829,7 @@
     socket.on('placeDone', function(){
         document.getElementById("errorID").innerText="Fire on the enemy!";
         document.getElementById("turn").innerText="Your Turn.";
+        canShoot = true;
         document.getElementById("place").disabled = false;
 
     });
@@ -831,12 +837,15 @@
     socket.on('waitPlace', function(){
         document.getElementById("turn").innerText="Enemy Turn.";
         document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
+        canShoot = false;
         document.getElementById("place").disabled = true;
     });
     socket.on('enemyDisconnect', function() {
         console.log("ENEMY DISCONNECTED");
         document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
+        canShoot = false;
         document.getElementById("place").disabled = true;
+        window.onbeforeunload = null;
         socket.gameOver = true;
         console.log(socket.gameOver);
     });
@@ -857,6 +866,7 @@
                 //list is empty and all ships are placed
                 document.getElementById("place").innerText="Fire";
                 document.getElementById("place").value = "Fire";
+                canShoot = true;
                 document.getElementById("place").disabled = true;
                 document.getElementById("errorID").innerText="Waiting for Enemy to finish placing."
                 var remover = document.getElementById("L");
@@ -867,6 +877,9 @@
                 remover.parentNode.removeChild(remover);
                 remover = document.getElementById("dirLabel");
                 remover.parentNode.removeChild(remover);
+                for(var i =0; i<100; i++) {
+                    document.getElementById(i+100).addEventListener("click", myFunction);
+                }
             }
 
             var x = placementParams.yLoc;
@@ -1234,21 +1247,19 @@
         }
     });
 
-    for(var i =0; i<100; i++) {
-        document.getElementById(i+100).addEventListener("click", myFunction);
-    }
-
     function myFunction(event) {
-        console.log("Data Value: " + event.target.id);
-        var idValue = event.target.id;
-        var sub = idValue.substring(1,3);
-        var xString = sub.substring(0,1);
-        var x = (xString);
-        console.log("X: " + x);
-        var yString = sub.substring(1,2);
-        var y = (yString);
-        console.log("Y: " + y);
-        socket.emit('fire', {xLoc: y, yLoc: x});
+        if(canShoot) {
+            console.log("Data Value: " + event.target.id);
+            var idValue = event.target.id;
+            var sub = idValue.substring(1,3);
+            var xString = sub.substring(0,1);
+            var x = (xString);
+            console.log("X: " + x);
+            var yString = sub.substring(1,2);
+            var y = (yString);
+            console.log("Y: " + y);
+            socket.emit('fire', {xLoc: y, yLoc: x});
+        }
     }
 
 </script>
