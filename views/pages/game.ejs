@@ -679,7 +679,7 @@
                     <label for="inputLarge">|</label>
                     <div>
                         <!--input type="submit" name="place" class="btn btn-primary" value="Place" onclick="shipPlace()"-->
-                        <button name="place" id="place" class="btn btn-primary" value="Place">
+                        <button name="place" id="place" class="btn btn-primary" value="Place" disabled>
                             Place
                         </button>
                     </div>
@@ -716,7 +716,7 @@
         <div class="card bg-light mb-3" style="display: table-cell;">
             <div class="card-header">Game Console!</div>
             <div class="card-body">
-                <h3 id="errorID" class="card-title">Place Your Ships.</h3>
+                <h3 id="errorID" class="card-title">Waiting for Opponent.</h3>
                 <h4 id="turn" class="card-title"></h4>
                 <p id=xyOutput class="card-text"></p>
 
@@ -738,8 +738,15 @@
 
     socket.on('p2Info', function(info) {
         //do a thing
+        document.getElementById("place").disabled = false;
+        document.getElementById("errorID").innerText="Place Your Ships.";
         var enName = document.getElementById("enemyName");
         enName.innerText = (info.pName+"'s Board");
+    });
+
+    socket.on('joined', function(){
+        document.getElementById("place").disabled = false;
+        document.getElementById("errorID").innerText="Place Your Ships.";
     });
 
     var firstThree = 0;
