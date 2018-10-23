@@ -704,7 +704,7 @@
                         You Win!!!!
                                             </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" href="/">Go Home</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location='/';">Go Home</button>
                     </div>
                 </div>
             </div>
@@ -774,6 +774,7 @@
         if(fireResults.result == 5) {
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
             document.getElementById("errorID").innerText = "You Lose.";
+            window.onbeforeunload = null;
             socket.emit('playerLoss');
         }
 
@@ -814,6 +815,7 @@
 
 
                 socket.emit('playerWin');
+                window.onbeforeunload = null;
 
 
             }
@@ -841,6 +843,7 @@
         document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
         canShoot = false;
         document.getElementById("place").disabled = true;
+        window.onbeforeunload = null;
         socket.gameOver = true;
         console.log(socket.gameOver);
     });
