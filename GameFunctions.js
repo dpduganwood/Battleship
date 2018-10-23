@@ -97,6 +97,7 @@ class GameController {
     }
 
     checkHit(attackingPlayerName, x, y, cb) {
+        console.log(this.gameOver);
         var attackingPlayer;
         var checkPlayer;
         var p = 0;
@@ -109,27 +110,9 @@ class GameController {
             checkPlayer = this.player1;
             p = 2;
         }
-        /*checkPlayer.checkHit(x, y, function(result) {
-            if(result == 0) {
-                //miss
-                attackingPlayer.misses += 1;
-                //advance turn
-            } else if(result == 2) {
-                //hit
-                attackingPlayer.hits += 1;
-                //advance turn
-            }
-            if(result != 1) {
-                if(p == 1) {
-                    this.playerName;
-                } else {
-                    this.player2Counter++;
-                }
-            }
-            //else invalid
-            cb(result);
-        });*/
+        
         var result = checkPlayer.checkHit(x,y);
+        console.log("new result: " + result);
         if(result == 0) {
             //miss
             attackingPlayer.misses += 1;
@@ -138,7 +121,7 @@ class GameController {
             //hit
             attackingPlayer.hits += 1;
             //advance turn
-        }
+        } //else do not advance turn
         console.log("player hits: " + attackingPlayer.hits);
         console.log("PLayer misses: " + attackingPlayer.misses);
         console.log(attackingPlayer);
@@ -155,6 +138,11 @@ class GameController {
             return;
         }
 
+        if(p == 1) {
+            console.log('player dynamic checking');
+        } else {
+            console.log('p2/ai dynamic checking');
+        }
         var foundEven = false;
         for(var j = 0; j < 10; j++) {
             for(var k = 0; k < 10; k++) {
@@ -169,15 +157,19 @@ class GameController {
         }
 
         if(!foundEven) {
+            console.log('setting game over');
             this.gameOver = true;
             result = 5;
         }
 
         cb(result);
+        console.log(this.gameOver);
 
         if(result != 1 && !this.gameOver) {
             //advance turn, AI
+            //console.log('begin AI turn');
             if(checkPlayer.type != 0) {
+                console.log('begin ai turn');
                 //checkPlayer is an AI
                 //var loc = this.player2.easyAISelectLocation(this.player1.getMap());
                 if(checkPlayer.type == 1) {
@@ -185,12 +177,13 @@ class GameController {
                     var loc = checkPlayer.easyAISelectLocation(attackingPlayer.getMap());
                     this.checkHit(checkPlayer.displayName, loc[0], loc[1], function(result) {
                         //do nothing for now
-                        if(result == 0 || result == 2) {
+                        if(result == 0 || result == 2 || result == 5) {
                             //valid hit or miss
                             console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
                             console.log(checkPlayer.gamekey);
 
                             //chekc if game win
+                            /*console.log('AI default checking');
                             var foundAIEven = false;
                             var AIAttackingPlayer = Server.games[checkPlayer.gamekey].player1;
                             for(var j = 0; j < 10; j++) {
@@ -209,7 +202,7 @@ class GameController {
                                 //AI wins game
                                 Server.games[checkPlayer.gamekey].gameOver = true;
                                 result = 5;
-                            }
+                            }*/
 
                             var id = Server.games[checkPlayer.gamekey].p1SocketId;
                             Server.ServerIO.to(id).emit('enemyFire', {xLoc: loc[0], yLoc: loc[1], result: result});
@@ -218,17 +211,18 @@ class GameController {
                             console.log("AI serious problem");
                         }
                     });
-                } else {
+                } else if(checkPlayer.type == 2) {
 
                     var loc = checkPlayer.hardAISelectLocation(attackingPlayer.getMap());
                     this.checkHit(checkPlayer.displayName, loc[0], loc[1], function(result) {
                         //do nothing for now
-                        if(result == 0 || result == 2) {
+                        if(result == 0 || result == 2 || result == 5) {
                             //valid hit or miss
                             console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
                             console.log(checkPlayer.gamekey);
 
                             //chekc if game win
+                            /*console.log('AI default checking');
                             var foundAIEven = false;
                             var AIAttackingPlayer = Server.games[checkPlayer.gamekey].player1;
                             for(var j = 0; j < 10; j++) {
@@ -245,9 +239,10 @@ class GameController {
 
                             if(!foundAIEven) {
                                 //AI wins game
+                                console.log('ai wins');
                                 Server.games[checkPlayer.gamekey].gameOver = true;
                                 result = 5;
-                            }
+                            }*/
 
                             var id = Server.games[checkPlayer.gamekey].p1SocketId;
                             Server.ServerIO.to(id).emit('enemyFire', {xLoc: loc[0], yLoc: loc[1], result: result});
@@ -259,13 +254,16 @@ class GameController {
 
 
                     //hard ai
-                }
+                } //else is player
+                console.log('end ai turn');
             }
+
         }
         //else do not advance turn
 
         console.log(this.player1.getMap());
         console.log(this.player2.getMap());
+        console.log(this.gameOver);
         //return result
     }
     setPlayer2(player2){
