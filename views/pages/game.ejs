@@ -875,8 +875,9 @@
                 remover.parentNode.removeChild(remover);
                 remover = document.getElementById("dirLabel");
                 remover.parentNode.removeChild(remover);
+
                 for(var i =0; i<100; i++) {
-                    document.getElementById(i+100).addEventListener("click", myFunction);
+                    document.getElementById(i+100).addEventListener("click", myFire);
                 }
             }
 
@@ -1245,7 +1246,38 @@
         }
     });
 
-    function myFunction(event) {
+    for(var j=0; j<100; j++){
+        var coors;
+        if(j<10){
+         coors = "0" + j;}
+        else{
+            coors = j;
+        }
+        console.log("Coors: " + coors);
+        document.getElementById(coors).addEventListener("click", myPlace, {passive: true});
+    }
+    function myPlace(event) {
+
+            console.log("Data Value: " + event.target.id);
+            var idValue = event.target.id;
+            var xString = idValue.substring(0,1);
+            var x = (xString);
+            console.log("X: " + x);
+            var yString = idValue.substring(1,2);
+            var y = (yString);
+            console.log("Y: " + y);
+            var L = document.getElementById("L");
+            L = parseInt(L.options[L.selectedIndex].text);
+            console.log("myPlace Length: " + L);
+            var D = document.getElementById("D");
+            D = D.options[D.selectedIndex].text;
+            console.log("myPlace Direction: " + D);
+            socket.emit('place', {xLoc: y, yLoc: x, leng: L, dir: D});
+
+    }
+
+
+    function myFire(event) {
         if(canShoot) {
             console.log("Data Value: " + event.target.id);
             var idValue = event.target.id;
