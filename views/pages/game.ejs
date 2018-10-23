@@ -831,7 +831,6 @@
         document.getElementById("turn").innerText="Your Turn.";
         canShoot = true;
         document.getElementById("place").disabled = false;
-
     });
 
     socket.on('waitPlace', function(){
@@ -1248,6 +1247,7 @@
     });
 
     function myFunction(event) {
+        console.log("can shoot: " + canShoot);
         if(canShoot) {
             console.log("Data Value: " + event.target.id);
             var idValue = event.target.id;
