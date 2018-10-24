@@ -758,7 +758,6 @@
 
     socket.on('p2Info', function(info) {
         //do a thing
-        document.getElementById("place").disabled = false;
         document.getElementById("errorID").innerText="Place Your Ships.";
         var enName = document.getElementById("enemyName");
         enName.innerText = (info.pName+"'s Board");

@@ -669,7 +669,7 @@ io.on('connection', function (socket) {
         }else{
             games[socket.game_key].player2Counter = 1;
         }
-
+        console.log("PLACING DONE: p1 "+games[socket.game_key].player1Counter+" p2 "+games[socket.game_key].player2Counter);
         if(games[socket.game_key].player1Counter + games[socket.game_key].player2Counter == 2){
             console.log("Placing Complete.");
             if(games[socket.game_key].player2.type != 0) {
