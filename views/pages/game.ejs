@@ -710,6 +710,26 @@
             </div>
         </div>
 
+        <!-- Game Lose Modal -->
+        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Game Over!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        You Lose!!!!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="window.location='/';">Go Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- <div style="display: table-cell;"> Right </div> -->
         <!-- RIGHT SIDE COMPONENT -->
@@ -784,6 +804,8 @@
             document.getElementById("errorID").innerText = "You Lose.";
             window.onbeforeunload = null;
             socket.emit('playerLoss');
+            $('#exampleModalCenter2').modal('toggle')
+
         }
         if(fireResults.result == 4) {
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
