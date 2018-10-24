@@ -846,7 +846,7 @@
     socket.on('placeDone', function(){
         document.getElementById("errorID").innerText="Fire on the enemy!";
         document.getElementById("turn").innerText="Your Turn.";
-        console.log("set can shoot true placedone recieve");
+        console.log("set can shoot true placedone receive");
         canShoot = true;
         document.getElementById("place").disabled = false;
     });
@@ -854,14 +854,14 @@
     socket.on('waitPlace', function(){
         document.getElementById("turn").innerText="Enemy Turn.";
         document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
-        console.log("set can shoot false waitplace recieve");
+        console.log("set can shoot false waitplace receive");
         canShoot = false;
         document.getElementById("place").disabled = true;
     });
     socket.on('enemyDisconnect', function() {
         console.log("ENEMY DISCONNECTED");
         document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
-        console.log("set can shoot false enemy disconnect revieve");
+        console.log("set can shoot false enemy disconnect receive");
         canShoot = false;
         document.getElementById("place").disabled = true;
         window.onbeforeunload = null;

@@ -526,6 +526,7 @@ io.on('connection', function (socket) {
             //is player 1
             games[socket.game_key].p1SocketId = socket.id;
             console.log("readout " + games[socket.game_key].p1SocketId);
+            socket.emit('joined');
         } else {
             //is player 2
             games[socket.game_key].p2SocketId = socket.id;
