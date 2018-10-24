@@ -183,7 +183,7 @@ class GameController {
                     var loc = checkPlayer.easyAISelectLocation(attackingPlayer.getMap());
                     this.checkHit(checkPlayer.displayName, loc[0], loc[1], function(result) {
                         //do nothing for now
-                        if(result == 0 || result == 2 || result == 5) {
+                        if(result == 0 || result == 2 || result == 5 || result == 4) {
                             //valid hit or miss
                             console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
                             console.log(checkPlayer.gamekey);
@@ -222,7 +222,7 @@ class GameController {
                     var loc = checkPlayer.hardAISelectLocation(attackingPlayer.getMap());
                     this.checkHit(checkPlayer.displayName, loc[0], loc[1], function(result) {
                         //do nothing for now
-                        if(result == 0 || result == 2 || result == 5) {
+                        if(result == 0 || result == 2 || result == 5 || result == 4) {
                             //valid hit or miss
                             console.log("AI hitting " + loc[0] + " " + loc[1] + " " + result);
                             console.log(checkPlayer.gamekey);
