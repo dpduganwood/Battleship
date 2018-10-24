@@ -163,7 +163,7 @@ class GameController {
             this.gameOver = true;
             result = 5;
         } else {
-            if(checkSunk(x, y, checkPlayer.getMap()) && checkPlayer.type == 0) {
+            if(checkSunk(x, y, checkPlayer.getMap()) && attackingPlayer.type == 0) {
                 //make sure check player is a player
                 console.log("sink confirmed");
                 result = 4;
