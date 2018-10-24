@@ -82,10 +82,12 @@ class GameController {
         if(this.player2.type != 0) {
             //is AI game
             this.player2Counter = 1;
+            this.gameOver = false;
         } else {
             this.player2Counter = 0;
+            this.gameOver = true;
         }
-        this.gameOver = false;
+        //this.gameOver = false;
     }
 
     getPlayer1Socket(){
