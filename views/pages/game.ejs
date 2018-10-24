@@ -738,7 +738,7 @@
             <div class="card-body">
                 <h3 id="errorID" class="card-title">Waiting for Opponent.</h3>
                 <h4 id="turn" class="card-title"></h4>
-                <p id=xyOutput class="card-text"></p>
+                <p id="sunk" class="card-text"></p>
 
             </div>
         </div>
@@ -808,7 +808,6 @@
         }
         if(fireResults.result == 4) {
             document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
-            //document.getElementById("errorID").innerText = "You Destroyed an Enemy Train!";
         }
 
     });
@@ -836,12 +835,14 @@
             console.log("My Fire Coordinates: " + coord);
             console.log("My Fire Results: " + fireResults.result);
 
-            if(fireResults.result == 0)
+            if(fireResults.result == 0) {
                 document.getElementById(coord).setAttribute("background", "../../images/broken_tracks.png");
-
-            if(fireResults.result == 2)
+                document.getElementById("sunk").innerText = "";
+            }
+            if(fireResults.result == 2){
                 document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
-
+                document.getElementById("sunk").innerText="";
+            }
             if(fireResults.result == 5) {
                 document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
                 document.getElementById("errorID").innerText="YOU WIN!!!!";
@@ -850,12 +851,13 @@
 
                 socket.emit('playerWin');
                 window.onbeforeunload = null;
-
+                document.getElementById("sunk").innerText="";
 
             }
             if(fireResults.result == 4) {
+                console.log("SUNK");
                 document.getElementById(coord).setAttribute("background", "../../images/rotisserie_chicken.png");
-                document.getElementById("errorID").innerText="You Destroyed an Enemy Train!!!!";
+                document.getElementById("sunk").innerText="You Destroyed an Enemy Train!!!";
             }
         } else {
             //invalid target
