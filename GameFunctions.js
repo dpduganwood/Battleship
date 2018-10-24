@@ -82,10 +82,12 @@ class GameController {
         if(this.player2.type != 0) {
             //is AI game
             this.player2Counter = 1;
+            this.gameOver = false;
         } else {
             this.player2Counter = 0;
+            this.gameOver = true;
         }
-        this.gameOver = false;
+        //this.gameOver = false;
     }
 
     getPlayer1Socket(){
@@ -161,7 +163,7 @@ class GameController {
             this.gameOver = true;
             result = 5;
         } else {
-            if(checkSunk(x, y, checkPlayer.getMap()) && checkPlayer.type == 0) {
+            if(checkSunk(x, y, checkPlayer.getMap()) && attackingPlayer.type == 0) {
                 //make sure check player is a player
                 console.log("sink confirmed");
                 result = 4;
