@@ -268,9 +268,15 @@ function addRandom(ins) {
         return -1;
     } else {
         var temp = randomLobby[0];
-        randomLobby[0] = -1;
-        console.log("joining random");
-        return temp;
+        if(games[temp] == null){
+            randomLobby[0] = ins;
+            console.log("first random");
+            return -1;
+        }else{
+            randomLobby[0] = -1;
+            console.log("joining random");
+            return temp;
+        }
     }
 }
 
