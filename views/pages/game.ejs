@@ -1268,7 +1268,8 @@
         }
     });
 
-    for(var j=0; j<100; j++){
+    //disabling clickable ship placement because there are too many bugs
+    /*for(var j=0; j<100; j++){
         var coors;
         if(j<10){
          coors = "0" + j;}
@@ -1277,7 +1278,7 @@
         }
         console.log("Coors: " + coors);
         document.getElementById(coors).addEventListener("click", myPlace, {passive: true});
-    }
+    }*/
     function myPlace(event) {
 
             console.log("Data Value: " + event.target.id);
