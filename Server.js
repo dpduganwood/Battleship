@@ -823,6 +823,9 @@ io.on('connection', function (socket) {
                 //do nothing
             });
         }
+        if(games[socket.game_key] != null) {
+            exitGame(socket.game_key);
+        }
     });
 });
 
