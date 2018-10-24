@@ -882,6 +882,7 @@
     socket.on('enemyDisconnect', function() {
         console.log("ENEMY DISCONNECTED");
         document.getElementById("errorID").innerText = "Opponent disconnected, You Win.";
+        $('#exampleModalCenter').modal('toggle')
         console.log("set can shoot false enemy disconnect receive");
         canShoot = false;
         document.getElementById("place").disabled = true;
