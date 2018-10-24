@@ -735,7 +735,7 @@ io.on('connection', function (socket) {
         //var sockName = socket.user_name;
         //var sockKey = socket.game_key;
         console.log(socket.gameOver);
-        if (games[socket.game_key].gameOver == null || games[socket.game_key].gameOver) {
+        if (games[socket.game_key] == null || games[socket.game_key].gameOver) {
             //do nothing
             console.log("normal exit");
         } else {
