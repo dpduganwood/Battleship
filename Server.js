@@ -66,6 +66,7 @@ app.get('/', function (req, res) {
                 res.render('pages/index', {
                     playerName: req.cookies.playerName,
                     playerInfo: playerInfo,
+                    perror: "Invalid Room Key"
                 });
             });
         } catch (e) {
@@ -102,6 +103,7 @@ app.get('/login2', function (req, res) {
         res.render('pages/index', {
             playerName: req.query.profileName,
             playerInfo: playerInfo,
+            perror: ""
         });
     });
 });
@@ -144,8 +146,9 @@ app.get('/join', function (req, res) {
     if(req.query.key < 0 || games[req.query.key] == null && req.query.key != "single") {
         Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
             res.render('pages/index', {
-                playerName: (req.cookies.playerName +" ! Invalid Room Key !"),
+                playerName: (req.cookies.playerName),
                 playerInfo: playerInfo,
+                perror: "Invalid Room Key"
             });
         });
     }else{
