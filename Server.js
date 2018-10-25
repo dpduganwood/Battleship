@@ -141,86 +141,94 @@ app.get('/join', function (req, res) {
     //console.log("Easy or hard AI: "+req.query.eOrH);
     var game;
     var tempKey;
-    if (req.query.key == "single") {
-        tempKey = genKey();
-        res.cookie('key', tempKey, {maxAge: 9000000});
-        console.log("Generated S Key: " + tempKey);
-
-        var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-        //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
-        var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
-        var ai;
-        var genMap = GameFunction.genRandomMap();
-        if (req.query.eOrH == "easy") {
-            ai = new AIFunction.AIOpponent(tempKey, genMap, 1);
-        } else {
-            ai = new AIFunction.AIOpponent(tempKey, genMap, 2);
-        }
-        game = new GameFunction.GameController(player, ai, tempKey);
-        games[tempKey] = game;
-    } else {
-        //game = new GameFunction.GameController(req.query.key);
-        tempKey = req.query.key;
-        var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-        //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
-        var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
-        games[tempKey].setPlayer2(player);
-        res.cookie('key', req.query.key, {maxAge: 9000000});
-    }
-    //res.cookie('turns', 0,{maxAge: 9000000});
-    //res.cookie('shipsLeft', [20, 31, 32, 40, 50], {maxAge: 9000000});
-    //console.log("Easy and hard are not complete.");
-    var yourMap = games[tempKey].player2.getMap();
-    var enemyMap = games[tempKey].player1.getMap();
-    //console.log(yourMap);
-    if(req.query.key == "single"){
+    if(req.query.key < 0 || games[req.query.key] == null && req.query.key != "single") {
         Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-            res.render('pages/game.ejs', {
+            res.render('pages/index', {
+                playerName: (req.cookies.playerName +" ! Invalid Room Key !"),
                 playerInfo: playerInfo,
-                playerName: req.cookies.playerName,
-                enemyName: games[tempKey].player2.playerName,
-                turns: 0,
-                shipsLeft: [20, 31, 32, 40, 50],
-                yMap: yourMap,
-                eMap: enemyMap,
-                rKey: tempKey,
-                isHost: "no"
             });
         });
     }else{
-        Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-            res.render('pages/game.ejs', {
-                playerInfo: playerInfo,
-                playerName: req.cookies.playerName,
-                enemyName: games[tempKey].player1.playerName,
-                turns: 0,
-                shipsLeft: [20, 31, 32, 40, 50],
-                yMap: yourMap,
-                eMap: enemyMap,
-                rKey: tempKey,
-                isHost: "no"
-            });
-        });
-    }
+        if (req.query.key == "single") {
+            tempKey = genKey();
+            res.cookie('key', tempKey, {maxAge: 9000000});
+            console.log("Generated S Key: " + tempKey);
 
+            var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+            //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+            var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
+            var ai;
+            var genMap = GameFunction.genRandomMap();
+            if (req.query.eOrH == "easy") {
+                ai = new AIFunction.AIOpponent(tempKey, genMap, 1);
+            } else {
+                ai = new AIFunction.AIOpponent(tempKey, genMap, 2);
+            }
+            game = new GameFunction.GameController(player, ai, tempKey);
+            games[tempKey] = game;
+        }else{
+            //game = new GameFunction.GameController(req.query.key);
+            tempKey = req.query.key;
+            var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+            //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+            var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
+            games[tempKey].setPlayer2(player);
+            res.cookie('key', req.query.key, {maxAge: 9000000});
+        }
+        //res.cookie('turns', 0,{maxAge: 9000000});
+        //res.cookie('shipsLeft', [20, 31, 32, 40, 50], {maxAge: 9000000});
+        //console.log("Easy and hard are not complete.");
+        var yourMap = games[tempKey].player2.getMap();
+        var enemyMap = games[tempKey].player1.getMap();
+        //console.log(yourMap);
+        if(req.query.key == "single"){
+            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                res.render('pages/game.ejs', {
+                    playerInfo: playerInfo,
+                    playerName: req.cookies.playerName,
+                    enemyName: games[tempKey].player2.playerName,
+                    turns: 0,
+                    shipsLeft: [20, 31, 32, 40, 50],
+                    yMap: yourMap,
+                    eMap: enemyMap,
+                    rKey: tempKey,
+                    isHost: "no"
+                });
+            });
+        }else{
+            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                res.render('pages/game.ejs', {
+                    playerInfo: playerInfo,
+                    playerName: req.cookies.playerName,
+                    enemyName: games[tempKey].player1.playerName,
+                    turns: 0,
+                    shipsLeft: [20, 31, 32, 40, 50],
+                    yMap: yourMap,
+                    eMap: enemyMap,
+                    rKey: tempKey,
+                    isHost: "no"
+                });
+            });
+        }
+    }
 });
 
 app.get('/host', function (req, res) {
