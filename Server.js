@@ -59,7 +59,10 @@ app.get('/', function (req, res) {
     res.cookie('shipsLeft', '', {maxAge: 0});
     if (req.cookies.playerName == undefined) {
         res.cookie('playerName', '', {maxAge: 9000000});
-        res.render('pages/index', {playerName: ''});
+        res.render('pages/index', {
+            playerName: '',
+            perror: ""
+        });
     } else {
         try {
             Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
@@ -71,7 +74,10 @@ app.get('/', function (req, res) {
             });
         } catch (e) {
             res.cookie('playerName', '', {maxAge: 9000000});
-            res.render('pages/index', {playerName: ''});
+            res.render('pages/index', {
+                playerName: '',
+                perror: ""
+            });
         }
     }
 });
@@ -80,7 +86,10 @@ app.get('/', function (req, res) {
 app.get('/logout', function (req, res) {
     //console.log("Logging out user: "+req.cookie.playerName);
     res.cookie('playerName', '', {maxAge: 9000000});
-    res.render('pages/index', {playerName: ''});
+    res.render('pages/index', {
+        playerName: '',
+        perror: ""
+    });
 });
 
 exports.register = register;
@@ -507,7 +516,10 @@ app.get('/deletePlayer', function (req, res) {
     var name = req.cookies.playerName;
     Connection.deletePlayer(name, function (ret) {
         res.cookie('playerName', '', {maxAge: 9000000});
-        res.render('pages/index', {playerName: ''});
+        res.render('pages/index', {
+            playerName: '',
+            perror: ""
+        });
     });
 });
 
@@ -515,7 +527,7 @@ app.get('/rules', function (req, res) {
     Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
         res.render('pages/rules', {
             playerName: req.cookies.playerName,
-            playerInfo: playerInfo,
+            playerInfo: playerInfo
         });
     });
 });
