@@ -66,7 +66,7 @@ app.get('/', function (req, res) {
                 res.render('pages/index', {
                     playerName: req.cookies.playerName,
                     playerInfo: playerInfo,
-                    perror: "Invalid Room Key"
+                    perror: ""
                 });
             });
         } catch (e) {
