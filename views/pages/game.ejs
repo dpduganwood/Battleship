@@ -39,7 +39,7 @@
         console.log("cookie element not found");
         return "";
     }
-    socket = io('http://boilergames.com:6009');
+    socket = io('http://localhost:6009');
     var pName = getElementFromCookie("playerName");
     var gKey = getElementFromCookie("key");
     socket.emit('basics', {playerName: pName, game_key: gKey});
