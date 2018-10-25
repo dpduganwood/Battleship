@@ -143,7 +143,8 @@ app.get('/join', function (req, res) {
     //console.log("Easy or hard AI: "+req.query.eOrH);
     var game;
     var tempKey;
-    if(req.query.key < 0 || games[req.query.key] == null && req.query.key != "single") {
+    if(req.query.key < 0 || games[req.query.key] == null || games[req.query.key].player2 != games[req.query.key].player1 && req.query.key != "single") {
+        console.log("BAD ROOM KEY");
         Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
             res.render('pages/index', {
                 playerName: (req.cookies.playerName),
