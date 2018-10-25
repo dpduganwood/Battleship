@@ -12,7 +12,7 @@ router.get('/logout', function(req, res) {
     // handle with passport
     req.logout();
     res.redirect('/logout');
-    res.send('logging out');
+    //res.send('logging out');
 });
 
 // auth with google+
