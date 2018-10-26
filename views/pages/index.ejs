@@ -214,12 +214,16 @@
     <td position="fixed" height="100px" width="400px" style="color: #868e96; align-content: center; background-color: transparent; float: top" height="100px">
 
         <hr class="my-4">
-
+        <%if (perror != '') {%>
+        <div>
+            <p><font size="5">User Deleted</font></p>
+        </div>
+        <%}%>
         <%if (playerName != ''){%>
             <%if (perror != '') {%>
                 <div>
                       <p><font size="5">Invalid room key! Please try again.</font></p>
-                </div>         
+                </div>
             <%}
             else {%>
                 <p>Select a game mode</p>

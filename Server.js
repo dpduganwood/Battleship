@@ -518,7 +518,7 @@ app.get('/deletePlayer', function (req, res) {
         res.cookie('playerName', '', {maxAge: 9000000});
         res.render('pages/index', {
             playerName: '',
-            perror: ""
+            perror: "User Deleted"
         });
     });
 });
