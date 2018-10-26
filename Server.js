@@ -535,12 +535,19 @@ app.get('/attack',function(req,res){
 
 app.get('/deletePlayer', function (req, res) {
     var name = req.cookies.playerName;
-    Connection.deletePlayer(name, function (ret) {
+    /*Connection.deletePlayer(name, function (ret) {
         res.cookie('playerName', '', {maxAge: 9000000});
         res.render('pages/index', {
             playerName: '',
             perror: "User Deleted"
         });
+    });*/
+
+    //DELETE USER DOES NOT DELETE USER (1)
+    res.cookie('playerName', '', {maxAge: 9000000});
+    res.render('pages/index', {
+        playerName: '',
+        perror: "User Deleted"
     });
 });
 
