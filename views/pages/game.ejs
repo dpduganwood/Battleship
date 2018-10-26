@@ -803,7 +803,9 @@
             document.getElementById("turn").innerText="Your Turn.";
             console.log('set can shoot true enemyfire recieve');
             canShoot = true;
-            document.getElementById("place").disabled = false;
+            // PLAYER CAN SHOOT WITHOUT LIMIT USING THE FIRE BUTTON BUT NOT CLICKING THE BOARD (12)
+            //document.getElementById("place").disabled = false;
+            document.getElementById("place").disabled = true;
         }
 
         var x = fireResults.yLoc;
