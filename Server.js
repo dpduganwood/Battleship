@@ -573,7 +573,7 @@ io.on('connection', function (socket) {
             //is player 2
             games[socket.game_key].p2SocketId = socket.id;
             games[socket.game_key].gameOver = false;
-            console.log("readout " + games[socket.game_key].p1SocketId);
+            console.log("readout " + games[socket.game_key].p2SocketId);
             //io.sockets.socket(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
             io.to(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
             socket.emit('joined');
