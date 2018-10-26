@@ -791,7 +791,28 @@ io.on('connection', function (socket) {
                 //invalid target, try again
                 //signal only attacking player
                 //socket.emit("invalidTarget");
-                socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+
+                // ENEMY CAN FIRE ON THE SAME TARGET (10)
+                //socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                if (result == 0 || result == 2 || result == 5 || result == 4) {
+                    //valid target. miss / hit, win
+                    if (games[socket.game_key].player2.type != 0) {
+                        //AI game
+                        socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                    } else {
+                        //multiplayer game
+                        socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                        if (games[socket.game_key].player1.playerName == socket.user_name) {
+                            //is player 1
+                            var id = games[socket.game_key].p2SocketId;
+                            io.to(id).emit('enemyFire', {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                        } else {
+                            //is player 2
+                            var id = games[socket.game_key].p1SocketId;
+                            io.to(id).emit('enemyFire', {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
+                        }
+                    }
+                }
             }
         });
     });

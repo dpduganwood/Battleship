@@ -882,6 +882,10 @@
             }
         } else {
             //invalid target
+            //USER CAN ATTACK SAME POSITION (10)
+            canShoot = false;
+            document.getElementById("place").disabled = true;
+
             console.log("invalid target location");
             document.getElementById("errorID").innerText = "Invalid target. Pick a valid location."
         }
