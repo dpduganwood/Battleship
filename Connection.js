@@ -205,7 +205,7 @@ function deletePlayer(playerName, cb) {
         if(err) {
             cb(err);
         } else {
-            con.query("DELETE FROM users WHERE user_id = " + result.user_id, function(err) {
+            con.query("DELETE FROM users WHERE user_id = " + result[0].user_id, function(err) {
                 if(err) {
                     cb(err);
                 } else {
