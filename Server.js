@@ -572,6 +572,7 @@ io.on('connection', function (socket) {
         } else {
             //is player 2
             games[socket.game_key].p2SocketId = socket.id;
+            console.log("setting game over false for key " + socket.game_key);
             games[socket.game_key].gameOver = false;
             console.log("readout " + games[socket.game_key].p2SocketId);
             //io.sockets.socket(games[socket.game_key].p1SocketId).emit('p2Info', {pName: socket.user_name});
@@ -771,8 +772,11 @@ io.on('connection', function (socket) {
         //var sockName = socket.user_name;
         //var sockKey = socket.game_key;
         console.log(socket.gameOver);
-        if (!(games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name) || games[socket.game_key] == null || games[socket.game_key].gameOver) {
+        if ((games[socket.game_key] == null || games[socket.game_key].gameOver) && !(games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name)) {
             //do nothing
+            console.log(games[socket.game_key] == null);
+            console.log(games[socket.game_key].gameOver);
+            console.log(!(games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name));
             console.log("normal exit");
         } else {
             //increment player loss count
