@@ -841,7 +841,8 @@
             //2 = hit
             //5 = hit and game win
             document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
-            document.getElementById("turn").innerText="Enemy Turn.";
+            //console will always say"your turn" (4)
+            //document.getElementById("turn").innerText="Enemy Turn.";
             console.log("set shoot false myFire recieve");
             canShoot = false;
             document.getElementById("place").disabled = true;
