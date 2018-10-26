@@ -176,7 +176,8 @@ function addPlayerMPLoss(playerName, cb) {
 
 exports.getleaderboard = getLeaderboard;
 function getLeaderboard(cb) {
-    con.query("SELECT displayName, mp_wins, mp_losses, hits, misses FROM users WHERE (mp_wins + mp_losses) > 0 ORDER BY (mp_wins-mp_losses) DESC LIMIT 100", function(err, result){
+    con.query("SELECT displayName, mp_wins, mp_losses, hits, misses FROM users WHERE (mp_wins + mp_losses) > 0 ORDER BY (mp_wins-mp_losses) ASC LIMIT 100", function(err, result){
+        /* Defect 9 - Changed DESC to ASC */
         if(err) {
             cb(err);
         } else {
