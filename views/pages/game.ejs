@@ -136,7 +136,8 @@
                             <td style="padding-left: 10px; color: black;"><%= Math.round((playerInfo[0].mp_wins / (playerInfo[0].mp_wins + playerInfo[0].mp_losses)) * 100) || 0 %>
                                 %
                             </td>
-                            <td style="padding-left: 10px; color: black;"><%= Math.round((playerInfo[0].hits / (playerInfo[0].hits + playerInfo[0].misses)) * 100) || 0 %>
+                            <td style="padding-left: 10px; color: black;"><%= Math.round((playerInfo[0].misses / (playerInfo[0].hits + playerInfo[0].misses)) * 100) || 0 %>
+                             <!-- Defect #16 - changed playerInfo[0].hits to playerInfo[0].misses-->
                                 %
                             </td>
                         </tr>
@@ -840,7 +841,8 @@
             //2 = hit
             //5 = hit and game win
             document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
-            document.getElementById("turn").innerText="Enemy Turn.";
+            //console will always say"your turn" (4)
+            //document.getElementById("turn").innerText="Enemy Turn.";
             console.log("set shoot false myFire recieve");
             canShoot = false;
             document.getElementById("place").disabled = true;

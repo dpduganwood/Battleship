@@ -113,7 +113,8 @@
                                 <td style="padding-left: 10px; color: black;"><%=playerInfo[0].hits%></td>
                                 <td style="padding-left: 10px; color: black;"><%=playerInfo[0].misses%></td>
                                 <td style="padding-left: 10px; color: black;"><%=Math.round((playerInfo[0].mp_wins/(playerInfo[0].mp_wins+playerInfo[0].mp_losses))*100) || 0%>%</td>
-                                <td style="padding-left: 10px; color: black;"><%=Math.round((playerInfo[0].hits/(playerInfo[0].hits+playerInfo[0].misses))*100) || 0%>%</td>
+                                <td style="padding-left: 10px; color: black;"><%=Math.round((playerInfo[0].misses/(playerInfo[0].hits+playerInfo[0].misses))*100) || 0%>%</td>
+                                <!-- Defect #16 - changed playerInfo[0].hits to playerInfo[0].misses-->
                             </tr>
                         </table>
                     </div>
