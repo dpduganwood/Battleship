@@ -736,6 +736,9 @@ io.on('connection', function (socket) {
     });
 
     socket.on('placeDone', function () {
+        //PLAYER CAN ATTACK ENEMY BOARD BEFORE THE ENEMY IS FINISHED PLACING (7)
+        games[socket.game_key].player1Counter = 1;
+        games[socket.game_key].player2Counter = 1;
         if (games[socket.game_key].player1.playerName == socket.user_name) {
             games[socket.game_key].player1Counter = 1;
         } else {

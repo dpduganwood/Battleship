@@ -906,7 +906,10 @@
         document.getElementById("turn").innerText="Enemy Turn.";
         document.getElementById("errorID").innerText="Waiting for Enemy to Fire.";
         console.log("set can shoot false waitplace receive");
+        // CAN ATTACK THE OPPONENT WITHOUT WAITING FOR THEM TO FINISIH PLACING [using button](7)
+
         canShoot = false;
+        // document.getElementById("place").disabled = true;
         document.getElementById("place").disabled = true;
     });
     socket.on('enemyDisconnect', function() {
