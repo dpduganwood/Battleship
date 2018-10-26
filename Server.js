@@ -148,223 +148,142 @@ var emptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 
 app.get('/join', function (req, res) {
-    console.log("Joining game: " + req.query.key);
-    //console.log("Easy or hard AI: "+req.query.eOrH);
-    var game;
-    var tempKey;
-    if((req.query.key == "single" && !(req.query.eOrH == "easy" || req.query.eOrH == "hard"))){
-        console.log("eOrH "+req.query.eOrH);
-        console.log("single "+req.query.key);
-        console.log("BAD ROOM KEY");
-        Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-            res.render('pages/index', {
-                playerName: (req.cookies.playerName),
-                playerInfo: playerInfo,
-                perror: "Invalid Room Key"
-            });
+    if (req.cookies.playerName == "") {
+        res.render('pages/index', {
+            playerName: '',
+            perror: "Not logged in."
         });
-    }else if(req.query.key != "single" && (req.query.key < 0 || games[req.query.key] == null || games[req.query.key].player2 != games[req.query.key].player1)) {
-        console.log("single "+req.query.key);
-        console.log("BAD ROOM KEY");
-        Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-            res.render('pages/index', {
-                playerName: (req.cookies.playerName),
-                playerInfo: playerInfo,
-                perror: "Invalid Room Key"
+    } else {
+        console.log("Joining game: " + req.query.key);
+        //console.log("Easy or hard AI: "+req.query.eOrH);
+        var game;
+        var tempKey;
+        if ((req.query.key == "single" && !(req.query.eOrH == "easy" || req.query.eOrH == "hard"))) {
+            console.log("eOrH " + req.query.eOrH);
+            console.log("single " + req.query.key);
+            console.log("BAD ROOM KEY");
+            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                res.render('pages/index', {
+                    playerName: (req.cookies.playerName),
+                    playerInfo: playerInfo,
+                    perror: "Invalid Room Key"
+                });
             });
-        });
-    }else{
-        if (req.query.key == "single") {
-            tempKey = genKey();
-            res.cookie('key', tempKey, {maxAge: 9000000});
-            console.log("Generated S Key: " + tempKey);
+        } else if (req.query.key != "single" && (req.query.key < 0 || games[req.query.key] == null || games[req.query.key].player2 != games[req.query.key].player1)) {
+            console.log("single " + req.query.key);
+            console.log("BAD ROOM KEY");
+            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                res.render('pages/index', {
+                    playerName: (req.cookies.playerName),
+                    playerInfo: playerInfo,
+                    perror: "Invalid Room Key"
+                });
+            });
+        } else {
+            if (req.query.key == "single") {
+                tempKey = genKey();
+                res.cookie('key', tempKey, {maxAge: 9000000});
+                console.log("Generated S Key: " + tempKey);
 
-            var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-            //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
-            var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
-            var ai;
-            var genMap = GameFunction.genRandomMap();
-            if (req.query.eOrH == "easy") {
-                ai = new AIFunction.AIOpponent(tempKey, genMap, 1);
+                var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+                //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+                var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
+                var ai;
+                var genMap = GameFunction.genRandomMap();
+                if (req.query.eOrH == "easy") {
+                    ai = new AIFunction.AIOpponent(tempKey, genMap, 1);
+                } else {
+                    ai = new AIFunction.AIOpponent(tempKey, genMap, 2);
+                }
+                game = new GameFunction.GameController(player, ai, tempKey);
+                games[tempKey] = game;
             } else {
-                ai = new AIFunction.AIOpponent(tempKey, genMap, 2);
+                //game = new GameFunction.GameController(req.query.key);
+                tempKey = req.query.key;
+                var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+                //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+                var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
+                games[tempKey].setPlayer2(player);
+                res.cookie('key', req.query.key, {maxAge: 9000000});
             }
-            game = new GameFunction.GameController(player, ai, tempKey);
-            games[tempKey] = game;
-        }else{
-            //game = new GameFunction.GameController(req.query.key);
-            tempKey = req.query.key;
-            var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-            //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
-            var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
-            games[tempKey].setPlayer2(player);
-            res.cookie('key', req.query.key, {maxAge: 9000000});
-        }
-        //res.cookie('turns', 0,{maxAge: 9000000});
-        //res.cookie('shipsLeft', [20, 31, 32, 40, 50], {maxAge: 9000000});
-        //console.log("Easy and hard are not complete.");
-        var yourMap = games[tempKey].player2.getMap();
-        var enemyMap = games[tempKey].player1.getMap();
-        //console.log(yourMap);
-        if(req.query.key == "single"){
-            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-                res.render('pages/game.ejs', {
-                    playerInfo: playerInfo,
-                    playerName: req.cookies.playerName,
-                    enemyName: games[tempKey].player2.playerName,
-                    turns: 0,
-                    shipsLeft: [20, 31, 32, 40, 50],
-                    yMap: yourMap,
-                    eMap: enemyMap,
-                    rKey: tempKey,
-                    isHost: "no"
+            //res.cookie('turns', 0,{maxAge: 9000000});
+            //res.cookie('shipsLeft', [20, 31, 32, 40, 50], {maxAge: 9000000});
+            //console.log("Easy and hard are not complete.");
+            var yourMap = games[tempKey].player2.getMap();
+            var enemyMap = games[tempKey].player1.getMap();
+            //console.log(yourMap);
+            if (req.query.key == "single") {
+                Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                    res.render('pages/game.ejs', {
+                        playerInfo: playerInfo,
+                        playerName: req.cookies.playerName,
+                        enemyName: games[tempKey].player2.playerName,
+                        turns: 0,
+                        shipsLeft: [20, 31, 32, 40, 50],
+                        yMap: yourMap,
+                        eMap: enemyMap,
+                        rKey: tempKey,
+                        isHost: "no"
+                    });
                 });
-            });
-        }else{
-            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-                res.render('pages/game.ejs', {
-                    playerInfo: playerInfo,
-                    playerName: req.cookies.playerName,
-                    enemyName: games[tempKey].player1.playerName,
-                    turns: 0,
-                    shipsLeft: [20, 31, 32, 40, 50],
-                    yMap: yourMap,
-                    eMap: enemyMap,
-                    rKey: tempKey,
-                    isHost: "no"
+            } else {
+                Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                    res.render('pages/game.ejs', {
+                        playerInfo: playerInfo,
+                        playerName: req.cookies.playerName,
+                        enemyName: games[tempKey].player1.playerName,
+                        turns: 0,
+                        shipsLeft: [20, 31, 32, 40, 50],
+                        yMap: yourMap,
+                        eMap: enemyMap,
+                        rKey: tempKey,
+                        isHost: "no"
+                    });
                 });
-            });
+            }
         }
     }
 });
 
 app.get('/host', function (req, res) {
-    var tempKey = genKey();
-    res.cookie('key', tempKey, {maxAge: 9000000});
-    console.log("Generated M Key: " + tempKey);
-
-    var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-    //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
-    var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
-    games[tempKey] = new GameFunction.GameController(player, player, tempKey);
-    console.log(tempKey);
-    Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-        res.render('pages/game.ejs', {
-            playerInfo: playerInfo,
-            playerName: req.cookies.playerName,
-            enemyName: "Missing opponent",
-            turns: 0,
-            shipsLeft: [20, 31, 32, 40, 50],
-            yMap: emptyMap,
-            eMap: emptyMap,
-            rKey: tempKey,
-            isHost: "yes"
-        });
-    });
-});
-
-var randomLobby = new Array(3).fill(-1);
-
-function addRandom(ins) {
-    console.log("random lobby gen: " + ins);
-    console.log(randomLobby);
-    if (randomLobby[0] == -1) {
-        randomLobby[0] = ins;
-        console.log("first random");
-        return -1;
-    } else {
-        var temp = randomLobby[0];
-        if(games[temp] == null){
-            randomLobby[0] = ins;
-            console.log("first random");
-            return -1;
-        }else{
-            randomLobby[0] = -1;
-            console.log("joining random");
-            return temp;
-        }
-    }
-}
-
-app.get('/random', function (req, res) {
-    var tempKey = genKey();
-    var ret = addRandom(tempKey)
-    console.log("ret: " + ret);
-    if (ret != -1) {
-        exitGame(tempKey);
-
-        var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-        //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, ret);
-        var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, ret);
-        games[ret].setPlayer2(player);
-        res.cookie('key', ret, {maxAge: 9000000});
-        var yourMap = games[ret].player2.getMap();
-        var enemyMap = games[ret].player1.getMap();
-        console.log(randomLobby);
-        console.log(games[ret]);
-        Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
-            res.render('pages/game.ejs', {
-                playerInfo: playerInfo,
-                playerName: req.cookies.playerName,
-                enemyName: games[ret].player1.playerName,
-                turns: 0,
-                shipsLeft: [20, 31, 32, 40, 50],
-                yMap: yourMap,
-                eMap: enemyMap,
-                rKey: ret,
-                isHost: "no"
-            });
+    if (req.cookies.playerName == "") {
+        res.render('pages/index', {
+            playerName: '',
+            perror: "Not logged in."
         });
     } else {
+        var tempKey = genKey();
         res.cookie('key', tempKey, {maxAge: 9000000});
-        console.log("Generated Random Lobby Key: " + tempKey);
+        console.log("Generated M Key: " + tempKey);
 
         var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
         //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
         var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
         games[tempKey] = new GameFunction.GameController(player, player, tempKey);
@@ -379,9 +298,111 @@ app.get('/random', function (req, res) {
                 yMap: emptyMap,
                 eMap: emptyMap,
                 rKey: tempKey,
-                isHost: "no"
+                isHost: "yes"
             });
         });
+    }
+});
+
+var randomLobby = new Array(3).fill(-1);
+
+function addRandom(ins) {
+    console.log("random lobby gen: " + ins);
+    console.log(randomLobby);
+    if (randomLobby[0] == -1) {
+        randomLobby[0] = ins;
+        console.log("first random");
+        return -1;
+    } else {
+        var temp = randomLobby[0];
+        if (games[temp] == null) {
+            randomLobby[0] = ins;
+            console.log("first random");
+            return -1;
+        } else {
+            randomLobby[0] = -1;
+            console.log("joining random");
+            return temp;
+        }
+    }
+}
+
+app.get('/random', function (req, res) {
+    if (req.cookies.playerName == "") {
+        res.render('pages/index', {
+            playerName: '',
+            perror: "Not logged in."
+        });
+    } else {
+        var tempKey = genKey();
+        var ret = addRandom(tempKey)
+        console.log("ret: " + ret);
+        if (ret != -1) {
+            exitGame(tempKey);
+
+            var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+            //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, ret);
+            var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, ret);
+            games[ret].setPlayer2(player);
+            res.cookie('key', ret, {maxAge: 9000000});
+            var yourMap = games[ret].player2.getMap();
+            var enemyMap = games[ret].player1.getMap();
+            console.log(randomLobby);
+            console.log(games[ret]);
+            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                res.render('pages/game.ejs', {
+                    playerInfo: playerInfo,
+                    playerName: req.cookies.playerName,
+                    enemyName: games[ret].player1.playerName,
+                    turns: 0,
+                    shipsLeft: [20, 31, 32, 40, 50],
+                    yMap: yourMap,
+                    eMap: enemyMap,
+                    rKey: ret,
+                    isHost: "no"
+                });
+            });
+        } else {
+            res.cookie('key', tempKey, {maxAge: 9000000});
+            console.log("Generated Random Lobby Key: " + tempKey);
+
+            var newEmptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+            //var player = new GameFunction.Player(req.cookies.playerName, emptyMap, tempKey);
+            var player = new GameFunction.Player(req.cookies.playerName, newEmptyMap, tempKey);
+            games[tempKey] = new GameFunction.GameController(player, player, tempKey);
+            console.log(tempKey);
+            Connection.getPlayer(req.cookies.playerName, function (playerInfo) {
+                res.render('pages/game.ejs', {
+                    playerInfo: playerInfo,
+                    playerName: req.cookies.playerName,
+                    enemyName: "Missing opponent",
+                    turns: 0,
+                    shipsLeft: [20, 31, 32, 40, 50],
+                    yMap: emptyMap,
+                    eMap: emptyMap,
+                    rKey: tempKey,
+                    isHost: "no"
+                });
+            });
+        }
     }
 });
 /*
@@ -564,7 +585,7 @@ io.on('connection', function (socket) {
 
         console.log("socket properties " + socket.user_name + " " + socket.game_key);
 
-        if(games[socket.game_key].player1.playerName == socket.user_name) {
+        if (games[socket.game_key].player1.playerName == socket.user_name) {
             //is player 1
             games[socket.game_key].p1SocketId = socket.id;
             console.log("readout " + games[socket.game_key].p1SocketId);
@@ -599,21 +620,21 @@ io.on('connection', function (socket) {
         console.log(socket.id + " joining " + joinInfo.key + " to " + games[joinInfo.key].p2SocketId);
     });*/
 
-    socket.on('playerWin', function(){
+    socket.on('playerWin', function () {
         socket.gameOver = true;
         var checkType = games[socket.game_key].player2.type;
-        if(checkType != 0) {
+        if (checkType != 0) {
             //AI game
-            Connection.addPlayerSPWin(socket.user_name, function(result) {
-                if(result == 1) {
+            Connection.addPlayerSPWin(socket.user_name, function (result) {
+                if (result == 1) {
                     //error
                 } else {
                     //success
                 }
             });
         } else {
-            Connection.addPlayerMPWin(socket.user_name, function(result) {
-                if(result == 1) {
+            Connection.addPlayerMPWin(socket.user_name, function (result) {
+                if (result == 1) {
                     //error
                 } else {
                     //success
@@ -623,7 +644,7 @@ io.on('connection', function (socket) {
         //add player hits and misses to db
         var hits;
         var misses;
-        if(games[socket.game_key].player1.playerName == socket.user_name) {
+        if (games[socket.game_key].player1.playerName == socket.user_name) {
             //is player 1
             hits = games[socket.game_key].player1.hits;
             misses = games[socket.game_key].player1.misses;
@@ -634,29 +655,29 @@ io.on('connection', function (socket) {
         }
         /*Connection.setPlayerHits(socket.user_name, hits);
             Connection.setPlayerMisses(socket.user_name, misses);*/
-            Connection.addPlayerHitsBySum(socket.user_name, hits, function(result) {
-                //do nothing
-            });
-            Connection.addPlayerMissesBySum(socket.user_name, misses, function(result) {
-                //do nothing
-            });
+        Connection.addPlayerHitsBySum(socket.user_name, hits, function (result) {
+            //do nothing
+        });
+        Connection.addPlayerMissesBySum(socket.user_name, misses, function (result) {
+            //do nothing
+        });
     });
 
-    socket.on('playerLoss', function() {
+    socket.on('playerLoss', function () {
         socket.gameOver = true;
         var checkType = games[socket.game_key].player2.type;
-        if(checkType != 0) {
+        if (checkType != 0) {
             //AI game
-            Connection.addPlayerSPLoss(socket.user_name, function(result) {
-                if(result == 1) {
+            Connection.addPlayerSPLoss(socket.user_name, function (result) {
+                if (result == 1) {
                     //error
                 } else {
                     //success
                 }
             });
         } else {
-            Connection.addPlayerMPLoss(socket.user_name, function(result) {
-                if(result == 1) {
+            Connection.addPlayerMPLoss(socket.user_name, function (result) {
+                if (result == 1) {
                     //error
                 } else {
                     //success
@@ -666,7 +687,7 @@ io.on('connection', function (socket) {
         //add player hits and misses to db
         var hits;
         var misses;
-        if(games[socket.game_key].player1.playerName == socket.user_name) {
+        if (games[socket.game_key].player1.playerName == socket.user_name) {
             //is player 1
             hits = games[socket.game_key].player1.hits;
             misses = games[socket.game_key].player1.misses;
@@ -677,12 +698,12 @@ io.on('connection', function (socket) {
         }
         /*Connection.setPlayerHits(socket.user_name, hits);
             Connection.setPlayerMisses(socket.user_name, misses);*/
-            Connection.addPlayerHitsBySum(socket.user_name, hits, function(result) {
-                //do nothing
-            });
-            Connection.addPlayerMissesBySum(socket.user_name, misses, function(result) {
-                //do nothing
-            });
+        Connection.addPlayerHitsBySum(socket.user_name, hits, function (result) {
+            //do nothing
+        });
+        Connection.addPlayerMissesBySum(socket.user_name, misses, function (result) {
+            //do nothing
+        });
     });
 
     socket.on('place', function (placementParams) {
@@ -706,22 +727,22 @@ io.on('connection', function (socket) {
         }
     });
 
-    socket.on('placeDone', function(){
-        if(games[socket.game_key].player1.playerName == socket.user_name){
+    socket.on('placeDone', function () {
+        if (games[socket.game_key].player1.playerName == socket.user_name) {
             games[socket.game_key].player1Counter = 1;
-        }else{
+        } else {
             games[socket.game_key].player2Counter = 1;
         }
-        console.log("PLACING DONE: p1 "+games[socket.game_key].player1Counter+" p2 "+games[socket.game_key].player2Counter);
-        if(games[socket.game_key].player1Counter + games[socket.game_key].player2Counter == 2){
+        console.log("PLACING DONE: p1 " + games[socket.game_key].player1Counter + " p2 " + games[socket.game_key].player2Counter);
+        if (games[socket.game_key].player1Counter + games[socket.game_key].player2Counter == 2) {
             console.log("Placing Complete.");
-            if(games[socket.game_key].player2.type != 0) {
+            if (games[socket.game_key].player2.type != 0) {
                 //AI game
                 socket.emit("placeDone");
             } else {
                 //multiplayer game
 
-                if(games[socket.game_key].player1.playerName == socket.user_name) {
+                if (games[socket.game_key].player1.playerName == socket.user_name) {
                     //is player 1
                     socket.emit("placeDone");
                     var id = games[socket.game_key].p2SocketId;
@@ -742,13 +763,13 @@ io.on('connection', function (socket) {
         games[socket.game_key].checkHit(socket.user_name, fireParams.xLoc, fireParams.yLoc, function (result) {
             if (result == 0 || result == 2 || result == 5 || result == 4) {
                 //valid target. miss / hit, win
-                if(games[socket.game_key].player2.type != 0) {
+                if (games[socket.game_key].player2.type != 0) {
                     //AI game
                     socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
                 } else {
                     //multiplayer game
                     socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
-                    if(games[socket.game_key].player1.playerName == socket.user_name) {
+                    if (games[socket.game_key].player1.playerName == socket.user_name) {
                         //is player 1
                         var id = games[socket.game_key].p2SocketId;
                         io.to(id).emit('enemyFire', {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
@@ -780,25 +801,25 @@ io.on('connection', function (socket) {
             games[socket.game_key].gameOver = true;
             var type1 = games[socket.game_key].player1.type;
             var type2 = games[socket.game_key].player2.type;
-            if(type1 != 0 || type2 != 0) {
+            if (type1 != 0 || type2 != 0) {
                 //is AI game
-                Connection.addPlayerSPLoss(socket.user_name, function(result){
-                    if(result == 0) {
+                Connection.addPlayerSPLoss(socket.user_name, function (result) {
+                    if (result == 0) {
                         //success
                     } else {
                         //fail
                     }
                 });
             } else {
-                Connection.addPlayerMPLoss(socket.user_name, function(result) {
-                    if(result == 0) {
+                Connection.addPlayerMPLoss(socket.user_name, function (result) {
+                    if (result == 0) {
                         //success
                     } else {
                         //fail
                     }
                 });
-                
-                if(games[socket.game_key].player1.playerName == socket.user_name) {
+
+                if (games[socket.game_key].player1.playerName == socket.user_name) {
                     //is player 1
                     var id = games[socket.game_key].p2SocketId;
                     console.log(id);
@@ -806,17 +827,17 @@ io.on('connection', function (socket) {
                     io.to(id).emit('enemyDisconnect');
 
                     //set player2 stats
-                    Connection.addPlayerMPWin(games[socket.game_key].player2.playerName, function(result) {
+                    Connection.addPlayerMPWin(games[socket.game_key].player2.playerName, function (result) {
                         //do nothing
                     });
                     var hits;
                     var misses;
                     hits = games[socket.game_key].player2.hits;
                     misses = games[socket.game_key].player2.misses;
-                    Connection.addPlayerHitsBySum(games[socket.game_key].player2.playerName, hits, function(result) {
+                    Connection.addPlayerHitsBySum(games[socket.game_key].player2.playerName, hits, function (result) {
                         //do nothing
                     });
-                    Connection.addPlayerMissesBySum(games[socket.game_key].player2.playerName, misses, function(result) {
+                    Connection.addPlayerMissesBySum(games[socket.game_key].player2.playerName, misses, function (result) {
                         //do nothing
                     });
                 } else {
@@ -827,17 +848,17 @@ io.on('connection', function (socket) {
                     io.to(id).emit('enemyDisconnect');
 
                     //set player1 starts
-                    Connection.addPlayerMPWin(games[socket.game_key].player1.playerName, function(result) {
+                    Connection.addPlayerMPWin(games[socket.game_key].player1.playerName, function (result) {
                         //do nothing
                     });
                     var hits;
                     var misses;
                     hits = games[socket.game_key].player1.hits;
                     misses = games[socket.game_key].player1.misses;
-                    Connection.addPlayerHitsBySum(games[socket.game_key].player1.playerName, hits, function(result) {
+                    Connection.addPlayerHitsBySum(games[socket.game_key].player1.playerName, hits, function (result) {
                         //do nothing
                     });
-                    Connection.addPlayerMissesBySum(games[socket.game_key].player1.playerName, misses, function(result) {
+                    Connection.addPlayerMissesBySum(games[socket.game_key].player1.playerName, misses, function (result) {
                         //do nothing
                     });
                 }
@@ -845,8 +866,8 @@ io.on('connection', function (socket) {
 
             var hits;
             var misses;
-            
-            if(games[socket.game_key].player1.playerName == socket.user_name) {
+
+            if (games[socket.game_key].player1.playerName == socket.user_name) {
                 //is player 1
                 hits = games[socket.game_key].player1.hits;
                 misses = games[socket.game_key].player1.misses;
@@ -859,14 +880,14 @@ io.on('connection', function (socket) {
             /*Connection.setPlayerHits(socket.user_name, hits);
             Connection.setPlayerMisses(socket.user_name, misses);*/
             console.log("at hit and miss adding point");
-            Connection.addPlayerHitsBySum(socket.user_name, hits, function(result) {
+            Connection.addPlayerHitsBySum(socket.user_name, hits, function (result) {
                 //do nothing
             });
-            Connection.addPlayerMissesBySum(socket.user_name, misses, function(result) {
+            Connection.addPlayerMissesBySum(socket.user_name, misses, function (result) {
                 //do nothing
             });
         }
-        if(games[socket.game_key] != null && (games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name)) {
+        if (games[socket.game_key] != null && (games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name)) {
             exitGame(socket.game_key);
         }
     });
