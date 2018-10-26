@@ -767,6 +767,7 @@ function genRandomMap() {
     return(genMap);
 }
 
+exports.testMapGen = testMapGen;
 function testMapGen() {
     var overallCount = 0;
     var worked = false;
@@ -796,7 +797,7 @@ function testMapGen() {
         if(count[5] == 5) {
             finalCount ++;
         }
-        console.log(finalCount);
+        //console.log(finalCount);
         if(finalCount == 5) {
             overallCount++;
         }
@@ -804,7 +805,8 @@ function testMapGen() {
     if(overallCount == 1000) {
         worked = true;
     }
-    console.log(worked);
+    return worked;
+    //console.log(worked);
 }
 
 //testMapGen();
