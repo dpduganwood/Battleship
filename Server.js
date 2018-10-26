@@ -771,7 +771,7 @@ io.on('connection', function (socket) {
         //var sockName = socket.user_name;
         //var sockKey = socket.game_key;
         console.log(socket.gameOver);
-        if (games[socket.game_key] == null || games[socket.game_key].gameOver) {
+        if (!(games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name) || games[socket.game_key] == null || games[socket.game_key].gameOver) {
             //do nothing
             console.log("normal exit");
         } else {
@@ -866,7 +866,7 @@ io.on('connection', function (socket) {
                 //do nothing
             });
         }
-        if(games[socket.game_key] != null) {
+        if(games[socket.game_key] != null && (games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name)) {
             exitGame(socket.game_key);
         }
     });
