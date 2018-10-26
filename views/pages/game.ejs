@@ -1356,7 +1356,7 @@
             var yString = sub.substring(1,2);
             var y = (yString);
             console.log("Y: " + y);
-            socket.emit('fire', {xLoc: y, yLoc: x});
+            socket.emit('fire', {xLoc: x, yLoc: y});
         }
     }
 
