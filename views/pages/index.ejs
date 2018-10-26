@@ -19,6 +19,7 @@
     body {
         background-image: url("../../images/logo.png");
         background-position: center;
+        background-size: cover; /* Defect #21 - I added this line */
         background-repeat: no-repeat;
         background-color: black;
     }
@@ -36,7 +37,7 @@
     </style>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="/">BattleTracks</a>
+        <a class="navbar-brand" href="/rules">BattleTracks</a>
         <%
         console.log("playerName: "+playerName);
         if (playerName != ''){

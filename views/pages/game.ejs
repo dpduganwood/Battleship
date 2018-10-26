@@ -66,7 +66,7 @@
     </style>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="/">BattleTracks</a>
+        <a class="navbar-brand" href="/rules">BattleTracks</a>
         <%
         console.log("playerName: " + playerName);
         if (playerName != ''){
@@ -223,10 +223,10 @@
 <table style="width:800px; float:top;">
     <tr>
         <td id="myName" align="center">
-            <%= playerName %>'s Board
+            <%= enemyName %>'s Board
         </td>
         <td id="enemyName" align="center">
-            <%= enemyName %>'s Board
+            <%=  playerName%>'s Board
         </td>
     </tr>
 
@@ -1356,7 +1356,7 @@
             var yString = sub.substring(1,2);
             var y = (yString);
             console.log("Y: " + y);
-            socket.emit('fire', {xLoc: y, yLoc: x});
+            socket.emit('fire', {xLoc: x, yLoc: y});
         }
     }
 
