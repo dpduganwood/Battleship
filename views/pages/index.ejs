@@ -103,7 +103,8 @@
                             <td style="padding-left: 10px"><%=playerInfo[0].hits%></td>
                             <td style="padding-left: 10px"><%=playerInfo[0].misses%></td>
                             <td style="padding-left: 10px"><%=Math.round((playerInfo[0].mp_wins/(playerInfo[0].mp_wins+playerInfo[0].mp_losses))*100) || 0%>%</td>
-                            <td style="padding-left: 10px"><%=Math.round((playerInfo[0].hits/(playerInfo[0].hits+playerInfo[0].misses))*100) || 0%>%</td>
+                            <td style="padding-left: 10px"><%=Math.round((playerInfo[0].misses/(playerInfo[0].hits+playerInfo[0].misses))*100) || 0%>%</td>
+                            <!-- Defect #16 - changed playerInfo[0].hits to playerInfo[0].misses-->
                         </tr>
                     </table>
                 </div>
@@ -112,7 +113,8 @@
                         <input type="submit" class="btn btn-danger" value="Delete Account">
                     </form>
                     <a href="https://www.google.com" class="btn btn-secondary">Change Password</a>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" >Close</button>
+                    <!-- Defect #13 - Removed data-dismiss="modal" so that modal does not close when click on Close Button -->
                 </div>
             </div>
         </div>
@@ -136,7 +138,7 @@
       </div>
       <div class="modal-body">
           <p style="font-size: 18px">Generate a code to host a game,</p>
-          <a class="btn btn-primary" role="button" href="/host">Host Game</a>
+          <a class="btn btn-primary" role="button" href="/join?key=single&eOrH=hard">Host Game</a>
           <p style="font-size: 18px">Enter a random lobby,</p>
           <a class="btn btn-primary" role="button" href="/random">Join a Random Lobby</a>
           <p style="font-size: 18px">Or enter a multiplayer code you have received.</p>
