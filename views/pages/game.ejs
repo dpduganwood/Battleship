@@ -959,11 +959,11 @@
             if(placementParams.leng == 2) {
                 console.log("At length check: " + placementParams.leng);
                 if (placementParams.dir == "D") {
-                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part1r.png");
-                    x = x +1;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part2r.png");
+                    x = x -1;
                     xS = x.toString();
                     coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part2r.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship1/part1r.png");
                 }
                 if (placementParams.dir == "U") {
 
@@ -1194,23 +1194,24 @@
                     document.getElementById(coord).setAttribute("background", "../../images/ship5/part5r.png");
                 }
                 if (placementParams.dir == "L") {
-                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part5.png");
-                    y = y-1;
-                    yS=y.toString();
-                    coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part4.png");
-                    y = y-1;
-                    yS=y.toString();
-                    coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part3.png");
-                    y = y-1;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part1.png");
+                    y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
                     document.getElementById(coord).setAttribute("background", "../../images/ship5/part2.png");
-                    y = y-1;
+                    y = y+1;
                     yS=y.toString();
                     coord = xS + yS;
-                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part1.png");
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part3.png");
+                    y = y+1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part4.png");
+                    y = y+1;
+                    yS=y.toString();
+                    coord = xS + yS;
+                    document.getElementById(coord).setAttribute("background", "../../images/ship5/part5.png");
+
                 }
                 if (placementParams.dir == "R") {
                     document.getElementById(coord).setAttribute("background", "../../images/ship5/part1.png");
