@@ -55,6 +55,13 @@ describe("AIcheckSunk",function(){
     });
 });
 
+describe("testMapGen",function(){
+    it("Returns true if 1000 random maps are made",function() {
+        var value=app.testMapGen();
+        expect(value).toBe(true);     
+    });
+});
+
 
 
 /*var prof = {displayName: "David Wood", emails: [{value: "dpduganwood@gmail.com"}], name: {givenName: "David", familyName: "Wood"}};
