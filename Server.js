@@ -772,11 +772,12 @@ io.on('connection', function (socket) {
         //var sockName = socket.user_name;
         //var sockKey = socket.game_key;
         console.log(socket.gameOver);
-        if ((games[socket.game_key] == null || games[socket.game_key].gameOver) && !(games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name)) {
+        //if ((games[socket.game_key] == null || games[socket.game_key].gameOver) && !(games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) {
+        if (games[socket.game_key] == null || games[socket.game_key].gameOver || (games[socket.game_key].gameOver && (games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) || (!games[socket.game_key].gameOver && !(games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name))) {
             //do nothing
-            console.log(games[socket.game_key] == null);
-            console.log(games[socket.game_key].gameOver);
-            console.log(!(games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name));
+            //console.log(games[socket.game_key] == null);
+            //console.log(games[socket.game_key].gameOver);
+            //console.log(!(games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name));
             console.log("normal exit");
         } else {
             //increment player loss count
@@ -870,7 +871,11 @@ io.on('connection', function (socket) {
                 //do nothing
             });
         }
-        if(games[socket.game_key] != null && (games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name)) {
+        //console.log("second set");
+        //console.log(games[socket.game_key] != null);
+        //console.log((games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name));
+        if(games[socket.game_key] != null && (games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) {
+            console.log("deleting game object");
             exitGame(socket.game_key);
         }
     });
