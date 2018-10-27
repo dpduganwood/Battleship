@@ -1005,6 +1005,9 @@ io.on('connection', function (socket) {
             console.log("deleting game object");
             exitGame(socket.game_key);
         }
+        if(games[socket.game_key] != null && games[socket.game_key].player2.playerName == "AInotPlayer"){
+            keys[socket.game_key] = 0;
+        }
     });
 });
 
