@@ -809,7 +809,7 @@ io.on('connection', function (socket) {
 
                 // ENEMY CAN FIRE ON THE SAME TARGET (10)
                 //socket.emit("myFire", {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
-                if (result == 0 || result == 2 || result == 5 || result == 4) {
+                //if (result == 0 || result == 2 || result == 5 || result == 4) {
                     //valid target. miss / hit, win
                     if (games[socket.game_key].player2.type != 0) {
                         //AI game
@@ -827,7 +827,7 @@ io.on('connection', function (socket) {
                             io.to(id).emit('enemyFire', {xLoc: fireParams.xLoc, yLoc: fireParams.yLoc, result: result});
                         }
                     }
-                }
+                //}
             }
         });
     });
