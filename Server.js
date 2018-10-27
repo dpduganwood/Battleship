@@ -834,6 +834,7 @@ io.on('connection', function (socket) {
         } else {
             //increment player loss count
             console.log("sudden disconnection");
+
             games[socket.game_key].gameOver = true;
             var type1 = games[socket.game_key].player1.type;
             var type2 = games[socket.game_key].player2.type;
@@ -847,46 +848,23 @@ io.on('connection', function (socket) {
                     }
                 });
             } else {
-                Connection.addPlayerMPLoss(socket.user_name, function (result) {
-                    if (result == 0) {
-                        //success
-                    } else {
-                        //fail
-                    }
-                });
-
-                if (games[socket.game_key].player1.playerName == socket.user_name) {
+                //SUDDEN DISCONNECTION WIN AND LOSS MISASSIGNED (22)
+                var p1Name = games[socket.game_key].player1.playerName;
+                var p2Name = games[socket.game_key].player2.playerName;
+                
+                if(socket.user_name == p1Name) {
                     //is player 1
-                    var id = games[socket.game_key].p2SocketId;
-                    console.log(id);
-                    io.to(id).gameOver = true;
-                    io.to(id).emit('enemyDisconnect');
+                    Connection.addPlayerMPLoss(p2Name, function (result) {
+                        if (result == 0) {
+                            //success
+                        } else {
+                            //fail
+                        }
+                    });
+                    Connection.addPlayerMPWin(p1Name, function (result) {
+                        //do nothing
+                    });
 
-                    //set player2 stats
-                    Connection.addPlayerMPWin(games[socket.game_key].player2.playerName, function (result) {
-                        //do nothing
-                    });
-                    var hits;
-                    var misses;
-                    hits = games[socket.game_key].player2.hits;
-                    misses = games[socket.game_key].player2.misses;
-                    Connection.addPlayerHitsBySum(games[socket.game_key].player2.playerName, hits, function (result) {
-                        //do nothing
-                    });
-                    Connection.addPlayerMissesBySum(games[socket.game_key].player2.playerName, misses, function (result) {
-                        //do nothing
-                    });
-                } else {
-                    //is player 2
-                    var id = games[socket.game_key].p1SocketId;
-                    console.log(id);
-                    io.to(id).gameOver
-                    io.to(id).emit('enemyDisconnect');
-
-                    //set player1 starts
-                    Connection.addPlayerMPWin(games[socket.game_key].player1.playerName, function (result) {
-                        //do nothing
-                    });
                     var hits;
                     var misses;
                     hits = games[socket.game_key].player1.hits;
@@ -897,6 +875,81 @@ io.on('connection', function (socket) {
                     Connection.addPlayerMissesBySum(games[socket.game_key].player1.playerName, misses, function (result) {
                         //do nothing
                     });
+                } else {
+                    //is player 2
+                    Connection.addPlayerMPLoss(p1Name, function (result) {
+                        if (result == 0) {
+                            //success
+                        } else {
+                            //fail
+                        }
+                    });
+                    Connection.addPlayerMPWin(p2Name, function (result) {
+                        //do nothing
+                    });
+
+                    var hits;
+                    var misses;
+                    hits = games[socket.game_key].player2.hits;
+                    misses = games[socket.game_key].player2.misses;
+                    Connection.addPlayerHitsBySum(games[socket.game_key].player2.playerName, hits, function (result) {
+                        //do nothing
+                    });
+                    Connection.addPlayerMissesBySum(games[socket.game_key].player2.playerName, misses, function (result) {
+                        //do nothing
+                    });
+                }
+
+                /*Connection.addPlayerMPLoss(socket.user_name, function (result) {
+                    if (result == 0) {
+                        //success
+                    } else {
+                        //fail
+                    }
+                });*/
+
+                if (games[socket.game_key].player1.playerName == socket.user_name) {
+                    //is player 1
+                    var id = games[socket.game_key].p2SocketId;
+                    console.log(id);
+                    io.to(id).gameOver = true;
+                    io.to(id).emit('enemyDisconnect');
+
+                    //set player2 stats
+                    /*Connection.addPlayerMPWin(games[socket.game_key].player2.playerName, function (result) {
+                        //do nothing
+                    });*/
+                    /*var hits;
+                    var misses;
+                    hits = games[socket.game_key].player2.hits;
+                    misses = games[socket.game_key].player2.misses;
+                    Connection.addPlayerHitsBySum(games[socket.game_key].player2.playerName, hits, function (result) {
+                        //do nothing
+                    });
+                    Connection.addPlayerMissesBySum(games[socket.game_key].player2.playerName, misses, function (result) {
+                        //do nothing
+                    });*/
+                } else {
+                    //is player 2
+                    var id = games[socket.game_key].p1SocketId;
+                    console.log(id);
+                    io.to(id).gameOver = true;
+                    io.to(id).emit('enemyDisconnect');
+
+                    //set player1 starts
+                    /*Connection.addPlayerMPWin(games[socket.game_key].player1.playerName, function (result) {
+                        //do nothing
+                    });*/
+                    /*var hits;
+                    var misses;
+                    hits = games[socket.game_key].player1.hits;
+                    misses = games[socket.game_key].player1.misses;
+                    Connection.addPlayerHitsBySum(games[socket.game_key].player1.playerName, hits, function (result) {
+                        //do nothing
+                    });
+                    Connection.addPlayerMissesBySum(games[socket.game_key].player1.playerName, misses, function (result) {
+                        //do nothing
+                    });*/
                 }
             }
 
