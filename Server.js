@@ -43,7 +43,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "sql123",
-    database: "Battletracks_db"
+    database: "Battletracks_bugged_db"
 });
 
 con.connect(function (err) {
@@ -586,8 +586,10 @@ app.get('/leaderboard', function (req, res) {
 });
 
 //app.listen(6009);
-var serverListener = app.listen(6009);
-console.log('6009 is the open port');
+//var serverListener = app.listen(6009);
+var serverListener = app.listen(9006);
+//console.log('6009 is the open port');
+console.log("9006 is the open port");
 
 //THIS MAY NEED TO BE MOVED UP OR DOWN
 var io = socket(serverListener);

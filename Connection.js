@@ -4,7 +4,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "sql123",
-    database: "Battletracks_db"
+    database: "Battletracks_bugged_db"
 });
 exports.con = con;
 

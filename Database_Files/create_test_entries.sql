@@ -1,4 +1,4 @@
-use Battletracks_db;
+use Battletracks_bugged_db;
 
 #format
 #insert into users value (

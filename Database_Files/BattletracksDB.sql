@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema Battletracks_db
+-- Schema Battletracks_bugged_db
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema Battletracks_db
+-- Schema Battletracks_bugged_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Battletracks_db` DEFAULT CHARACTER SET utf8 ;
-USE `Battletracks_db` ;
+CREATE SCHEMA IF NOT EXISTS `Battletracks_bugged_db` DEFAULT CHARACTER SET utf8 ;
+USE `Battletracks_bugged_db` ;
 
 -- -----------------------------------------------------
--- Table `Battletracks_db`.`users`
+-- Table `Battletracks_bugged_db`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Battletracks_db`.`users` (
+CREATE TABLE IF NOT EXISTS `Battletracks_bugged_db`.`users` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` TEXT NOT NULL,
   `displayName` TEXT NOT NULL,
