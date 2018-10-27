@@ -1000,7 +1000,7 @@ io.on('connection', function (socket) {
         //console.log("second set");
         //console.log(games[socket.game_key] != null);
         //console.log((games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name));
-        if(games[socket.game_key].player2.playerName != "AInotPlayer" && games[socket.game_key] != null && (games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) {
+        if(games[socket.game_key] != null && games[socket.game_key].player2.playerName != "AInotPlayer" && (games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) {
             console.log("deleting game object");
             exitGame(socket.game_key);
         }
