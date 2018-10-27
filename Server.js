@@ -85,11 +85,19 @@ app.get('/', function (req, res) {
 
 app.get('/logout', function (req, res) {
     //console.log("Logging out user: "+req.cookie.playerName);
-    res.cookie('playerName', '', {maxAge: 9000000});
-    res.render('pages/index', {
-        playerName: '',
-        perror: ""
+    Connection.deletePlayer(name, function (ret) {
+        res.cookie('playerName', '', {maxAge: 9000000});
+        res.render('pages/index', {
+            playerName: '',
+            perror: "User Deleted"
+        });
     });
+    //Above code was added to make the sign out button delete the data instead of sign out. (15)
+    //res.cookie('playerName', '', {maxAge: 9000000});
+    //res.render('pages/index', {
+    //    playerName: '',
+    //    perror: ""
+    //});
 });
 
 exports.register = register;
@@ -148,17 +156,19 @@ var emptyMap = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 
 app.get('/join', function (req, res) {
-    if (req.cookies.playerName == "") {
+    //This code checked to see if the user was logged in before letting them play. (17)
+    /*if (req.cookies.playerName == "") {
         res.render('pages/index', {
             playerName: '',
             perror: "Not logged in."
         });
-    } else {
+    } else {*/
         console.log("Joining game: " + req.query.key);
         //console.log("Easy or hard AI: "+req.query.eOrH);
         var game;
         var tempKey;
-        if ((req.query.key == "single" && !(req.query.eOrH == "easy" || req.query.eOrH == "hard"))) {
+        //If statements check if room key is valid (8)
+        /*if ((req.query.key == "single" && !(req.query.eOrH == "easy" || req.query.eOrH == "hard"))) {
             console.log("eOrH " + req.query.eOrH);
             console.log("single " + req.query.key);
             console.log("BAD ROOM KEY");
@@ -179,7 +189,7 @@ app.get('/join', function (req, res) {
                     perror: "Invalid Room Key"
                 });
             });
-        } else {
+        } else {*/
             if (req.query.key == "single") {
                 tempKey = genKey();
                 res.cookie('key', tempKey, {maxAge: 9000000});
@@ -259,17 +269,18 @@ app.get('/join', function (req, res) {
                     });
                 });
             }
-        }
-    }
+        //}
+    //}
 });
 
 app.get('/host', function (req, res) {
-    if (req.cookies.playerName == "") {
+    //This code checked to see if the user was logged in before letting them play. (17)
+    /*if (req.cookies.playerName == "") {
         res.render('pages/index', {
             playerName: '',
             perror: "Not logged in."
         });
-    } else {
+    } else {*/
         var tempKey = genKey();
         res.cookie('key', tempKey, {maxAge: 9000000});
         console.log("Generated M Key: " + tempKey);
@@ -301,7 +312,7 @@ app.get('/host', function (req, res) {
                 isHost: "yes"
             });
         });
-    }
+    //}
 });
 
 var randomLobby = new Array(3).fill(-1);
@@ -328,12 +339,13 @@ function addRandom(ins) {
 }
 
 app.get('/random', function (req, res) {
-    if (req.cookies.playerName == "") {
+    //This code checked to see if the user was logged in before letting them play. (17)
+    /*if (req.cookies.playerName == "") {
         res.render('pages/index', {
             playerName: '',
             perror: "Not logged in."
         });
-    } else {
+    } else {*/
         var tempKey = genKey();
         var ret = addRandom(tempKey)
         console.log("ret: " + ret);
@@ -403,7 +415,7 @@ app.get('/random', function (req, res) {
                 });
             });
         }
-    }
+    //}
 });
 /*
 app.get('/place',function(req,res) {
@@ -926,7 +938,7 @@ io.on('connection', function (socket) {
         //console.log("second set");
         //console.log(games[socket.game_key] != null);
         //console.log((games[socket.game_key].player1 == socket.user_name || games[socket.game_key].player2 == socket.user_name));
-        if(games[socket.game_key] != null && (games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) {
+        if(games[socket.game_key].player2.playerName != "AInotPlayer" && games[socket.game_key] != null && (games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) {
             console.log("deleting game object");
             exitGame(socket.game_key);
         }
