@@ -226,6 +226,7 @@
 
 <table style="width:800px; float:top;">
     <tr>
+        <!--swapped for (24)-->
         <td id="myName" align="center">
             <%= enemyName %>'s Board
         </td>
@@ -784,7 +785,8 @@
     socket.on('p2Info', function(info) {
         //do a thing
         document.getElementById("errorID").innerText="Place Your Ships.";
-        var enName = document.getElementById("enemyName");
+        var enName = document.getElementById("myName");
+        //changed from enemyName for (24).
         enName.innerText = (info.pName+"'s Board");
     });
 
