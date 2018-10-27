@@ -85,7 +85,9 @@ class GameController {
             this.gameOver = false;
         } else {
             this.player2Counter = 0;
-            this.gameOver = true;
+            // DISCONNECTING PRE GAME RESULTS IN A LOSS (25)
+            //this.gameOver = true;
+            this.gameOver = false;
         }
         //this.gameOver = false;
     }

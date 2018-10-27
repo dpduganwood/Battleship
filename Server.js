@@ -849,6 +849,7 @@ io.on('connection', function (socket) {
                 });
             } else {
                 //SUDDEN DISCONNECTION WIN AND LOSS MISASSIGNED (22)
+                // DISCONNECTING PRE GAME RESULT IN A LOSS (25)
                 var p1Name = games[socket.game_key].player1.playerName;
                 var p2Name = games[socket.game_key].player2.playerName;
                 
@@ -861,9 +862,11 @@ io.on('connection', function (socket) {
                             //fail
                         }
                     });
-                    Connection.addPlayerMPWin(p1Name, function (result) {
-                        //do nothing
-                    });
+                    if(p1Name != p2Name) {
+                        Connection.addPlayerMPWin(p1Name, function (result) {
+                            //do nothing
+                        });
+                    }
 
                     var hits;
                     var misses;
@@ -884,9 +887,11 @@ io.on('connection', function (socket) {
                             //fail
                         }
                     });
-                    Connection.addPlayerMPWin(p2Name, function (result) {
-                        //do nothing
-                    });
+                    if(p1Name != p2Name) {
+                        Connection.addPlayerMPWin(p2Name, function (result) {
+                            //do nothing
+                        });
+                    }
 
                     var hits;
                     var misses;
@@ -910,10 +915,12 @@ io.on('connection', function (socket) {
 
                 if (games[socket.game_key].player1.playerName == socket.user_name) {
                     //is player 1
-                    var id = games[socket.game_key].p2SocketId;
-                    console.log(id);
-                    io.to(id).gameOver = true;
-                    io.to(id).emit('enemyDisconnect');
+                    if(p2Name != p1Name) {
+                        var id = games[socket.game_key].p2SocketId;
+                        console.log(id);
+                        io.to(id).gameOver = true;
+                        io.to(id).emit('enemyDisconnect');
+                    }
 
                     //set player2 stats
                     /*Connection.addPlayerMPWin(games[socket.game_key].player2.playerName, function (result) {
@@ -931,10 +938,12 @@ io.on('connection', function (socket) {
                     });*/
                 } else {
                     //is player 2
-                    var id = games[socket.game_key].p1SocketId;
-                    console.log(id);
-                    io.to(id).gameOver = true;
-                    io.to(id).emit('enemyDisconnect');
+                    if(p1Name != p2Name) {
+                        var id = games[socket.game_key].p1SocketId;
+                        console.log(id);
+                        io.to(id).gameOver = true;
+                        io.to(id).emit('enemyDisconnect');
+                    }
 
                     //set player1 starts
                     /*Connection.addPlayerMPWin(games[socket.game_key].player1.playerName, function (result) {
