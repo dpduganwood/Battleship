@@ -85,6 +85,7 @@ app.get('/', function (req, res) {
 
 app.get('/logout', function (req, res) {
     //console.log("Logging out user: "+req.cookie.playerName);
+    var name = req.cookies.playerName;
     Connection.deletePlayer(name, function (ret) {
         res.cookie('playerName', '', {maxAge: 9000000});
         res.render('pages/index', {
@@ -1003,6 +1004,9 @@ io.on('connection', function (socket) {
         if(games[socket.game_key] != null && games[socket.game_key].player2.playerName != "AInotPlayer" && (games[socket.game_key].player1.playerName == socket.user_name || games[socket.game_key].player2.playerName == socket.user_name)) {
             console.log("deleting game object");
             exitGame(socket.game_key);
+        }
+        if(games[socket.game_key] != null && games[socket.game_key].player2.playerName == "AInotPlayer"){
+            keys[socket.game_key] = 0;
         }
     });
 });
